@@ -178,7 +178,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 4 — Persistent configuration
 
-- [ ] Phase 4 — Persistent configuration
+- [x] Phase 4 — Persistent configuration
     - [x] Milestone 4.1 — Runtime controls
         - [x] T-028 — Define runtime settings and alternate lock policies
             Completion evidence: RED: nine runtime-policy assertions failed plus the absent definitions module. GREEN: 111 unit tests, TypeScript/Vite build pass. Exact tokens/defaults and strict value checks, failed Down/gravity, follow versus immediate (including zero travel), captured old deadline/policies, hold replacement capture, live availability with preserved hold/source and pre-start Controller settings are verified. Due lock precedes new-piece immediate drop. HANDOFF records verified 0.3.0 release/CI and phase4 hosted readiness.
@@ -230,8 +230,9 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-034, T-035. Contract: A-04/A-06/A-09, Phase 4 exits.
             Evidence: All six source/write/reload paths, focus, fragment/unrelated query retention and classic/modern/penetrator regression; version 0.4.0 metadata.
             Milestone exit: review the whole 4.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 4.4 — Phase review
-        - [ ] T-037 — Review test and report phase 4
+    - [x] Milestone 4.4 — Phase review
+        - [x] T-037 — Review test and report phase 4
+            Completion evidence: Independent complete-phase source/test/guide review and milestone reviews report no remaining findings;144 unit/check/package and66 packaged browser checks verify unchanged final payload. Audited actual T028–036 commits one owning result/evidence/initial checkbox each, prior closed reports unchanged, all delivery issues/milestones closed. Phase report/HANDOFF record exits, limits, no TODO and pending integration/release effects;0.4.0 candidate ready for explicit merged verification.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.4.0.
             Depends on: T-036; all phase 4 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/4/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.

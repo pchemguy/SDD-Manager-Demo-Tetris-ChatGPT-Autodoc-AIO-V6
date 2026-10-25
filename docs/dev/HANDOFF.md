@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase 4 milestone 4.3 T-036 completion, publication/hosting pending.
+Checkpoint: phase 4 review T-037 completion, publication/hosting pending.
 
 ## Authority and predecessor
 
@@ -10,4 +10,4 @@ Full T-001–T-057 and six phase releases remain authorized. Phase 3 tasks/revie
 
 phase/4-persistent-configuration was created from that published release parent; integration target main. Governing contracts/design inputs unchanged and accepted QC remains applicable. Exact phase label/four milestone briefs and initial associations for T-028–T-037 issues 37–46 fully verified before execution. Final-list lag for T-037 was settled by read-only reconciliation without replaying writes; no unknown effects remain.
 
-T-028–T-035 are published/closed; milestones4.1 and4.2 closed. T-036 completes version0.4.0 metadata/README and packaged persistence/regression acceptance, with report4.3. Unit144 and66 packaged checks are the selected full suite; actual outcome is in task completion evidence. Independent whole-milestone/phase review found no findings. Publish/close T-036 and milestone4.3 before T-037 phase audit/report, then explicit main integration, merged checks, CI and release0.4.0. Full remaining scope through T-057 stays authorized. No closed report is revised.
+T-028–T-036 are published/closed and all delivery milestones4.1–4.3 closed/read back. T-037 phase review/report owns phase completion. Independent code reviews found no findings; executable T-036 payload passed144 unit and66 exact-packaged browser checks. Actual owning commit audit passed throughT-036 and prior closed phase reports remain unchanged. Publish/close T-037 and4.4, audit its actual composition, explicitly merge into main with merged checks/push/hosted CI, then exact-body clean reproducible0.4.0 release/tag/assets/download verification. Optional comprehensive-prerelease advisory emitted; no new approval gate. After verified release activate phase5 from that release commit and completeT-038–T-047, then phase6T-048–T-057/release1.0.0. Full remaining scope remains authorized; no unresolved phase TODO.
