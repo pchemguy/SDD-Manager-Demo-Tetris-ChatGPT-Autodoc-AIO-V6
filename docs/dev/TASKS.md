@@ -53,7 +53,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: browser/input.ts; app/controller.ts; focus/repeat tests.
             Depends on: T-006. Contract: G-03, S-01/S-05.
             Evidence: 150/50 ms repeat, competing horizontal keys, one-shot repeat suppression, form focus, blur/visibility and user-pause composition.
-        - [ ] T-008 — Package and document the playable baseline
+        - [x] T-008 — Package and document the playable baseline
+            Completion evidence: RED: initial archive failed the required playable-entry/license inventory check. GREEN: npm run package built the static app and inspected a 7-member ZIP; two package builds were byte-identical with SHA-256 745258ea176b1ade79c208b2f8eb52b1bf1f47f03a55b92642b229a5cfba3b92. Verified CRC, unique safe names, relative asset references, license/version/source/dirty metadata, checksum and credential exclusions. Workflow YAML parsed and official v7 action commits pinned; hosted CI and clean tagged release packaging remain pending.
             Scope: build/CI configuration; package lock/version; README, docs/user/CONTROLS.md.
             Depends on: T-007. Contract: S-05, Phase 1 delivery/release requirements.
             Evidence: Reproducible static build and validated setup/check commands; baseline version 0.1.0 and truthful controls, assets and notices.
