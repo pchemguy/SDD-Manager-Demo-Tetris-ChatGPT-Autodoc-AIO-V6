@@ -302,7 +302,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 - [ ] Phase 6 — SQLite portability
     - [ ] Milestone 6.1 — SQLite encoding
-        - [ ] T-048 — Bundle a lazy bounded SQLite worker
+        - [x] T-048 — Bundle a lazy bounded SQLite worker
+            Completion evidence: RED:worker suite failed importing absent SQLite runtime while221 predecessors passed. GREEN:229 unit tests, TypeScript/Vite build and4 native Chromium/Firefox component probes pass. Pinned sql.js1.15.1/types1.4.11; real local WASM initialization/database close, operation IDs/stale replies, error/post/construction/malformed-reply paths, abort/deadline cleanup and termination verified. Native probes confirm local WASM200/error reply/zero remaining workers and working JSON download/gameplay after forced load failure. Worker/WASM/notices bundle locally; actual file encoder/import remain assigned next tasks and unadvertised. Fixture ArrayBuffer typing corrected; HANDOFF records verified0.5.0/CI/assets and phase6 readiness.
             Scope: leaderboard/sqlite.worker.ts, sqlite.ts; local WASM/build wiring.
             Depends on: T-047. Contract: L-03/L-04, ARCHITECTURE file boundary.
             Evidence: Pinned compatible sql.js/WASM, asynchronous local initialization, operation IDs/error replies, worker disposal and no effect on gameplay/JSON after load failure.
