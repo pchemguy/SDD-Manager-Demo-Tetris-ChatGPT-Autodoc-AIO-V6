@@ -47,9 +47,15 @@ export interface SQLiteWorker {
  terminate():void;
 }
 let operationID=0;
+/** Keep dev requests on the project's working route rather than a canonical
+ * filesystem URL that can fall outside a Windows drive/junction mapping. */
+function browserSQLiteWorker():SQLiteWorker {
+ if(import.meta.env.DEV)return new Worker(`${import.meta.env.BASE_URL}src/leaderboard/sqlite.worker.ts?worker_file&type=module`,{type:'module'});
+ return new Worker(new URL('./sqlite.worker.ts',import.meta.url),{type:'module'});
+}
 export function sqliteOperation(action:'encode',payload:readonly Result[],signal:AbortSignal,create?:()=>SQLiteWorker):Promise<Uint8Array>;
 export function sqliteOperation(action:'decode',payload:Uint8Array,signal:AbortSignal,create?:()=>SQLiteWorker):Promise<Result[]>;
-export function sqliteOperation(action:'encode'|'decode',payload:readonly Result[]|Uint8Array,signal:AbortSignal,create:()=>SQLiteWorker=()=>new Worker(new URL('./sqlite.worker.ts',import.meta.url),{type:'module'})):Promise<Uint8Array|Result[]> {
+export function sqliteOperation(action:'encode'|'decode',payload:readonly Result[]|Uint8Array,signal:AbortSignal,create:()=>SQLiteWorker=browserSQLiteWorker):Promise<Uint8Array|Result[]> {
  if(signal.aborted)return Promise.reject(new DOMException('Operation canceled.','AbortError'));
  return new Promise((resolve,reject)=>{
   const worker=create(),id=++operationID;let settled=false;
