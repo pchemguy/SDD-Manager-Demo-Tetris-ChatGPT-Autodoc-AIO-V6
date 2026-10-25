@@ -1,6 +1,6 @@
 {
   "name": "browser-tetris",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,6 +10,7 @@
     "check": "tsc --noEmit",
     "test": "node scripts/copy-schema.mjs && vitest run",
     "test:browser": "playwright test",
+    "test:dev": "playwright test --config=playwright.dev.config.ts",
     "package": "npm run build && python scripts/package.py"
   },
   "devDependencies": {
