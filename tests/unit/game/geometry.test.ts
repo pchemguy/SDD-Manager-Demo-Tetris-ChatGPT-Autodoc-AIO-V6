@@ -25,3 +25,8 @@ it('rejects wall floor hidden-bound and occupied collisions', () => {
   expect(canPlace(emptyBoard(),piece('I',0,19))).toBe(false);
   expect(canPlace(emptyBoard(),piece('T',0,-3))).toBe(false);
 });
+
+it('uses the independent I pivot expectations for all orientations',()=>{
+ const expected=[[[0,1],[1,1],[2,1],[3,1]],[[2,0],[2,1],[2,2],[2,3]],[[3,2],[2,2],[1,2],[0,2]],[[1,3],[1,2],[1,1],[1,0]]];
+ for(const o of [0,1,2,3] as const)expect(cells(piece('I',0,0,o))).toEqual(expected[o].map(([x,y])=>({x,y})));
+});

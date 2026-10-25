@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase 2 T-011 seven-bag source, publication pending.
+Checkpoint: phase 2 milestone 2.1 T-013 completion, publication/hosting pending.
 
 ## Authority and baseline
 
@@ -8,4 +8,4 @@ Full T-001–T-057 and six phase releases remain authorized. Phase 1 tasks/revie
 
 ## Phase 2 state
 
-phase/2-modern-play branches from f4954adc94ada5fb6f52e392098f5742ff54de07; parent/integration target main. Accepted governing inputs unchanged; prior QC remains applicable. Verified phase label, native milestones 6–9 and issues 20–29 (T-011–T-020), exact briefs and initial associations. Native helper partial timeout and transient final list lag were reconciled without duplicate writes. T-011 changes independent draws to seven-bag and non-consuming preview; classic fixture now uses distinct I/J/L. Publish/close T-011 before T-012; continue authorized phase through review, explicit merge and 0.2.0 release, then later phases. Preserve one owning task per verified published commit.
+phase/2-modern-play branches from f4954adc94ada5fb6f52e392098f5742ff54de07; parent/integration target main. Accepted governing inputs unchanged; prior QC remains applicable. Verified phase label, native milestones 6–9 and issues 20–29 (T-011–T-020), exact briefs and initial associations. Native helper partial timeout and transient final list lag were reconciled without duplicate writes. T-011/T-012 are published/closed. T-013 integrates colored next preview and snapshot/source browser evidence, adds missing geometry fixtures, and records milestone report 2.1. Independent review finds no Critical/Important issue; 55 unit tests/check/build and 32 browser checks pass, screenshot inspected; final CSS minimum-viewport recheck passes both browsers. Publish/close T-013 and milestone 2.1, then continue T-014–T-020 through explicit merge and 0.2.0 release, then later phases. Preserve one owning task per verified published commit.

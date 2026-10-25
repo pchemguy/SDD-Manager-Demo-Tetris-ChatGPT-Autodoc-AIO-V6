@@ -39,3 +39,10 @@ it('rejects stack-blocked kicks atomically and preserves the grounding deadline'
  const g=new Game({board,piece});g.advance(400);const before=g.snapshot;g.rotate(1);
  expect(g.snapshot.active).toEqual(before.active);expect(g.snapshot.groundedDeadline).toBe(1000);expect(g.snapshot.board).toEqual(before.board);
 });
+
+it('returns every kind to its exact original position after four CW or CCW turns',()=>{
+ for(const kind of ['I','J','L','O','S','T','Z'] as const)for(const direction of [-1,1] as const){
+  const piece:Piece={kind,orientation:0,x:3,y:5};const g=new Game({piece});
+  for(let turn=0;turn<4;turn++)g.rotate(direction);expect(g.snapshot.active).toEqual(piece);
+ }
+});

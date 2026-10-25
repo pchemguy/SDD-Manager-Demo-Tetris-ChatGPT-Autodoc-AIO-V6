@@ -27,3 +27,7 @@ python -m http.server 8000
 ```
 
 Open `http://localhost:8000`. The application uses local static assets and has no account or application-server requirement. Source development uses the commands in the root README.
+
+## Piece selection and rotation
+
+The current development game draws each group of seven pieces from one shuffled bag. The Next panel previews the exact next kind without consuming it. Rotation uses ordered SRS wall/floor kicks; a rejected rotation leaves position and lock timing unchanged.
