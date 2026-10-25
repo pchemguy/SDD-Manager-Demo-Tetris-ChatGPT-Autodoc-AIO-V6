@@ -185,7 +185,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/settings/definitions.ts; game/controller policy capture; unit tests.
             Depends on: T-027. Contract: C-01, G-05, S-03.
             Evidence: Exact tokens/defaults, failed-down and immediate hard-drop modes, same-time boundaries and next-spawn snapshots.
-        - [ ] T-029 — Connect six live configuration controls
+        - [x] T-029 — Connect six live configuration controls
+            Completion evidence: RED: both actual Chromium control scenarios failed on absent labeled selects. GREEN: 111 unit tests/build and six focused Chromium/Firefox checks (live controls, ready policy capture and minimum viewport) pass. All six native controls update memory, hide/disable immediately while preserving queue/hold-used state, retain current locking policy and apply selected policies at next/hold spawn. Strict tokens/native focus ownership, dynamic whole-piece condition and listener disposal included. Independent read-only core review found no Critical/Important issue; boundary visibility/complete regressions remain T-030.
             Scope: browser/panels.ts; controller/settings in-memory wiring.
             Depends on: T-028. Contract: C-01, G-07–G-09, S-03.
             Evidence: All controls work without persistence, hide/disable relevant features immediately and preserve source/hold state.

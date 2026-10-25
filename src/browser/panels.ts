@@ -2,12 +2,16 @@
 import {cells,COLORS} from '../game/geometry';
 import type {Kind} from '../game/types';
 import type {View} from '../app/controller';
-export function renderPanels(view:View):void {
+import {DEFAULTS,KEYS,isSettingValue,type Settings,type SettingKey} from '../settings/definitions';
+export function renderPanels(view:View,settings:Readonly<Settings>=view?.settings??DEFAULTS):void {
  const set=(id:string,value:string)=>{const node=document.getElementById(id)!;if(node.textContent!==value)node.textContent=value;};
- set('next',view?.next??'—');
- drawPreview('next-preview',view?.next??null);
- set('held',view?.held??'EMPTY');drawPreview('hold-preview',view?.held??null);
- set('hold-state',!view?'—':view.penetrator?'LOCKED':view.holdUsed?'USED':'AVAILABLE');
+ for(const key of KEYS){const select=document.getElementById('setting-'+key) as HTMLSelectElement;if(select.value!==settings[key])select.value=settings[key];}
+ set('next',settings.next==='off'?'OFF':view?.next??'—');
+ drawPreview('next-preview',settings.next==='on'?view?.next??null:null);
+ document.getElementById('next-preview')!.hidden=settings.next==='off';
+ set('held',settings.hold==='off'?'OFF':view?.held??'EMPTY');drawPreview('hold-preview',settings.hold==='on'?view?.held??null:null);
+ document.getElementById('hold-preview')!.hidden=settings.hold==='off';
+ set('hold-state',settings.hold==='off'?'OFF':!view?'—':view.penetrator?'LOCKED':view.holdUsed?'USED':'AVAILABLE');
  set('bonus-count',String(view?.bonuses??0));set('bonus-symbols','⚡'.repeat(view?.bonuses??0));
  set('penetrator-state',view?.penetrator?'ACTIVE':view?.bonuses?'ACTIVATE':'EARN 4 LINES');
  const score=String(view?.score??0);set('score',score);set('level',String(view?.level??1));set('lines',String(view?.lines??0));
@@ -26,4 +30,16 @@ function drawPreview(id:string,kind:Kind|null):void {
  if(kind)for(const {x,y} of cells({kind,orientation:0,x:0,y:0})){
   ctx.fillStyle=COLORS[kind];ctx.fillRect(29+x*14,15+y*14,12,12);
  }
+}
+
+/** Native controls own their keyboard behavior; only exact known tokens reach the model. */
+export function bindSettings(onChange:<K extends SettingKey>(key:K,value:Settings[K])=>void):()=>void {
+ const root=document.getElementById('configuration')!;
+ const change=(event:Event)=>{
+  const select=event.target;if(!(select instanceof HTMLSelectElement))return;
+  const key=select.dataset.setting as SettingKey;
+  if(!KEYS.some(known=>known===key)||!isSettingValue(key,select.value))return;
+  onChange(key,select.value);
+ };
+ root.addEventListener('change',change);return()=>root.removeEventListener('change',change);
 }

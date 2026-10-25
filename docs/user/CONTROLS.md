@@ -48,3 +48,7 @@ Press C or either Shift key to store the active kind. Hold is available once unt
 Clear four lines at once to earn one penetrator bonus, up to three. The side panel shows one lightning symbol per stored use. Press B while playing to spend one on the current piece; activation without funding or a valid target leaves the count unchanged.
 
 The activated falling piece and its outlined ghost are white. It can move or rotate through occupied cells while retaining a fully visible, non-overlapping landing. Ghost and hard drop select its deepest valid position, even below blockers. Existing blocks remain intact. Hold is LOCKED during activation; there is no manual deactivation or refund. Activation ends on lock, and settled cells use the regular piece color. An activated four-line clear earns a bonus for a future piece. Restart resets bonuses to zero.
+
+## Live settings
+
+The Settings panel controls ghost visibility, hard-drop availability, next preview, hard-drop locking, general locking and hold. Visibility and availability apply immediately while keeping queue/held state. Both locking choices apply when the next piece spawns, including hold replacements; the active piece retains its captured policy. Native selects keep their keyboard behavior. Click the board to return gameplay focus.

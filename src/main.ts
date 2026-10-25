@@ -3,10 +3,14 @@ import './styles.css';
 import {Controller} from './app/controller';
 import {renderBoard} from './browser/render';
 import {bindInput,type InputBinding} from './browser/input';
-import {renderPanels} from './browser/panels';
+import {renderPanels,bindSettings} from './browser/panels';
+import {DEFAULTS,type Settings} from './settings/definitions';
 const canvas=document.querySelector<HTMLCanvasElement>('#board')!;
 let input:InputBinding|undefined;
-const controller=new Controller(view=>{renderBoard(canvas,view);renderPanels(view);if(view?.status!=='playing')input?.reset();});
+let settings:Settings={...DEFAULTS};
+const controller=new Controller(view=>{renderBoard(canvas,view);renderPanels(view,settings);if(view?.status!=='playing')input?.reset();});
+controller.configure(settings);
+const unbindSettings=bindSettings((key,value)=>{settings={...settings,[key]:value};controller.configure(settings);});
 input=bindInput(canvas,document.querySelector<HTMLButtonElement>('#start')!,controller,document.querySelector<HTMLButtonElement>('#pause')!);
 let frame=0;
 const tick=(now:number)=>{controller.frame(now);frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);
@@ -14,7 +18,7 @@ let suspended=false;
 window.addEventListener('pagehide',(event)=>{
  cancelAnimationFrame(frame);input?.reset();
  if(event.persisted)suspended=true;
- else input?.dispose();
+ else {input?.dispose();unbindSettings();}
 });
 window.addEventListener('pageshow',(event)=>{
  if(event.persisted&&suspended){suspended=false;controller.rebaseClock(performance.now());frame=requestAnimationFrame(tick);}

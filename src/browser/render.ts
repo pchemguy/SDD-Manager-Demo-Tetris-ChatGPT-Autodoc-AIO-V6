@@ -18,7 +18,7 @@ export function renderBoard(canvas:HTMLCanvasElement,view:View):void {
    const kind=view.board[y][x];if(kind)block(x,y,COLORS[kind]);
   }
   const color=view.penetrator?'#ffffff':COLORS[view.active.kind];
-  if(view.ghost){
+  if(view.ghost&&view.settings.ghost!=='hide'&&(view.settings.ghost!=='dynamic'||cells(view.ghost).every(p=>p.y>=10))){
    ctx.fillStyle=color+'22';ctx.strokeStyle=color;ctx.lineWidth=1;
    for(const {x,y} of cells(view.ghost)){
     ctx.fillRect(x*CELL+2,y*CELL+2,CELL-4,CELL-4);
