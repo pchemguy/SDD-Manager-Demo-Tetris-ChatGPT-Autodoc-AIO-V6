@@ -263,7 +263,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/leaderboard/json.ts; canonical schema import; scripts/copy-schema.mjs; generated public schema.
             Depends on: T-040. Contract: L-02 and LEADERBOARD-SCHEMA.json.
             Evidence: Pinned schema validator without coercion/default/removal, registered strict UTC format, downloadable schema byte equality and invalid-calendar corpus.
-        - [ ] T-042 — Implement JSON encode and validated decode
+        - [x] T-042 — Implement JSON encode and validated decode
+            Completion evidence: RED:three valid codec paths failed against missing exports. GREEN:187 unit tests and TypeScript check pass. UTF-8 versioned JSON empty/ten and unsorted round trips preserve exact IDs/safe scores/UTC timestamps and rank deterministically. Decode enforces65536 bytes before fatal UTF-8 parsing, validates complete data against actual compiled schema then shared semantic invariants; codec returns detached candidates and never changes session state. Invalid syntax/UTF-8/version and invalid exports reject.
             Scope: src/leaderboard/json.ts; validation.ts collaborators; JSON fixtures.
             Depends on: T-041. Contract: L-02, L-04 JSON dispatch subset.
             Evidence: Versioned UTF-8 export, bounded input, schema-first and semantic validation; empty/ten/unsorted round trips preserve values.
