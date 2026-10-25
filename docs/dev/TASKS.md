@@ -213,7 +213,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-031, T-032. Contract: C-01–C-04, A-06.
             Evidence: Resolve before first spawn; actual reload/cookies/query, separate write failures, visible warnings and working session controls.
             Milestone exit: review the whole 4.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 4.3 — Configuration integration
+    - [x] Milestone 4.3 — Configuration integration
         - [x] T-034 — Verify policies across hold penetrator and drop
             Completion evidence: Added six cross-feature characterization scenarios against existing accepted implementation: all four penetrator locking combinations, mid-piece settings changes, disabled drop with visible ghost, active hold/reactivation guards, unchanged clocks/source/bonuses, legal non-overlapping lock and next capture; activation cancels an obsolete grounded deadline without resetting gravity; nonempty hold exchange captures policies without queue consumption. GREEN:144 unit tests and TypeScript check pass; no production rule change needed.
             Scope: domain/controller integration fixtures; affected rule owners.
@@ -224,7 +224,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: browser/panels.ts, styles; docs/user/CONFIGURATION.md.
             Depends on: T-034. Contract: C-01/C-04, S-05.
             Evidence: Labeled/native controls, next-piece policy note, disabled-feature explanations and visible nonblocking persistence status.
-        - [ ] T-036 — Verify persistent configuration in both browsers
+        - [x] T-036 — Verify persistent configuration in both browsers
+            Completion evidence: Version0.4.0 package/lock metadata and README reflect six persistent settings. GREEN:144 unit tests, TypeScript/Vite package and66 exact-packaged Chromium/Firefox checks pass, including every setting source/write/reload, native focus, foreign query/fragment/history retention and classic/modern/natural penetrator regressions. Independent whole-milestone/phase inspection found no findings; report4.3/HANDOFF included. Required phase audit/integration/hosted CI/release effects remain pending.
             Scope: tests/browser/configuration suites; packaged app/README/version.
             Depends on: T-034, T-035. Contract: A-04/A-06/A-09, Phase 4 exits.
             Evidence: All six source/write/reload paths, focus, fragment/unrelated query retention and classic/modern/penetrator regression; version 0.4.0 metadata.

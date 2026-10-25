@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase 4 milestone 4.2 T-033 completion, publication/hosting pending.
+Checkpoint: phase 4 milestone 4.3 T-036 completion, publication/hosting pending.
 
 ## Authority and predecessor
 
@@ -10,4 +10,4 @@ Full T-001–T-057 and six phase releases remain authorized. Phase 3 tasks/revie
 
 phase/4-persistent-configuration was created from that published release parent; integration target main. Governing contracts/design inputs unchanged and accepted QC remains applicable. Exact phase label/four milestone briefs and initial associations for T-028–T-037 issues 37–46 fully verified before execution. Final-list lag for T-037 was settled by read-only reconciliation without replaying writes; no unknown effects remain.
 
-T-028–T-032 are published and closed; milestone 4.1 is closed. T-033 integrates startup resolution before game creation, independent writes and nonblocking feedback. Independent read-only milestone 4.2 review finds no Critical/Important/Minor issue. Unit138 and focused persistence18 checks pass; full packaged checks are recorded in its completion evidence. Report4.2 owns the review, with unchanged contracts and actual HTTP versus modeled failure/HTTPS limits. Publish/close T-033 and milestone4.2 before T-034 cross-feature policy tests, T-035 configuration help, T-036 version0.4 acceptance and T-037 phase review/integration/release. Full remaining scope through T-057 stays authorized.
+T-028–T-035 are published/closed; milestones4.1 and4.2 closed. T-036 completes version0.4.0 metadata/README and packaged persistence/regression acceptance, with report4.3. Unit144 and66 packaged checks are the selected full suite; actual outcome is in task completion evidence. Independent whole-milestone/phase review found no findings. Publish/close T-036 and milestone4.3 before T-037 phase audit/report, then explicit main integration, merged checks, CI and release0.4.0. Full remaining scope through T-057 stays authorized. No closed report is revised.
