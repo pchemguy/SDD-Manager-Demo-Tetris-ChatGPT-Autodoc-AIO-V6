@@ -202,7 +202,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/settings/service.ts; synthetic source fixtures.
             Depends on: T-030. Contract: C-02.
             Evidence: All six keys, mixed/omitted/default URL cases, duplicate/invalid tokens/cookies and independent fallback.
-        - [ ] T-032 — Implement independent cookie and URL writes
+        - [x] T-032 — Implement independent cookie and URL writes
+            Completion evidence: RED:9 persistence-effect assertions failed against read-only initialization/no writes. GREEN:138 unit tests and TypeScript check pass. Explicit URL defaults save exact per-key cookies; omissions/invalid duplicates do not overwrite cookies or synthesize defaults. Changed-key writes use Path/SameSite/MaxAge/Secure rules and replaceState with preserved state/path/foreign query/fragment and collapsed duplicates. Cookie/history errors and silent no-ops are independently detected, with the other effect still attempted; unavailable reads retain usable resolution and invalid changed tokens cause no effects.
             Scope: src/settings/browser.ts, service.ts; adapter failure tests.
             Depends on: T-031. Contract: C-03/C-04.
             Evidence: Exact cookie flags, valid explicit-default writes, no omitted/default overwrite, changed-key replaceState and unrelated URL preservation.
