@@ -2,7 +2,7 @@
 
 A browser-based Tetris project with a playable-classic-first delivery target. The complete intended scope includes modern play, a penetrator bonus, configurable assistance, cookie/URL settings persistence, a session leaderboard and manual JSON/SQLite result files.
 
-The current source provides a playable classic loop plus seven-bag generation, full SRS wall kicks, next preview, ghost, hard drop and once-per-piece hold. Grounded pieces use a full gravity-interval lock delay; controlled repeat, pause/restart and readable stats are included. The [latest published release](https://github.com/pchemguy/SDD-Manager-Demo-Tetris-ChatGPT-Autodoc-AIO-V6/releases/latest) supplies a static ZIP and checksum. Penetrator, settings and portable leaderboards remain planned. Accepted requirements and progress are in [PROJECT](docs/dev/PROJECT.md), [TASKS](docs/dev/TASKS.md) and [HANDOFF](docs/dev/HANDOFF.md). Preparation QC/integration passed; full implementation is authorized and tracked by phase.
+The current source provides a playable classic loop plus seven-bag generation, full SRS wall kicks, next preview, ghost, hard drop and once-per-piece hold. Four-line clears earn capped penetrator bonuses; B activates a white piece that can traverse occupied cells to a legal deepest landing. Grounded pieces use a full gravity-interval lock delay; controlled repeat, pause/restart and readable stats are included. The [latest published release](https://github.com/pchemguy/SDD-Manager-Demo-Tetris-ChatGPT-Autodoc-AIO-V6/releases/latest) supplies a static ZIP and checksum. Settings and portable leaderboards remain planned. Accepted requirements and progress are in [PROJECT](docs/dev/PROJECT.md), [TASKS](docs/dev/TASKS.md) and [HANDOFF](docs/dev/HANDOFF.md). Preparation QC/integration passed; full implementation is authorized and tracked by phase.
 
 See [SDD Manager usage](SDD-MANAGER.md) and the [AI-assisted development disclosure](AI_DISCLOSURE.md). Development follows the [project instructions](AGENTS.md) and [browser development policy](BROWSER_DEV_POLICY.md).
 
@@ -16,7 +16,7 @@ npm test
 npm run check
 ```
 
-`npm run dev` starts the local game; `npm run build` produces static assets in `dist/`. Build, 70 unit tests and 38 packaged Playwright checks have passed on Linux: 36 browser-interaction checks across Chromium/Firefox plus two source/asset HTTP checks. Hosted CI passed for the published classic baseline; see milestone reports for evidence and limits. Windows follows WINDOWS_SHELL_POLICY.md; no PowerShell is required.
+`npm run dev` starts the local game; `npm run build` produces static assets in `dist/`. Build, 99 unit tests and 40 packaged Playwright checks have passed on Linux: 38 browser-interaction checks across Chromium/Firefox plus two source/asset HTTP checks. Hosted CI passed for the published classic baseline; see milestone reports for evidence and limits. Windows follows WINDOWS_SHELL_POLICY.md; no PowerShell is required.
 
 ## Browser checks
 

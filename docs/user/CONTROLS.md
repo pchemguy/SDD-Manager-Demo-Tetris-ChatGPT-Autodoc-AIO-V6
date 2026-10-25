@@ -8,6 +8,7 @@ Start with the button or Enter. Click the board to return keyboard focus after u
 | Soft drop | Down arrow |
 | Hard drop | Space |
 | Hold | C or either Shift key |
+| Activate penetrator | B, when a bonus is available |
 | Rotate clockwise | Up arrow or X |
 | Rotate counterclockwise | Z |
 | Pause/resume | P, Escape or Pause/Resume button |
@@ -18,7 +19,7 @@ Holding an arrow repeats after 150 ms and then every 50 ms. The most recently pr
 
 Complete a horizontal row to clear it. One/two/three/four simultaneous lines award 100/300/500/800 points multiplied by the level before the clear. Each successful soft-drop row awards one point. Every ten cleared lines increases the level and falling speed. A grounded piece locks after one full gravity interval; grounded movement does not restart the timer. Leaving the ground cancels it until the next landing.
 
-The game pauses while its page/window loses visibility or focus. An explicit user pause remains until resumed. Game over preserves the final visible stats; restart clears the board, stats and active run. Closing/reloading the page begins a fresh run. This release has no automatic permanent score storage.
+The game pauses while its page/window loses visibility or focus. An explicit user pause remains until resumed. Game over preserves the final visible stats; restart clears the board, stats, hold, bonuses and active run. Closing/reloading the page begins a fresh run. This release has no automatic permanent score storage.
 
 ## Running a static release
 
@@ -41,3 +42,9 @@ The outlined ghost previews the same landing selected by Space. Hard drop awards
 ## Hold
 
 Press C or either Shift key to store the active kind. Hold is available once until that piece locks. An empty hold consumes Next; exchanging a stored kind leaves Next unchanged. The replacement returns to its spawn position/orientation with fresh gravity and lock timing. The panel shows the stored kind and AVAILABLE or USED state. Restart clears hold.
+
+## Penetrator bonuses
+
+Clear four lines at once to earn one penetrator bonus, up to three. The side panel shows one lightning symbol per stored use. Press B while playing to spend one on the current piece; activation without funding or a valid target leaves the count unchanged.
+
+The activated falling piece and its outlined ghost are white. It can move or rotate through occupied cells while retaining a fully visible, non-overlapping landing. Ghost and hard drop select its deepest valid position, even below blockers. Existing blocks remain intact. Hold is LOCKED during activation; there is no manual deactivation or refund. Activation ends on lock, and settled cells use the regular piece color. An activated four-line clear earns a bonus for a future piece. Restart resets bonuses to zero.

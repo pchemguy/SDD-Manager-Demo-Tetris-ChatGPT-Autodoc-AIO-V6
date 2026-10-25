@@ -152,7 +152,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-021, T-022. Contract: P-02, G-09, S-02, A-05 legal-motion subset.
             Evidence: Ghost/drop deepest equality, crossing occupied rows, ordinary-versus-penetrator distinction, no overwritten cells and legal-only final lock.
             Milestone exit: review the whole 3.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/3/3.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 3.2 — Earn and activate
+    - [x] Milestone 3.2 — Earn and activate
         - [x] T-024 — Award and cap penetrator bonuses
             Completion evidence: RED: four award/future-activation assertions failed before four-line awards. GREEN: 94 unit tests and TypeScript check pass. Exactly four simultaneous lines add one bonus, cap at three, zero-to-three line clears add none, and an activated clear ends the old activation before awarding a future use. Fresh games reset zero; bounded fixture funding rejects invalid values. Existing legal traversal/drop/hold/timing regressions pass.
             Scope: src/game/game.ts; scoring/bonus fixtures.
@@ -163,7 +163,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/game.ts; browser/input.ts; activation/hold fixtures.
             Depends on: T-024. Contract: P-01/P-03, G-08.
             Evidence: B spends once only after viable activation, rejects impossible/repeated activation without spending, and blocks hold while active.
-        - [ ] T-026 — Present and verify the complete bonus mechanic
+        - [x] T-026 — Present and verify the complete bonus mechanic
+            Completion evidence: RED: real Chromium bonus-panel assertion failed before presentation. GREEN: 99 unit tests/check/build, 40 packaged Playwright checks and final two-browser package-byte recheck pass. A generated/production-domain-validated seven-bag replay naturally earns/spends/locks in both browsers, verifies four white cells/white deepest ghost, active hold ban, indicator updates and preserved occupied bridge. Firefox screenshot inspected; min viewport/regressions pass. Version0.3.0, player/accessibility/package help and report3.2/HANDOFF complete. Independent milestone/phase review and docs recheck found no Critical/Important issue.
             Scope: browser/render.ts, panels.ts; browser penetrator suite; player help.
             Depends on: T-024, T-025. Contract: P-01–P-03, A-05.
             Evidence: Entirely white active piece, nonwhite regular colors, one symbol per bonus, earn→spend→lock demonstration, modern regressions and 0.3.0 metadata.
