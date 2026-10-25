@@ -91,7 +91,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-011, T-012. Contract: G-07, R-01, A-02.
             Evidence: Visible next matches next spawn, classic replay remains usable, full SRS works in the actual game.
             Milestone exit: review the whole 2.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 2.2 — Ghost and hard drop
+    - [x] Milestone 2.2 — Ghost and hard drop
         - [x] T-014 — Unify ordinary landing projection
             Completion evidence: RED: the hidden first-obstruction fixture returned a non-visible target. GREEN: 59 unit tests and TypeScript check pass. Shared ordinary projection now rejects hidden/invalid targets, stops at overhangs rather than lower legal gaps, preserves board data and lands every kind/orientation exactly at the bottom boundary. Grounding consumes this projection; lifecycle/time/SRS/source regressions remain green.
             Scope: src/game/landing.ts; constructed-board unit fixtures.
@@ -102,7 +102,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/game.ts; clock/drop tests.
             Depends on: T-014. Contract: G-05/G-09 default follow, S-01/S-02.
             Evidence: Score traveled rows, position at shared target, preserve zero-distance deadline and obey interval-policy boundary ties.
-        - [ ] T-016 — Render ghost and wire the hard-drop action
+        - [x] T-016 — Render ghost and wire the hard-drop action
+            Completion evidence: RED: missing-ghost snapshot/pixel assertions and hidden-row grounding regression failed. GREEN: 65 unit tests, TypeScript/Vite build and 34 actual Chromium/Firefox checks pass. Floor/stack ghost and hard-drop pixel equality, delayed source advancement and held Space across spawning verified; Firefox ghost screenshot inspected. Independent milestone review found R2.2-01, rechecked its timing repair, and found no remaining Critical/Important blocker. Report 2.2/HANDOFF and controls updated.
             Scope: browser/render.ts, input.ts; game/controller snapshots; browser tests.
             Depends on: T-014, T-015. Contract: G-09 always-show subset, A-02/A-03.
             Evidence: Ghost/drop positions match at floor/stacks, active piece remains legible, Space acts once and prior controls remain usable.

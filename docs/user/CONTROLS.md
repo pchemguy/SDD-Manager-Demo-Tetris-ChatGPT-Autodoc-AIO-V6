@@ -31,3 +31,7 @@ Open `http://localhost:8000`. The application uses local static assets and has n
 ## Piece selection and rotation
 
 The current development game draws each group of seven pieces from one shuffled bag. The Next panel previews the exact next kind without consuming it. Rotation uses ordered SRS wall/floor kicks; a rejected rotation leaves position and lock timing unchanged.
+
+## Ghost and hard drop
+
+The outlined ghost previews the same landing selected by Space. Hard drop awards two points per traveled row and follows the default full gravity-interval delay before locking. A drop that travels zero rows does not extend an existing deadline. Holding Space does not drop later pieces automatically.

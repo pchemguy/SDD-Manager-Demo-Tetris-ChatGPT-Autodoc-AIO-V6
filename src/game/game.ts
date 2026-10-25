@@ -41,11 +41,11 @@ export class Game {
     this.events.push({type:'game-over',gameId:this.gameId,score:this.score,lines:this.lines,level:this.level});
   }
   /** A detached snapshot prevents renderers from mutating the domain. */
-  get snapshot() { return {next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
+  get snapshot() { return {ghost:landing(this.board,this.active),next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
   private refreshGrounding():void {
     if(this.status!=='playing') {this.groundedDeadline=null;return;}
     const target=landing(this.board,this.active);
-    if(target&&target.y>this.active.y) this.groundedDeadline=null;
+    if((target&&target.y>this.active.y)||(!target&&canPlace(this.board,{...this.active,y:this.active.y+1}))) this.groundedDeadline=null;
     else if(this.groundedDeadline===null) this.groundedDeadline=this.time+this.interval;
   }
   private lock():void {

@@ -1,7 +1,7 @@
 /** Routes logical time and browser commands to a single game owner. */
 import {Game,type GameOverEvent} from '../game/game';
 export type View=(Omit<Game['snapshot'],'status'>&{status:'playing'|'paused'|'game-over'})|null;
-export type Command='left'|'right'|'down'|'cw'|'ccw';
+export type Command='left'|'right'|'down'|'cw'|'ccw'|'drop';
 export class Controller {
   private game:Game|null=null;
   private last=0;
@@ -46,6 +46,7 @@ export class Controller {
     if(command==='down')this.game.down();
     if(command==='cw')this.game.rotate(1);
     if(command==='ccw')this.game.rotate(-1);
+    if(command==='drop')this.game.hardDrop();
     this.consumeEvents();this.render(this.view);
   }
 }
