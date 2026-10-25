@@ -1,6 +1,10 @@
 # Project handoff
 
-Checkpoint: complete project and verified stable release 1.0.0. Current branch: main.
+Checkpoint: focused SQLite development-startup correction opened after release 1.0.0. Current branch: revision/001_fbe036e-sqlite-dev-startup.
+
+## Active correction
+
+The user reports a SQLite worker communication failure under `npm run dev` on Windows. [Revision plan](reviews/001_fbe036e-sqlite-dev-startup/REVISION-PLAN.md) owns the bounded diagnosis, fix, regression checks and integration. Branch creation parent/target is main at fbe036e10ae24da75c9363f0c84b442bdc37aa9b. No parent work is suspended. The original six phases remain complete. Next: reproduce with an empty dependency cache, fix startup without changing accepted gameplay/file contracts, verify Windows/Linux browser evidence, integrate and publish the patch, then stop.
 
 ## Completed scope
 
@@ -17,4 +21,4 @@ Release body SHA-256: 78342cd582d25f1abf989fc036be5b77c5156753afe2df542453b0bc8c
 
 ## Remaining boundary
 
-No unresolved functional TODO, deferred finding or blocker. Linux HTTP/native Chromium/Firefox are established; native OS-window/BFCache/picker, HTTPS execution and Windows limits remain explicit in the final report. Optional additional environment verification requires an equipped host. The requested goal is complete; await a new user request before starting new work.
+The new SQLite development-startup defect is active under the revision above. Linux HTTP/native Chromium/Firefox were established for 1.0.0; native OS-window/BFCache/picker, HTTPS execution and Windows limits remain explicit in that release's final report.
