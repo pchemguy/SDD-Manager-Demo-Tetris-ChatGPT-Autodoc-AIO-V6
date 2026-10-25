@@ -336,7 +336,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Content-detected restore, no partial state, initialization/read failure, timeout/cancel/stale reply and resource teardown preserve JSON and existing scores.
             Milestone exit: review the whole 6.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 6.3 — Dual-format delivery
-        - [ ] T-054 — Complete format selection and file help
+        - [x] T-054 — Complete format selection and file help
+            Completion evidence: Completed player guide and accessible file help for both formats, content-over-extension replacement, stable field/rank rules, exact schema/SQLite metadata, actual storage classes, byte/deadline bounds, cancel/failure preservation and lazy-runtime isolation. Save/Restore/format control share descriptive help and nonblocking ready/operation status. TypeScript/Vite build and4 focused Chromium/Firefox actual dual-format download/content-restore checks pass. Existing283-unit/100-packaged acceptance covers unchanged codec/controller logic; final cross-format/subdirectory/package checks remain T055–056.
             Scope: browser/panels.ts, files.ts; docs/user/LEADERBOARD.md; schema link.
             Depends on: T-053. Contract: L-02–L-04, S-05.
             Evidence: Save offers JSON/SQLite, Restore accepts either by content, extension mismatch handled, clear errors and preserved record fields.
