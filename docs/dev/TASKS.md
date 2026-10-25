@@ -197,7 +197,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Hide straddling/upper ghost, show all-lower ghost; test switching/disabled hold/drop/next and captured policies in playable game.
             Milestone exit: review the whole 4.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 4.2 — Settings persistence
-        - [ ] T-031 — Resolve URL cookie and default per setting
+        - [x] T-031 — Resolve URL cookie and default per setting
+            Completion evidence: RED:12 source-resolution assertions failed against the initial default-only resolver. GREEN:127 unit tests and TypeScript check pass. All six keys resolve valid unique URL, then valid unique decoded complete-name cookie, then default independently. Explicit defaults enter the cookie-write plan; omissions/invalid URLs schedule no default replacement. Covered mixed sources, duplicate/case/whitespace/empty/malformed values, duplicate/invalid cookies, unknown names, exact matching and detached defaults. Pure resolver performs no browser writes.
             Scope: src/settings/service.ts; synthetic source fixtures.
             Depends on: T-030. Contract: C-02.
             Evidence: All six keys, mixed/omitted/default URL cases, duplicate/invalid tokens/cookies and independent fallback.
