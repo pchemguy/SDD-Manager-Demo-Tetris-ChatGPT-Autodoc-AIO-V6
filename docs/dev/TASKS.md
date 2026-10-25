@@ -109,7 +109,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Ghost/drop positions match at floor/stacks, active piece remains legible, Space acts once and prior controls remain usable.
             Milestone exit: review the whole 2.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 2.3 — Hold integration
-        - [ ] T-017 — Implement once-per-piece hold and source exchange
+        - [x] T-017 — Implement once-per-piece hold and source exchange
+            Completion evidence: RED: all five hold fixtures failed on the missing action. GREEN: 70 unit tests and TypeScript check pass. Verified empty versus nonempty queue consumption, once-per-lock guard, fresh position/orientation/gravity/deadline, hold during grounding delay, blocked replacement game over without board mutation, and fresh-game reset. Centralized replacement timing for constructor/lock/hold; existing drop/ghost/hidden-row/SRS regressions pass. UI/key wiring remains T-018.
             Scope: src/game/game.ts; hold/source/time tests.
             Depends on: T-016. Contract: G-08.
             Evidence: Empty versus swap queue consumption, used flag, fresh orientation/timing and blocked replacement game over.
