@@ -239,7 +239,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 5 — JSON leaderboard
 
-- [ ] Phase 5 — JSON leaderboard
+- [x] Phase 5 — JSON leaderboard
     - [x] Milestone 5.1 — Session results
         - [x] T-038 — Implement result validation ranking and top ten
             Completion evidence: RED:leaderboard validation suite failed to import absent modules while144 predecessor tests passed. GREEN:173 unit tests and TypeScript check pass. Strict real canonical UTC years0001–9999/leap dates, exact stable ASCII IDs/fields, safe nonnegative scores, whole-array duplicate/count rejection, deterministic score/time/ASCII ranking, top10 trimming, detached snapshots and atomic invalid replacement verified. HANDOFF records published0.4.0/CI/assets, phase5 hosted readiness and unchanged accepted input QC.
@@ -291,8 +291,9 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-044, T-045. Contract: L-01/L-02/L-04 JSON, A-07/A-08/A-09.
             Evidence: Download bytes then restore empty/ten files, invalid restore leaves state, schema download works in Chromium/Firefox; expose JSON-only capability honestly for 0.5.0.
             Milestone exit: review the whole 5.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 5.4 — Phase review
-        - [ ] T-047 — Review test and report phase 5
+    - [x] Milestone 5.4 — Phase review
+        - [x] T-047 — Review test and report phase 5
+            Completion evidence: Complete phase source/tests/guide/resource reviews and final recheck find no remaining findings; final unchanged payload passed221 unit/check/package and86 packaged browser checks. Actual T038–046 owning commit audit passes; prior closed reports unchanged; all delivery issues/milestones closed/read back. Phase report/HANDOFF distinguish accepted JSON-only0.5 scope, modeled/native limits and pending integration/CI/release effects; no unresolved phase TODO.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.5.0.
             Depends on: T-046; all phase 5 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/5/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
