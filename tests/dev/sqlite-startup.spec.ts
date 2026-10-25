@@ -52,7 +52,8 @@ for(const linked of [false,true])test.describe(linked?'linked layout with filesy
   await page.getByLabel('Save format',{exact:true}).selectOption('sqlite');
   let download:Download|undefined;page.on('download',value=>{download=value;});
   await page.locator('#save').click();
-  await expect(page.locator('#file-status')).toContainText('Download offered');
+  // Cold WASM initialization has the application's existing 10-second budget.
+  await expect(page.locator('#file-status')).toContainText('Download offered',{timeout:11000});
   await expect.poll(()=>download).toBeTruthy();
   const SQL=await initSqlJs({wasmBinary:new Uint8Array(readFileSync('node_modules/sql.js/dist/sql-wasm.wasm')).buffer});
   const db=new SQL.Database(await bytes(download!));
@@ -65,7 +66,7 @@ for(const linked of [false,true])test.describe(linked?'linked layout with filesy
    db.run('INSERT INTO high_scores VALUES(?,?,?)',[record.id,456,record.timestamp]);fixture=Buffer.from(db.export());
   }finally{db.close();}
   await upload(page,fixture,'first.sqlite');
-  await expect(page.locator('#file-status')).toContainText('Restored 1');
+  await expect(page.locator('#file-status')).toContainText('Restored 1',{timeout:11000});
  }
  expect(navigations).toEqual([]);expect(wasm.length).toBeGreaterThan(0);
  expect(wasm.every(url=>new URL(url).origin===new URL(origin).origin)).toBe(true);

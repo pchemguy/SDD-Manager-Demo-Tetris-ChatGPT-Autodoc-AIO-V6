@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: SQLite development worker route workaround verified and prepared on main for release 1.0.2. Current branch: main.
+Checkpoint: SQLite development worker route workaround verified; parent release-validation recovery for 1.0.3 pending. Current branch: main.
 
 ## Active boundary
 
@@ -8,7 +8,7 @@ The user explicitly selected finishing the narrow development-worker workaround 
 
 Creation parent/target main and branch-off baseline: 7a57e6d3a1f94539559b096a5fcaa92cd6308ed0. Original opening: fc1d54c2e7acc6fddbf2df1e14e4d8cfe14576b8. Verified/published executable correction: ceb51fa94ded90145d7cf128dbfe3296a86835b2. No parent work is suspended. No gameplay or file-contract change. This finalization changes documentation only.
 
-The explicit integration combines source dc389e46adecafdb9c9452af912aee7866ac96e8 with creation parent main 7a57e6d3a1f94539559b096a5fcaa92cd6308ed0. No conflict or application merge-resolution change. During merged verification, fixture HTML cleanup inside the repository produced an unrelated Vite watcher notification; fixture/cache roots were moved to owned OS temporary directories, with explicit trusted source/temp filesystem allowance. TypeScript and all eight scenarios passed again after this isolated test-only correction; independent follow-up review found no findings. Next: publish/read back the verified main integration, confirm its CI, then publish/verify clean pinned release 1.0.2. Close issue 67 after those verified effects. Stop after the workaround; do not resume original phases or add broad Vite symlink support.
+The explicit integration combines source dc389e46adecafdb9c9452af912aee7866ac96e8 with creation parent main 7a57e6d3a1f94539559b096a5fcaa92cd6308ed0. No conflict or application merge-resolution change. During merged verification, fixture HTML cleanup inside the repository produced an unrelated Vite watcher notification; fixture/cache roots were moved to owned OS temporary directories, with explicit trusted source/temp filesystem allowance. TypeScript and all eight scenarios passed again after this isolated test-only correction; independent follow-up review found no findings. Final main CI 40198143810 passed Linux but the Windows Firefox ordinary Save assertion expired at 5 seconds while the application was still preparing within its 10-second budget. [Validation recovery](reports/RELEASE-1.0.2-VALIDATION.md) records the actual log, unchanged application behavior, aligned 11-second success assertions and successful local recheck. The reserved v1.0.2 tag remains at 624e7ad1f68899218d538a7957739099e5b49ae7 with no GitHub release/assets. Version advances to 1.0.3 without moving that tag. Next: publish/read back the bounded parent recovery, verify its native Windows/Linux CI, then create the final 1.0.3 release commit/tag and publish/verify its package. Do not tag before that CI passes. Close issue 67 after those verified effects. Stop after the workaround; do not resume original phases or add broad Vite symlink support.
 
 ## Previous completed scope
 
