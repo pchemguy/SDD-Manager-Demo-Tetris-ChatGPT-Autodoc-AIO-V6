@@ -136,7 +136,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 - [ ] Phase 3 — Penetrator
     - [ ] Milestone 3.1 — Legal penetration
-        - [ ] T-021 — Implement deepest legal penetrator projection
+        - [x] T-021 — Implement deepest legal penetrator projection
+            Completion evidence: RED: four new penetrator projection fixtures failed against ordinary-only landing. GREEN: 75 unit tests and TypeScript check pass. Shared service enumerates deepest visible non-overlapping target below obstructions, permits transient overlap, handles isolated gaps/no-target/current bounds, preserves occupied cells and matches independent bottom-up enumeration across 280 seeded kind/orientation cases. Ordinary/time/SRS/hold regressions remain green; predecessor release and phase projection recorded in HANDOFF.
             Scope: src/game/landing.ts; adversarial board fixtures.
             Depends on: T-020. Contract: P-02, S-02.
             Evidence: Enumerated deepest targets below blockers, intermediate overlap, board boundaries and no-target cases.
