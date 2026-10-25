@@ -158,7 +158,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/game.ts; scoring/bonus fixtures.
             Depends on: T-023. Contract: P-03.
             Evidence: Four-line clears award exactly one, zero-to-three cap, penetrator clear awards future bonus and new game resets.
-        - [ ] T-025 — Wire activation spending and active hold rejection
+        - [x] T-025 — Wire activation spending and active hold rejection
+            Completion evidence: RED: three activation-routing assertions failed before the Controller route. GREEN: 98 unit tests and TypeScript/Vite build pass. B maps through the one-shot gameplay input path; Controller tests verify one spend with extra funding, active hold rejection/source preservation, paused activation rejection while funded, no-target preservation and due four-line lock/award before same-time activation of the new piece. Native earned-bonus/B/white acceptance remains T-026; domain guards are shared with prior viability work.
             Scope: src/game/game.ts; browser/input.ts; activation/hold fixtures.
             Depends on: T-024. Contract: P-01/P-03, G-08.
             Evidence: B spends once only after viable activation, rejects impossible/repeated activation without spending, and blocks hold while active.
