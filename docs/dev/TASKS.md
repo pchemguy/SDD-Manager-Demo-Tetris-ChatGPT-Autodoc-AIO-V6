@@ -13,7 +13,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 ## Phase 1 — Classic baseline
 
 - [ ] Phase 1 — Classic baseline
-    - [ ] Milestone 1.1 — Playable falling loop
+    - [x] Milestone 1.1 — Playable falling loop
         - [x] T-001 — Establish classic geometry and board rules
             Completion evidence: RED: npm test observed four intended geometry/collision failures. GREEN: npm test passed 5/5; npm run check passed. Pinned dependencies installed from registry with a lockfile; board rows, spawn cells, pivot/O behavior, hidden bounds and collisions verified. Browser/build acceptance remains T-003 work.
             Scope: package/toolchain setup; src/game/types.ts, geometry.ts, board.ts; unit fixtures.
@@ -24,7 +24,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/game.ts, landing.ts, source.ts; time/command tests.
             Depends on: T-001. Contract: G-01, G-04/G-05 default interval, G-07 independent source, S-01.
             Evidence: Exact grounding deadline, failed moves, legal movement, ordinary landing and seeded source traces.
-        - [ ] T-003 — Connect the playable browser loop
+        - [x] T-003 — Connect the playable browser loop
+            Completion evidence: RED: two Controller assertions and the persisted-page lifecycle regression failed before fixes. GREEN: 17 unit tests, TypeScript/Vite build, and 10 actual app browser tests passed (5 Chromium/5 Firefox); screenshot inspected. Repeated isolated preflight passed after official download fallbacks and diagnosed Firefox process-local override. Independent milestone review rechecked the repaired lifecycle bug; report 1.1 and HANDOFF included. Native Back and modeled persisted-handler evidence are explicitly distinguished.
             Scope: src/main.ts; app/controller.ts; browser/input.ts, render.ts; isolated Playwright setup.
             Depends on: T-001, T-002. Contract: G-01/G-03 initial keys, S-01/S-05, A-01 playable subset.
             Evidence: Proactively pin/provision and repeatedly exercise isolated Chromium/Firefox before browser-dependent checks; verify falling/moving/rotating board and inspected rendering.

@@ -33,3 +33,12 @@ it('uses controlled uniform source draws and rejects invalid entropy',()=>{
  const values=[0,.999];const s=new PieceSource(()=>values.shift()!);expect(s.next()).toBe('I');expect(s.next()).toBe('Z');
  expect(()=>new PieceSource(()=>1).next()).toThrow(RangeError);
 });
+it('resets gravity after successful Down and preserves a rejected Down deadline',()=>{
+ const g=new Game({piece:{...square,y:0}});g.advance(400);g.down();expect(g.snapshot.active.y).toBe(1);
+ g.advance(1000);expect(g.snapshot.active.y).toBe(1);g.advance(1400);expect(g.snapshot.active.y).toBe(2);
+ const grounded=new Game({piece:{...square,y:18}});grounded.advance(400);grounded.down();expect(grounded.snapshot.groundedDeadline).toBe(1000);
+});
+it('schedules the next piece gravity from its spawn',()=>{
+ const g=new Game({piece:{...square,y:18},random:()=>0});g.advance(1000);expect(g.snapshot.active.y).toBe(-1);
+ g.advance(1999);expect(g.snapshot.active.y).toBe(-1);g.advance(2000);expect(g.snapshot.active.y).toBe(0);
+});
