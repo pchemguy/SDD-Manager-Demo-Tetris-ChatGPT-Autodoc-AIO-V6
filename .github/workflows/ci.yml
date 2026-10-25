@@ -1,13 +1,40 @@
 name: Verify static game
 on:
   push:
-    branches: [main]
+    branches: [main, 'revision/**']
     paths: ['src/**', 'tests/**', 'scripts/**', 'public/**', 'package*.json', '*.config.ts', 'tsconfig.json', 'index.html', '.github/workflows/ci.yml']
   pull_request:
     branches: [main]
 permissions:
   contents: read
 jobs:
+  dev-startup:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            shell: bash
+          - os: windows-latest
+            shell: cmd
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+    timeout-minutes: 15
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.cache/playwright
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: node node_modules/playwright/cli.js install --with-deps --only-shell chromium firefox
+      - run: npm run test:dev
   verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 15

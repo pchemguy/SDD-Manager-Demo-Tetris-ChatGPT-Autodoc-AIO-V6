@@ -25,6 +25,8 @@ npm test
 npm run dev
 ```
 
+`npm run test:dev` checks first-use SQLite Save and Restore with a separate empty Vite dependency cache for every browser/scenario. The development configuration pre-optimizes the lazy worker's `sql.js` dependency so the first operation does not trigger a dependency-rebuild page reload. WASM still loads only when SQLite is used. After updating a running checkout, stop the old dev server, restart `npm run dev`, and reload the page.
+
 `npm run build` creates `dist/`; `npm run package` builds `.cache/releases/browser-tetris.zip` and its SHA-256 file. The 1.0.0 release passed 283 unit tests and 104 packaged Playwright checks across Chromium/Firefox, including actual uploads/downloads, cross-format data preservation, subdirectory local assets and two exact served-byte inventory checks. Independent milestone/phase/product reviews found no remaining code findings. The [verified release outcome](docs/dev/reports/RELEASE-1.0.0-OUTCOME.md) records completed publication and CI. Detailed evidence and limits are in [development reports](docs/dev/reports/), [TASKS](docs/dev/TASKS.md) and [HANDOFF](docs/dev/HANDOFF.md).
 
 ## Browser checks
@@ -47,12 +49,12 @@ Then set `TETRIS_PACKAGE_TEST=1` in the shell environment and run `npm run test:
 
 On this restricted Linux host, Firefox content processes failed with `/proc/self/uid_map: EPERM`. The diagnosed trusted-local-only override `TETRIS_FIREFOX_NO_CONTENT_SANDBOX=1` was verified with repeated contexts, native input, Canvas output and teardown. It affects only Firefox test launch. Normal hosts/CI use the default sandbox. Browser setup and governance follow [BROWSER_DEV_POLICY](BROWSER_DEV_POLICY.md).
 
-Native keyboard and DOM-control focus are tested. OS-window/tab visibility and persisted-page events use controlled models; actual native window transitions and BFCache eligibility are unestablished. Windows execution has not been verified and follows [WINDOWS_SHELL_POLICY](WINDOWS_SHELL_POLICY.md).
+Native keyboard and DOM-control focus are tested. OS-window/tab visibility and persisted-page events use controlled models; actual native window transitions and BFCache eligibility are unestablished. For 1.0.1, fresh-cache development Save/Restore checks pass on native Windows CI using CMD and Chromium/Firefox, as well as Linux. The full packaged/gameplay suite remains verified on Linux; Windows 10 and the user's particular browser installation were not directly exercised. See the [startup correction report](docs/dev/reviews/001_fbe036e-sqlite-dev-startup/REVISION-REPORT.md) and [Windows shell policy](WINDOWS_SHELL_POLICY.md).
 
 ## Distribution and project records
 
 Archives contain the runnable entry/assets, worker/WASM, canonical schema, required licenses/notices, standalone instructions and BUILD.json version/source/dirty metadata. Sorted members with fixed timestamps/modes support reproducibility. Final release packaging uses a clean pinned main release commit, matching tag/notes and verified uploaded/downloaded asset bytes. Credentials, caches, skills and development logs are excluded.
 
-The [CI workflow](.github/workflows/ci.yml) runs checks on main integrations and pull requests with pinned official actions, Node 24 and both browsers. It has Contents read only and does not publish releases. Actual hosted outcomes are recorded at release boundaries.
+The [CI workflow](.github/workflows/ci.yml) runs checks on main/revision pushes and pull requests with pinned official actions, Node 24 and both browsers. Fresh-cache development checks run on Linux and Windows; full packaged acceptance runs on Linux. It has Contents read only and does not publish releases. Actual hosted outcomes are recorded at release boundaries.
 
 Accepted design and contracts are in [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md) and [SPEC](docs/dev/SPEC.md). See [SDD Manager usage](SDD-MANAGER.md), [AI-assisted disclosure](AI_DISCLOSURE.md) and [project instructions](AGENTS.md).

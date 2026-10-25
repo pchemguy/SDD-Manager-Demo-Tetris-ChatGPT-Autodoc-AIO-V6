@@ -1,6 +1,10 @@
 # Project handoff
 
-Checkpoint: complete project and verified stable release 1.0.0. Current branch: main.
+Checkpoint: focused SQLite development-startup correction prepared and verified on main for patch release 1.0.1. Current branch: main.
+
+## Active correction
+
+The reported SQLite worker startup failure is corrected by explicit dependency optimization. [Revision report](reviews/001_fbe036e-sqlite-dev-startup/REVISION-REPORT.md) records the failing baseline, bounded fix, 283 unit/104 packaged checks, four local fresh-cache checks, independent review and successful native Windows CMD/Linux CI 40194571590. The explicit integration incorporates revision tip 5a8e7a44fd17bad0f61e43e5a2de7ba45748a030 into its creation parent main at fbe036e10ae24da75c9363f0c84b442bdc37aa9b; original opening commit is fb2123d1284445777eca2761699075cc951f2dbe. No conflict or executable change was introduced by the merge. No parent work is suspended. The original six phases remain complete. Next: publish/read back the verified main integration, verify its CI, publish the clean pinned 1.0.1 patch and verify downloads, then stop. No gameplay or file-contract changes are authorized or needed.
 
 ## Completed scope
 
@@ -17,4 +21,4 @@ Release body SHA-256: 78342cd582d25f1abf989fc036be5b77c5156753afe2df542453b0bc8c
 
 ## Remaining boundary
 
-No unresolved functional TODO, deferred finding or blocker. Linux HTTP/native Chromium/Firefox are established; native OS-window/BFCache/picker, HTTPS execution and Windows limits remain explicit in the final report. Optional additional environment verification requires an equipped host. The requested goal is complete; await a new user request before starting new work.
+The source defect is verified corrected; integration and patch release remain pending. Native Windows startup checks now pass under CMD in both browsers. Full packaged gameplay remains Linux-tested; Windows 10, the user's installed browser, native OS-window/BFCache/picker and HTTPS execution remain outside established evidence.
