@@ -319,7 +319,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: SQLite export through real UI, actual downloaded database inspection and cleanup in both browsers; preserve JSON export.
             Milestone exit: review the whole 6.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 6.2 — Validated SQLite restore
-        - [ ] T-051 — Validate SQLite identity integrity and schema
+        - [x] T-051 — Validate SQLite identity integrity and schema
+            Completion evidence: RED:four structural-scope assertions failed against absent validated read scope. GREEN:263 unit tests and TypeScript/Vite build pass. Genuine Python-generated corpus verifies version/header/truncation/btree corruption, table identity/count, extra tables/views/triggers/indexes/unique constraints, complete column order/types/NOTNULL/PK and hidden/generated flags, virtual tables and protection flags before row callbacks. Equivalent reformatted and ordinary WITHOUT ROWID schemas accepted; automatic PK metadata allowed. Fixed queries only, no imported DDL execution. Disposable DB closes on callback failure; fixture/inspection connections explicitly close. Row/storage validation remains T052.
             Scope: leaderboard/sqlite.ts; real corrupt/schema fixture corpus.
             Depends on: T-050. Contract: L-03.
             Evidence: Header/version/integrity, complete column/hidden/type/PK checks, reject views/triggers/extra objects and never execute imported SQL.
