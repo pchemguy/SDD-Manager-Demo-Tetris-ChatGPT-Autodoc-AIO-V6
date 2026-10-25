@@ -27,7 +27,39 @@ for file in sorted(dist.rglob('*')):
     members[name]=file.read_bytes()
 members['LICENSE']=(ROOT/'LICENSE').read_bytes()
 members['BUILD.json']=(json.dumps({'version':version,'source_commit':source,'dirty':dirty},sort_keys=True)+'\n').encode()
-members['README.txt']=(f'Browser Tetris {version}\n\nExtract this archive, then serve this directory over HTTP.\nFor example: python -m http.server 8000\nOpen http://localhost:8000 in your browser. No application backend is required.\n\nArrow keys move/descend, Up/X and Z rotate, Space hard drops, C/Shift holds, B activates a funded penetrator, P/Escape pause.\nFour-line clears earn one bonus, up to three. Activated white pieces pass occupied cells to a legal deepest landing; hold is blocked until lock.\nEnter starts from ready/game-over. Use the explicit Restart button to abandon a run.\nSee the tagged project release for the capabilities included in this version.\n').encode()
+members['README.txt']=(f"""Browser Tetris {version}
+
+Extract this archive and serve its directory over HTTP(S), including from a subdirectory.
+For example: python -m http.server 8000
+Open http://localhost:8000 in your browser. All assets, the SQLite worker and WASM are local.
+No application backend or account is required.
+
+PLAY
+Arrow keys move/descend; Up/X and Z rotate. Space hard drops; C/Shift holds.
+B activates a funded penetrator. Four-line clears earn one bonus, up to three.
+White penetrators cross occupied cells to the deepest legal non-overlapping landing.
+P/Escape or the button pauses. Enter starts from ready/game-over; Restart abandons a run.
+
+SETTINGS
+Six controls configure ghost, hard drop, next preview, locking and hold.
+URL values override saved cookies independently; changes save only the selected setting.
+Dynamic ghost shows only wholly lower-half landings. Hard-drop availability is independent.
+Locking choices apply at the next spawn, including hold replacements.
+
+RESULTS AND FILES
+The session top ten retains completed games across restart and clears on leaving/reload.
+Save offers JSON or SQLite downloads. Restore detects either by content and replaces only
+fully validated results. IDs, safe integer scores and canonical UTC timestamps are preserved.
+JSON Schema is available as leaderboard.schema.json. JSON limit: 65536 bytes.
+SQLite limit: 1048576 bytes, format version PRAGMA user_version=1.
+File operations pause play; Cancel and errors preserve results. Downloads are manual.
+
+LICENSES AND SOURCE
+See LICENSE and THIRD-PARTY-NOTICES.txt. BUILD.json identifies version and source commit.
+Player guides and validation reports are in the tagged source repository:
+https://github.com/pchemguy/SDD-Manager-Demo-Tetris-ChatGPT-Autodoc-AIO-V6
+""").encode()
+
 with zipfile.ZipFile(OUTPUT,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
     for name,data in sorted(members.items()):
         info=zipfile.ZipInfo(name,date_time=(2000,1,1,0,0,0))

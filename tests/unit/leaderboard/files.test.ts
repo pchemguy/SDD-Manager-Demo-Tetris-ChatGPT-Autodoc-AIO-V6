@@ -1,13 +1,13 @@
 /** Controlled async boundaries expose cancellation, timeout and stale completion. */
 import {afterEach,expect,it,vi} from 'vitest';
-import {saveFile,restoreFile,type FilePort,type Codecs} from '../../../src/leaderboard/files';
+import {saveFile,restoreFile,type FilePort,type SelectedFile,type Codecs} from '../../../src/leaderboard/files';
 import {encodeJSON,decodeJSON} from '../../../src/leaderboard/json';
 import {Controller} from '../../../src/app/controller';
 import {Game} from '../../../src/game/game';
 const records=[{id:'stable',score:7,timestamp:'2026-01-01T00:00:00.000Z'}];
 function deferred<T>(){let resolve!:(v:T)=>void;const promise=new Promise<T>(r=>{resolve=r;});return {promise,resolve};}
 const flush=async()=>{for(let i=0;i<8;i++)await Promise.resolve();};
-function environment(){const bytes=encodeJSON(records),read=vi.fn(async()=>bytes),pick=vi.fn<FilePort['pick']>(async()=>({size:bytes.length,read})),download=vi.fn<FilePort['download']>(async()=>{});return {read,pick,download,port:{pick,download} satisfies FilePort};}
+function environment(bytes:Uint8Array=encodeJSON(records)){const read=vi.fn<SelectedFile['read']>(async(_signal,start=0,end=bytes.length)=>bytes.slice(start,end)),pick=vi.fn<FilePort['pick']>(async()=>({size:bytes.length,read})),download=vi.fn<FilePort['download']>(async()=>{});return {read,pick,download,port:{pick,download} satisfies FilePort};}
 afterEach(()=>{vi.useRealTimers();vi.restoreAllMocks();});
 it('captures an immutable save snapshot before asynchronous encoding',async()=>{
  const env=environment(),gate=deferred<void>(),input=records.map(r=>({...r}));const codec:Codecs={encode:async(_format,snapshot)=>{await gate.promise;return encodeJSON(snapshot);},decode:async bytes=>decodeJSON(bytes)};
@@ -16,8 +16,8 @@ it('captures an immutable save snapshot before asynchronous encoding',async()=>{
 it('empty picker cancellation performs no read/codec work and installs no deadline',async()=>{
  vi.useFakeTimers();const env=environment();env.pick.mockResolvedValue(null);expect(await restoreFile(env.port,new AbortController().signal)).toBeNull();expect(env.read).not.toHaveBeenCalled();expect(vi.getTimerCount()).toBe(0);
 });
-it('rejects oversized selection before reading any bytes',async()=>{
- const env=environment();env.pick.mockResolvedValue({size:65537,read:env.read});await expect(restoreFile(env.port,new AbortController().signal)).rejects.toThrow(/65536-byte/);expect(env.read).not.toHaveBeenCalled();
+it('rejects oversized JSON after its bounded header peek before reading the body',async()=>{
+ const env=environment();env.pick.mockResolvedValue({size:65537,read:env.read});await expect(restoreFile(env.port,new AbortController().signal)).rejects.toThrow(/65536-byte/);expect(env.read).toHaveBeenCalledTimes(1);expect(env.read.mock.calls[0].slice(1)).toEqual([0,16]);
 });
 it('pre-aborted restore never opens a picker',async()=>{
  const env=environment(),abort=new AbortController();abort.abort();await expect(restoreFile(env.port,abort.signal)).rejects.toThrow(/canceled/);expect(env.pick).not.toHaveBeenCalled();
@@ -46,4 +46,11 @@ it('ready file operation blocks start and repeated end is harmless',()=>{
 });
 it.each([undefined,null])('preserves rejected codec outcome even when its reason is %s',async reason=>{
  const env=environment();const codec:Codecs={encode:async()=>{throw reason;},decode:async()=>{throw reason;}};await expect(saveFile('json',records,env.port,new AbortController().signal,codec)).rejects.toBe(reason);expect(env.download).not.toHaveBeenCalled();
+});
+
+it('rejects over-one-MiB files before even a header read and rejects short reads',async()=>{
+ const env=environment();env.pick.mockResolvedValue({size:1048577,read:env.read});await expect(restoreFile(env.port,new AbortController().signal)).rejects.toThrow(/1048576-byte/);expect(env.read).not.toHaveBeenCalled();env.pick.mockResolvedValue({size:100,read:env.read});env.read.mockResolvedValue(new Uint8Array());await expect(restoreFile(env.port,new AbortController().signal)).rejects.toThrow(/unexpected number/);
+});
+it('classifies SQLite bytes before selecting its larger bound and reads each byte once',async()=>{
+ const data=new Uint8Array(65537);data.set(new TextEncoder().encode('SQLite format 3\0'));const env=environment(data),decode=vi.fn<Codecs['decode']>(async()=>[]);expect(await restoreFile(env.port,new AbortController().signal,{encode:async()=>new Uint8Array(),decode})).toEqual([]);expect(env.read.mock.calls.map(call=>call.slice(1))).toEqual([[0,16],[16,65537]]);expect(decode.mock.calls[0][0]).toEqual(data);
 });

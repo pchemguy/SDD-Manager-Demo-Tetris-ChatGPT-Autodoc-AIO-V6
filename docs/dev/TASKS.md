@@ -300,51 +300,61 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 6 — SQLite portability
 
-- [ ] Phase 6 — SQLite portability
-    - [ ] Milestone 6.1 — SQLite encoding
-        - [ ] T-048 — Bundle a lazy bounded SQLite worker
+- [x] Phase 6 — SQLite portability
+    - [x] Milestone 6.1 — SQLite encoding
+        - [x] T-048 — Bundle a lazy bounded SQLite worker
+            Completion evidence: RED:worker suite failed importing absent SQLite runtime while221 predecessors passed. GREEN:229 unit tests, TypeScript/Vite build and4 native Chromium/Firefox component probes pass. Pinned sql.js1.15.1/types1.4.11; real local WASM initialization/database close, operation IDs/stale replies, error/post/construction/malformed-reply paths, abort/deadline cleanup and termination verified. Native probes confirm local WASM200/error reply/zero remaining workers and working JSON download/gameplay after forced load failure. Worker/WASM/notices bundle locally; actual file encoder/import remain assigned next tasks and unadvertised. Fixture ArrayBuffer typing corrected; HANDOFF records verified0.5.0/CI/assets and phase6 readiness.
             Scope: leaderboard/sqlite.worker.ts, sqlite.ts; local WASM/build wiring.
             Depends on: T-047. Contract: L-03/L-04, ARCHITECTURE file boundary.
             Evidence: Pinned compatible sql.js/WASM, asynchronous local initialization, operation IDs/error replies, worker disposal and no effect on gameplay/JSON after load failure.
-        - [ ] T-049 — Encode versioned SQLite leaderboard files
+        - [x] T-049 — Encode versioned SQLite leaderboard files
+            Completion evidence: RED:four real SQLite export assertions failed against absent encoder. GREEN:234 unit tests and TypeScript/Vite build pass. Genuine SQLite3 empty/ten exports independently opened: user_version1, exact ordinary high_scores columns/NOTNULL/PK and range constraints, bound insert values, integer/text storage classes, safe score/calendar extremes, stable IDs and integrity exactlyok verified. Invalid/duplicate data reject before output; injected insert failure frees statement and closes DB. Worker now returns transferable encoded bytes; UI/filename/MIME/native download integration is T050.
             Scope: leaderboard/sqlite.ts; real SQLite byte fixtures.
             Depends on: T-048. Contract: L-03.
             Evidence: Genuine database header, user_version=1, exact ordinary table, bound inserts, integer score storage and empty/ten preserved records.
-        - [ ] T-050 — Integrate and verify SQLite downloads
+        - [x] T-050 — Integrate and verify SQLite downloads
+            Completion evidence: RED:native format-selection assertion failed before UI integration. GREEN:234 unit/check/package and90 complete exact-packaged Chromium/Firefox checks pass. Four focused native SQLite cases download genuine empty/ten files; independent Python SQLite verifies header/version/exact columns/PK/index/integrity/storage classes and stable safe fields. Local WASM loads lazily only for SQLite; workers terminate, Save retains results and JSON/gameplay survive forced initialization failure. Filename/MIME dispatch and all predecessor gameplay/settings/session/JSON regressions pass. Independent whole6.1 review found no findings; report6.1/HANDOFF included; restore remains assigned6.2.
             Scope: browser/files.ts; leaderboard/files.ts; browser export checks.
             Depends on: T-048, T-049. Contract: L-03 export, L-04 Save.
             Evidence: SQLite export through real UI, actual downloaded database inspection and cleanup in both browsers; preserve JSON export.
             Milestone exit: review the whole 6.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 6.2 — Validated SQLite restore
-        - [ ] T-051 — Validate SQLite identity integrity and schema
+    - [x] Milestone 6.2 — Validated SQLite restore
+        - [x] T-051 — Validate SQLite identity integrity and schema
+            Completion evidence: RED:four structural-scope assertions failed against absent validated read scope. GREEN:263 unit tests and TypeScript/Vite build pass. Genuine Python-generated corpus verifies version/header/truncation/btree corruption, table identity/count, extra tables/views/triggers/indexes/unique constraints, complete column order/types/NOTNULL/PK and hidden/generated flags, virtual tables and protection flags before row callbacks. Equivalent reformatted and ordinary WITHOUT ROWID schemas accepted; automatic PK metadata allowed. Fixed queries only, no imported DDL execution. Disposable DB closes on callback failure; fixture/inspection connections explicitly close. Row/storage validation remains T052.
             Scope: leaderboard/sqlite.ts; real corrupt/schema fixture corpus.
             Depends on: T-050. Contract: L-03.
             Evidence: Header/version/integrity, complete column/hidden/type/PK checks, reject views/triggers/extra objects and never execute imported SQL.
-        - [ ] T-052 — Validate every SQLite result and input bound
+        - [x] T-052 — Validate every SQLite result and input bound
+            Completion evidence: RED:three row-decoder/storage/bounded-read assertions failed against absent decoder. GREEN:280 unit tests and TypeScript/Vite build pass. Actual Python-generated unsorted/ten/empty files rank identically to JSON and preserve safe fields. REAL1.0 fixture patches its identified record payload only and independently proves typeof=real/value1/integrityok; decoder rejects it while INTEGER1 passes. Unsafe integer, negative/fraction/text/blob values, invalid IDs/calendar/times and excess rows reject. Duplicate-corrupted PK file rejects at integrity gate; shared duplicate semantics already verified. LIMIT11 is observed against50 rows; >1MiB rejects before DB construction. Statements and DB handles close on every path; native atomic integration remains T053.
             Scope: leaderboard/sqlite.ts; shared validation; database row fixtures.
             Depends on: T-051. Contract: L-01/L-03.
             Evidence: Integer storage class/safe range, text IDs/calendar UTC, duplicates/eleventh row and file size; valid unsorted data ranks identically to JSON.
-        - [ ] T-053 — Integrate bounded atomic SQLite restore
+        - [x] T-053 — Integrate bounded atomic SQLite restore
+            Completion evidence: RED:actual SQLite Restore was incorrectly attempted as UTF-8 JSON. GREEN:283 unit/check/package and100 complete exact-packaged Chromium/Firefox checks pass. Content classifier admits bounded header/tail ranges once, validates read lengths and JSON/SQLite limits before full reads/worker initialization. Worker integrates protected schema/storage/record decode; controller commits only validated candidates. Thirty focused native file checks include valid/empty/misnamed SQLite, twelve invalid databases preserving rows, failed init preserving JSON, real held-init cancellation/10000ms timeout retaining user pause and zero workers, plus actual pre-read bounds. Unit protocol ignores stale replies. Global test budget expanded, product deadline unchanged. Independent6.2 review found no findings; report6.2/HANDOFF included.
             Scope: sqlite.worker.ts; files/controller ports; browser restore tests.
             Depends on: T-051, T-052. Contract: L-03/L-04, S-04.
             Evidence: Content-detected restore, no partial state, initialization/read failure, timeout/cancel/stale reply and resource teardown preserve JSON and existing scores.
             Milestone exit: review the whole 6.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 6.3 — Dual-format delivery
-        - [ ] T-054 — Complete format selection and file help
+    - [x] Milestone 6.3 — Dual-format delivery
+        - [x] T-054 — Complete format selection and file help
+            Completion evidence: Completed player guide and accessible file help for both formats, content-over-extension replacement, stable field/rank rules, exact schema/SQLite metadata, actual storage classes, byte/deadline bounds, cancel/failure preservation and lazy-runtime isolation. Save/Restore/format control share descriptive help and nonblocking ready/operation status. TypeScript/Vite build and4 focused Chromium/Firefox actual dual-format download/content-restore checks pass. Existing283-unit/100-packaged acceptance covers unchanged codec/controller logic; final cross-format/subdirectory/package checks remain T055–056.
             Scope: browser/panels.ts, files.ts; docs/user/LEADERBOARD.md; schema link.
             Depends on: T-053. Contract: L-02–L-04, S-05.
             Evidence: Save offers JSON/SQLite, Restore accepts either by content, extension mismatch handled, clear errors and preserved record fields.
-        - [ ] T-055 — Verify cross-format and packaged browser behavior
+        - [x] T-055 — Verify cross-format and packaged browser behavior
+            Completion evidence: Expanded acceptance characterization passes283 unit tests and104 complete exact-packaged Chromium/Firefox checks without product repair. Actual JSON→SQLite→JSON empty/ten downloads/restores preserve exact safe scores/IDs/calendar timestamps and replace marker history; extension mismatch succeeds by content. Real read-only HTTP /demo mount verifies every observed HTTP request stays local under prefix, including actual worker/WASM/schema/icon paths. Vite relative base already handles packaged URLs. All predecessor regression/invalid/cancel/timeout cases pass; independent complete-product/source review found no findings. Dedicated prefix server is test infrastructure only.
             Scope: tests/browser/dual-format suite; packaged worker/WASM/schema paths; affected owners.
             Depends on: T-054. Contract: A-01–A-09 complete applicable coverage.
             Evidence: JSON→SQLite→JSON value preservation, empty/ten/invalid files, subdirectory static deployment, local assets/no CDN and complete predecessor regressions in both browsers.
-        - [ ] T-056 — Package and document the complete product
+        - [x] T-056 — Package and document the complete product
+            Completion evidence: Version1.0.0 metadata, full standalone/player/developer instructions and navigation complete. GREEN:283 unit/check/package and104 complete exact-packaged Chromium/Firefox checks pass with no skips; final Firefox panel inspected. Two candidate ZIP builds match; exact11 members/local pinned WASM/canonical schema/all production license texts and doc links verified. Candidate dirty/source metadata truthful; final clean release build pending. Independent complete-product and final producer/docs review found no findings; report6.3/HANDOFF included. No behavior drift; final audit/report/integration/CI/release remain T057 boundaries.
             Scope: package/version/build/CI assets; README, user guides and release-note inputs.
             Depends on: T-054, T-055. Contract: Full SPEC and Phase 6 exits.
             Evidence: Reproducible 1.0.0 static package, correct local worker/WASM/schema URLs, notices and truthful validated commands; exclude credentials/cache/skills/provenance from product.
             Milestone exit: review the whole 6.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 6.4 — Phase review
-        - [ ] T-057 — Review test and report phase 6
+    - [x] Milestone 6.4 — Phase review
+        - [x] T-057 — Review test and report phase 6
+            Completion evidence: Complete product/phase source review and final producer/docs recheck report zero remaining Critical/Important/Minor findings; unchanged final1.0 payload passed283 unit/check/package and104 exact-packaged Chromium/Firefox checks without skips. Audited actual T048–056 owning commits, preserved closed reports, verified delivery issue/milestone closure and report links. Final implementation report mapsA01–A09 and aggregates all historical TODO provenance: none unresolved/deferred; environment limits explicit. Phase/HANDOFF distinguish verified full-target product acceptance from pending main integration/CI/clean release effects. Final task composition will be audited after commit.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 1.0.0.
             Depends on: T-056; all phase 6 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/6/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.

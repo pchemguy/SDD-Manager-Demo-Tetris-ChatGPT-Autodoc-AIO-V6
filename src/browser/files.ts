@@ -6,10 +6,10 @@ export function browserFilePort():FilePort {
  return {
   pick:signal=>new Promise((resolve,reject)=>{
    if(signal.aborted){reject(canceled());return;}
-   const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.hidden=true;document.body.append(input);
+   const input=document.createElement('input');input.type='file';input.accept='.json,.sqlite,.db,application/json,application/vnd.sqlite3,application/octet-stream';input.hidden=true;document.body.append(input);
    const cleanup=()=>{input.removeEventListener('change',change);input.removeEventListener('cancel',cancel);signal.removeEventListener('abort',abort);input.remove();};
    const abort=()=>{cleanup();reject(canceled());};const cancel=()=>{cleanup();resolve(null);};
-   const change=()=>{const file=input.files?.[0];cleanup();resolve(file?{size:file.size,read:s=>readFile(file,s)}:null);};
+   const change=()=>{const file=input.files?.[0];cleanup();resolve(file?{size:file.size,read:(s,start=0,end=file.size)=>readFile(file.slice(start,end),s)}:null);};
    input.addEventListener('change',change);input.addEventListener('cancel',cancel);signal.addEventListener('abort',abort,{once:true});
    try{input.click();}catch(error){cleanup();reject(error);}
   }),
@@ -40,7 +40,7 @@ export function bindFiles(controller:Controller,port:FilePort=browserFilePort(),
  const cancel=()=>{const operation=active;if(!operation)return;active=null;operation.abort();controller.endFile(performance.now());if(!disposed)status.textContent='Canceled. Results unchanged.';};
  const run=async(kind:'save'|'restore')=>{
   if(disposed||active||!controller.beginFile(performance.now()))return;
-  const operation=new AbortController();active=operation;status.textContent=kind==='save'?'Preparing download…':'Choose a JSON file…';
+  const operation=new AbortController();active=operation;status.textContent=kind==='save'?'Preparing download…':'Choose a JSON or SQLite file…';
   try{
    if(kind==='save'){const format=(document.querySelector<HTMLSelectElement>('#file-format')!.value as Format);await saveFile(format,controller.results,port,operation.signal,codec);if(active===operation&&!operation.signal.aborted)status.textContent='Download offered. Results unchanged.';}
    else {const candidate=await restoreFile(port,operation.signal,codec);if(active===operation&&!operation.signal.aborted){if(candidate){controller.replaceResults(candidate);status.textContent=`Restored ${candidate.length} results.`;}else status.textContent='No file selected. Results unchanged.';}}
