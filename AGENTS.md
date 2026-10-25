@@ -43,3 +43,7 @@ Follow `sdd-manage`'s preparation and phase-activation workflows for required tr
 ## Project guidance
 
 Maintain project-specific navigation and validated setup/check commands here as they become established. Do not invent commands, paths, requirements or completion claims.
+
+## Current project navigation
+
+The accepted project brief is [docs/dev/PROJECT.md](docs/dev/PROJECT.md); its decision/approval state is recorded in DOCS_PREPARATION. Preparation control and approval evidence live in [DOCS_PREPARATION](docs/dev/DOCS_PREPARATION.md), with task checkoffs in [DOCS_TASKS](docs/dev/DOCS_TASKS.md). Recover subsequent progress from these records and Git after reading HANDOFF. Detailed inputs are [ARCHITECTURE](docs/dev/ARCHITECTURE.md), [DECOMPOSITION](docs/dev/DECOMPOSITION.md), [SPEC](docs/dev/SPEC.md), [PLAN](docs/dev/PLAN.md), [layout](docs/dev/layout.md) and the executable [TASKS](docs/dev/TASKS.md). Source/test paths in layout are planned; no game implementation or validated build/test commands exist at this checkpoint.

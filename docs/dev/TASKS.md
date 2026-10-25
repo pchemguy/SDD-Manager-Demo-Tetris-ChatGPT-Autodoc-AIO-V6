@@ -1,0 +1,304 @@
+# Implementation tasks
+
+## Execution contract
+
+The [PLAN](PLAN.md) owns phase/milestone outcomes, [layout](layout.md) physical ownership and [SPEC](SPEC.md) precise behavior. This is the single executable task list; all implementation work is initially unchecked. Accepted document inputs do not establish an implementation baseline until their required published integration is complete.
+
+For each delivery task, use meaningful test-first evidence for new rules/behavior, implement the bounded outcome, update affected player/module documentation, run relevant checks and repair failures before completion. Include the result, required evidence and initial task checkbox in one owning commit; publish/read back before dependent work and reconcile its hosted issue. Never claim a browser, schema or SQLite check from a mock alone.
+
+Each delivery milestone has three delivery tasks. Its final task depends on both siblings and includes whole-milestone code review, relevant tests/regressions, blocker repairs, a milestone report with a TODO section and HANDOFF refresh in that same completion commit. No standalone delivery-milestone review task is required at this count. Each phase has one dedicated review task after its delivery milestones; code review and test execution are separate evidence.
+
+Phase entry requires the predecessor review, hosted milestone closures and verified published integration; first entry also requires the accepted preparation baseline and eligible-phase projection. Phase completion is followed by explicit integration, merged-state checks/publication and the requested versioned GitHub release before any authorized next phase. Review tasks prepare exact source/version/notes/package evidence; a provider release is coordinated after integration. A bounded execution request stops at its selected range.
+
+## Phase 1 — Classic baseline
+
+- [ ] Phase 1 — Classic baseline
+    - [ ] Milestone 1.1 — Playable falling loop
+        - [ ] T-001 — Establish classic geometry and board rules
+            Scope: package/toolchain setup; src/game/types.ts, geometry.ts, board.ts; unit fixtures.
+            Depends on: none. Contract: G-01, R-01 zero-offset subset.
+            Evidence: Typecheck and deterministic bounds/spawn/rotation/board fixtures; no full kicks or modern features.
+        - [ ] T-002 — Implement movement gravity and interval locking
+            Scope: src/game/game.ts, landing.ts, source.ts; time/command tests.
+            Depends on: T-001. Contract: G-01, G-04/G-05 default interval, G-07 independent source, S-01.
+            Evidence: Exact grounding deadline, failed moves, legal movement, ordinary landing and seeded source traces.
+        - [ ] T-003 — Connect the playable browser loop
+            Scope: src/main.ts; app/controller.ts; browser/input.ts, render.ts; isolated Playwright setup.
+            Depends on: T-001, T-002. Contract: G-01/G-03 initial keys, S-01/S-05, A-01 playable subset.
+            Evidence: Proactively pin/provision and repeatedly exercise isolated Chromium/Firefox before browser-dependent checks; verify falling/moving/rotating board and inspected rendering.
+            Milestone exit: review the whole 1.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 1.2 — Complete classic game
+        - [ ] T-004 — Add simultaneous line clearing scoring and levels
+            Scope: src/game/board.ts, game.ts; line/score unit fixtures.
+            Depends on: T-003. Contract: G-06.
+            Evidence: One-to-four-line compaction, level-before-clear scoring, speed changes and safe score saturation.
+        - [ ] T-005 — Complete game lifecycle and pause transitions
+            Scope: src/game/game.ts; app/controller.ts; lifecycle/time tests.
+            Depends on: T-004. Contract: G-02, G-05, S-01, A-01/A-03.
+            Evidence: Spawn/top-out, one completion event, restart preservation boundaries and frozen/restored logical deadlines.
+        - [ ] T-006 — Present classic stats and lifecycle controls
+            Scope: browser/panels.ts; controller/render composition; browser classic suite.
+            Depends on: T-004, T-005. Contract: G-01–G-06, S-05, A-01.
+            Evidence: Play a scored game, pause/resume, lose and restart through real controls in both browsers; stats match domain.
+            Milestone exit: review the whole 1.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 1.3 — Browser delivery
+        - [ ] T-007 — Implement controlled key repeat and focus pause
+            Scope: browser/input.ts; app/controller.ts; focus/repeat tests.
+            Depends on: T-006. Contract: G-03, S-01/S-05.
+            Evidence: 150/50 ms repeat, competing horizontal keys, one-shot repeat suppression, form focus, blur/visibility and user-pause composition.
+        - [ ] T-008 — Package and document the playable baseline
+            Scope: build/CI configuration; package lock/version; README, docs/user/CONTROLS.md.
+            Depends on: T-007. Contract: S-05, Phase 1 delivery/release requirements.
+            Evidence: Reproducible static build and validated setup/check commands; baseline version 0.1.0 and truthful controls, assets and notices.
+        - [ ] T-009 — Verify classic browser acceptance and repair blockers
+            Scope: tests/browser/classic suites and rendering fixtures; affected baseline owners.
+            Depends on: T-007, T-008. Contract: A-01/A-03/A-09 baseline, Phase 1 exits.
+            Evidence: Actual packaged/server path in Chromium/Firefox, Canvas screenshot inspection, keyboard/lifecycle/time regressions and no missing essential classic action.
+            Milestone exit: review the whole 1.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 1.4 — Phase review
+        - [ ] T-010 — Review test and report phase 1
+            Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.1.0.
+            Depends on: T-009; all phase 1 delivery milestones completed and closed, including their folded review/report obligations.
+            Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/1/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
+
+## Phase 2 — Modern play
+
+- [ ] Phase 2 — Modern play
+    - [ ] Milestone 2.1 — Bag and rotation
+        - [ ] T-011 — Implement seven-bag generation and queue semantics
+            Scope: src/game/source.ts; bag/queue fixtures.
+            Depends on: T-010. Contract: G-07.
+            Evidence: Every seeded bag contains seven kinds once, boundary draws and preview do not corrupt consumption.
+        - [ ] T-012 — Implement full SRS transformations and kicks
+            Scope: src/game/geometry.ts, game.ts; rotation fixtures.
+            Depends on: T-011. Contract: R-01, G-05.
+            Evidence: All eight transitions in each ordered table, wall/floor/stack rejection, O invariance, hidden bounds and unchanged timer on rejected rotation.
+        - [ ] T-013 — Integrate next preview and modern piece selection
+            Scope: browser/panels.ts; game/controller source wiring; browser tests.
+            Depends on: T-011, T-012. Contract: G-07, R-01, A-02.
+            Evidence: Visible next matches next spawn, classic replay remains usable, full SRS works in the actual game.
+            Milestone exit: review the whole 2.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 2.2 — Ghost and hard drop
+        - [ ] T-014 — Unify ordinary landing projection
+            Scope: src/game/landing.ts; constructed-board unit fixtures.
+            Depends on: T-013. Contract: G-09, S-02.
+            Evidence: Floor/wall/overhang/stack targets use first obstruction and never overlap settled cells.
+        - [ ] T-015 — Implement hard drop with captured lock timing
+            Scope: src/game/game.ts; clock/drop tests.
+            Depends on: T-014. Contract: G-05/G-09 default follow, S-01/S-02.
+            Evidence: Score traveled rows, position at shared target, preserve zero-distance deadline and obey interval-policy boundary ties.
+        - [ ] T-016 — Render ghost and wire the hard-drop action
+            Scope: browser/render.ts, input.ts; game/controller snapshots; browser tests.
+            Depends on: T-014, T-015. Contract: G-09 always-show subset, A-02/A-03.
+            Evidence: Ghost/drop positions match at floor/stacks, active piece remains legible, Space acts once and prior controls remain usable.
+            Milestone exit: review the whole 2.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 2.3 — Hold integration
+        - [ ] T-017 — Implement once-per-piece hold and source exchange
+            Scope: src/game/game.ts; hold/source/time tests.
+            Depends on: T-016. Contract: G-08.
+            Evidence: Empty versus swap queue consumption, used flag, fresh orientation/timing and blocked replacement game over.
+        - [ ] T-018 — Expose hold state and keyboard controls
+            Scope: browser/panels.ts, input.ts; controller snapshots.
+            Depends on: T-017. Contract: G-08, A-02.
+            Evidence: C/Shift swaps once, displays held kind and does not consume next during a nonempty exchange.
+        - [ ] T-019 — Verify modern interactions and document controls
+            Scope: tests/browser/modern suites; docs/user/CONTROLS.md; affected modern owners.
+            Depends on: T-017, T-018. Contract: G-07–G-09, R-01, A-02/A-03.
+            Evidence: Bag/hold/kick/drop/timer combinations in both browsers, screenshots and classic regression; version 0.2.0 packaging metadata.
+            Milestone exit: review the whole 2.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 2.4 — Phase review
+        - [ ] T-020 — Review test and report phase 2
+            Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.2.0.
+            Depends on: T-019; all phase 2 delivery milestones completed and closed, including their folded review/report obligations.
+            Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/2/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
+
+## Phase 3 — Penetrator
+
+- [ ] Phase 3 — Penetrator
+    - [ ] Milestone 3.1 — Legal penetration
+        - [ ] T-021 — Implement deepest legal penetrator projection
+            Scope: src/game/landing.ts; adversarial board fixtures.
+            Depends on: T-020. Contract: P-02, S-02.
+            Evidence: Enumerated deepest targets below blockers, intermediate overlap, board boundaries and no-target cases.
+        - [ ] T-022 — Implement viability-checked penetrator transitions
+            Scope: src/game/game.ts; geometry/landing collaborators; domain fixtures.
+            Depends on: T-021. Contract: P-01/P-02, G-05, R-01.
+            Evidence: Traversal/ordered kicks retain a legal target; transient overlap never locks; activation grounding preserves or cancels deadlines correctly.
+        - [ ] T-023 — Integrate penetrator ghost drop and legal locking
+            Scope: src/game/game.ts, landing.ts; renderer snapshots; integration fixtures.
+            Depends on: T-021, T-022. Contract: P-02, G-09, S-02, A-05 legal-motion subset.
+            Evidence: Ghost/drop deepest equality, crossing occupied rows, ordinary-versus-penetrator distinction, no overwritten cells and legal-only final lock.
+            Milestone exit: review the whole 3.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/3/3.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 3.2 — Earn and activate
+        - [ ] T-024 — Award and cap penetrator bonuses
+            Scope: src/game/game.ts; scoring/bonus fixtures.
+            Depends on: T-023. Contract: P-03.
+            Evidence: Four-line clears award exactly one, zero-to-three cap, penetrator clear awards future bonus and new game resets.
+        - [ ] T-025 — Wire activation spending and active hold rejection
+            Scope: src/game/game.ts; browser/input.ts; activation/hold fixtures.
+            Depends on: T-024. Contract: P-01/P-03, G-08.
+            Evidence: B spends once only after viable activation, rejects impossible/repeated activation without spending, and blocks hold while active.
+        - [ ] T-026 — Present and verify the complete bonus mechanic
+            Scope: browser/render.ts, panels.ts; browser penetrator suite; player help.
+            Depends on: T-024, T-025. Contract: P-01–P-03, A-05.
+            Evidence: Entirely white active piece, nonwhite regular colors, one symbol per bonus, earn→spend→lock demonstration, modern regressions and 0.3.0 metadata.
+            Milestone exit: review the whole 3.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/3/3.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 3.3 — Phase review
+        - [ ] T-027 — Review test and report phase 3
+            Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.3.0.
+            Depends on: T-026; all phase 3 delivery milestones completed and closed, including their folded review/report obligations.
+            Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/3/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
+
+## Phase 4 — Persistent configuration
+
+- [ ] Phase 4 — Persistent configuration
+    - [ ] Milestone 4.1 — Runtime controls
+        - [ ] T-028 — Define runtime settings and alternate lock policies
+            Scope: src/settings/definitions.ts; game/controller policy capture; unit tests.
+            Depends on: T-027. Contract: C-01, G-05, S-03.
+            Evidence: Exact tokens/defaults, failed-down and immediate hard-drop modes, same-time boundaries and next-spawn snapshots.
+        - [ ] T-029 — Connect six live configuration controls
+            Scope: browser/panels.ts; controller/settings in-memory wiring.
+            Depends on: T-028. Contract: C-01, G-07–G-09, S-03.
+            Evidence: All controls work without persistence, hide/disable relevant features immediately and preserve source/hold state.
+        - [ ] T-030 — Implement dynamic ghost and verify runtime settings
+            Scope: game/landing snapshots; browser/render.ts; runtime-setting suites.
+            Depends on: T-028, T-029. Contract: G-09, C-01, A-04.
+            Evidence: Hide straddling/upper ghost, show all-lower ghost; test switching/disabled hold/drop/next and captured policies in playable game.
+            Milestone exit: review the whole 4.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 4.2 — Settings persistence
+        - [ ] T-031 — Resolve URL cookie and default per setting
+            Scope: src/settings/service.ts; synthetic source fixtures.
+            Depends on: T-030. Contract: C-02.
+            Evidence: All six keys, mixed/omitted/default URL cases, duplicate/invalid tokens/cookies and independent fallback.
+        - [ ] T-032 — Implement independent cookie and URL writes
+            Scope: src/settings/browser.ts, service.ts; adapter failure tests.
+            Depends on: T-031. Contract: C-03/C-04.
+            Evidence: Exact cookie flags, valid explicit-default writes, no omitted/default overwrite, changed-key replaceState and unrelated URL preservation.
+        - [ ] T-033 — Integrate startup reload and persistence feedback
+            Scope: src/main.ts; controller/panels; browser configuration suite.
+            Depends on: T-031, T-032. Contract: C-01–C-04, A-06.
+            Evidence: Resolve before first spawn; actual reload/cookies/query, separate write failures, visible warnings and working session controls.
+            Milestone exit: review the whole 4.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 4.3 — Configuration integration
+        - [ ] T-034 — Verify policies across hold penetrator and drop
+            Scope: domain/controller integration fixtures; affected rule owners.
+            Depends on: T-033. Contract: G-05/G-08/G-09, P-01/P-02, S-03.
+            Evidence: Mid-piece policy changes, hold-spawn capture, active-penetrator guard, ghost with hard drop off and no timer/source reset.
+        - [ ] T-035 — Explain and expose configuration state clearly
+            Scope: browser/panels.ts, styles; docs/user/CONFIGURATION.md.
+            Depends on: T-034. Contract: C-01/C-04, S-05.
+            Evidence: Labeled/native controls, next-piece policy note, disabled-feature explanations and visible nonblocking persistence status.
+        - [ ] T-036 — Verify persistent configuration in both browsers
+            Scope: tests/browser/configuration suites; packaged app/README/version.
+            Depends on: T-034, T-035. Contract: A-04/A-06/A-09, Phase 4 exits.
+            Evidence: All six source/write/reload paths, focus, fragment/unrelated query retention and classic/modern/penetrator regression; version 0.4.0 metadata.
+            Milestone exit: review the whole 4.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 4.4 — Phase review
+        - [ ] T-037 — Review test and report phase 4
+            Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.4.0.
+            Depends on: T-036; all phase 4 delivery milestones completed and closed, including their folded review/report obligations.
+            Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/4/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
+
+## Phase 5 — JSON leaderboard
+
+- [ ] Phase 5 — JSON leaderboard
+    - [ ] Milestone 5.1 — Session results
+        - [ ] T-038 — Implement result validation ranking and top ten
+            Scope: src/leaderboard/validation.ts, store.ts; result fixtures.
+            Depends on: T-037. Contract: L-01.
+            Evidence: Safe integers, stable IDs, strict calendar UTC, duplicate rejection, deterministic ties and truncation.
+        - [ ] T-039 — Record each game-over result exactly once
+            Scope: app/controller.ts; injected ID/time provider; lifecycle fixtures.
+            Depends on: T-038. Contract: L-01, G-02, S-01.
+            Evidence: Unique ID/time on first completion, exclude abandoned games, retain restored-ID uniqueness and no duplicate events.
+        - [ ] T-040 — Render and verify page-lifetime results
+            Scope: browser/panels.ts; browser result suite.
+            Depends on: T-038, T-039. Contract: L-01, A-07.
+            Evidence: Rank/score/time labels, top ten after games, restart retention and reload clearing with unchanged persistent settings.
+            Milestone exit: review the whole 5.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 5.2 — JSON contract
+        - [ ] T-041 — Compile and publish the canonical JSON Schema
+            Scope: src/leaderboard/json.ts; canonical schema import; scripts/copy-schema.mjs; generated public schema.
+            Depends on: T-040. Contract: L-02 and LEADERBOARD-SCHEMA.json.
+            Evidence: Pinned schema validator without coercion/default/removal, registered strict UTC format, downloadable schema byte equality and invalid-calendar corpus.
+        - [ ] T-042 — Implement JSON encode and validated decode
+            Scope: src/leaderboard/json.ts; validation.ts collaborators; JSON fixtures.
+            Depends on: T-041. Contract: L-02, L-04 JSON dispatch subset.
+            Evidence: Versioned UTF-8 export, bounded input, schema-first and semantic validation; empty/ten/unsorted round trips preserve values.
+        - [ ] T-043 — Verify JSON failures and codec compatibility
+            Scope: tests/unit/leaderboard/json.test.ts; invalid-file fixtures; affected codec owners.
+            Depends on: T-041, T-042. Contract: L-01/L-02, A-08 JSON subset.
+            Evidence: Malformed UTF-8/JSON, unknown fields/version, wrong types, dates, duplicate IDs, excess count and byte limits reject as a whole.
+            Milestone exit: review the whole 5.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 5.3 — Manual JSON files
+        - [ ] T-044 — Add JSON Save and atomic Restore below results
+            Scope: leaderboard/files.ts; browser/files.ts, panels.ts; controller operation wiring.
+            Depends on: T-043. Contract: L-04 JSON, S-04.
+            Evidence: Actual download/upload path, immutable save snapshot, fully validated replace-not-merge and gameplay/file-action pause.
+        - [ ] T-045 — Handle file cancellation errors and resource cleanup
+            Scope: leaderboard/files.ts; browser/files.ts; controller pause/operation tests.
+            Depends on: T-044. Contract: L-04, S-04.
+            Evidence: Picker cancellation, file/read/download failures, deadline/stale reply, disabled concurrency and cleanup preserve prior list and other pause reasons.
+        - [ ] T-046 — Verify and document JSON portability in browsers
+            Scope: tests/browser/JSON file suite; docs/user/LEADERBOARD.md; package/version.
+            Depends on: T-044, T-045. Contract: L-01/L-02/L-04 JSON, A-07/A-08/A-09.
+            Evidence: Download bytes then restore empty/ten files, invalid restore leaves state, schema download works in Chromium/Firefox; expose JSON-only capability honestly for 0.5.0.
+            Milestone exit: review the whole 5.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 5.4 — Phase review
+        - [ ] T-047 — Review test and report phase 5
+            Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.5.0.
+            Depends on: T-046; all phase 5 delivery milestones completed and closed, including their folded review/report obligations.
+            Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/5/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
+
+## Phase 6 — SQLite portability
+
+- [ ] Phase 6 — SQLite portability
+    - [ ] Milestone 6.1 — SQLite encoding
+        - [ ] T-048 — Bundle a lazy bounded SQLite worker
+            Scope: leaderboard/sqlite.worker.ts, sqlite.ts; local WASM/build wiring.
+            Depends on: T-047. Contract: L-03/L-04, ARCHITECTURE file boundary.
+            Evidence: Pinned compatible sql.js/WASM, asynchronous local initialization, operation IDs/error replies, worker disposal and no effect on gameplay/JSON after load failure.
+        - [ ] T-049 — Encode versioned SQLite leaderboard files
+            Scope: leaderboard/sqlite.ts; real SQLite byte fixtures.
+            Depends on: T-048. Contract: L-03.
+            Evidence: Genuine database header, user_version=1, exact ordinary table, bound inserts, integer score storage and empty/ten preserved records.
+        - [ ] T-050 — Integrate and verify SQLite downloads
+            Scope: browser/files.ts; leaderboard/files.ts; browser export checks.
+            Depends on: T-048, T-049. Contract: L-03 export, L-04 Save.
+            Evidence: SQLite export through real UI, actual downloaded database inspection and cleanup in both browsers; preserve JSON export.
+            Milestone exit: review the whole 6.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 6.2 — Validated SQLite restore
+        - [ ] T-051 — Validate SQLite identity integrity and schema
+            Scope: leaderboard/sqlite.ts; real corrupt/schema fixture corpus.
+            Depends on: T-050. Contract: L-03.
+            Evidence: Header/version/integrity, complete column/hidden/type/PK checks, reject views/triggers/extra objects and never execute imported SQL.
+        - [ ] T-052 — Validate every SQLite result and input bound
+            Scope: leaderboard/sqlite.ts; shared validation; database row fixtures.
+            Depends on: T-051. Contract: L-01/L-03.
+            Evidence: Integer storage class/safe range, text IDs/calendar UTC, duplicates/eleventh row and file size; valid unsorted data ranks identically to JSON.
+        - [ ] T-053 — Integrate bounded atomic SQLite restore
+            Scope: sqlite.worker.ts; files/controller ports; browser restore tests.
+            Depends on: T-051, T-052. Contract: L-03/L-04, S-04.
+            Evidence: Content-detected restore, no partial state, initialization/read failure, timeout/cancel/stale reply and resource teardown preserve JSON and existing scores.
+            Milestone exit: review the whole 6.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 6.3 — Dual-format delivery
+        - [ ] T-054 — Complete format selection and file help
+            Scope: browser/panels.ts, files.ts; docs/user/LEADERBOARD.md; schema link.
+            Depends on: T-053. Contract: L-02–L-04, S-05.
+            Evidence: Save offers JSON/SQLite, Restore accepts either by content, extension mismatch handled, clear errors and preserved record fields.
+        - [ ] T-055 — Verify cross-format and packaged browser behavior
+            Scope: tests/browser/dual-format suite; packaged worker/WASM/schema paths; affected owners.
+            Depends on: T-054. Contract: A-01–A-09 complete applicable coverage.
+            Evidence: JSON→SQLite→JSON value preservation, empty/ten/invalid files, subdirectory static deployment, local assets/no CDN and complete predecessor regressions in both browsers.
+        - [ ] T-056 — Package and document the complete product
+            Scope: package/version/build/CI assets; README, user guides and release-note inputs.
+            Depends on: T-054, T-055. Contract: Full SPEC and Phase 6 exits.
+            Evidence: Reproducible 1.0.0 static package, correct local worker/WASM/schema URLs, notices and truthful validated commands; exclude credentials/cache/skills/provenance from product.
+            Milestone exit: review the whole 6.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
+    - [ ] Milestone 6.4 — Phase review
+        - [ ] T-057 — Review test and report phase 6
+            Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 1.0.0.
+            Depends on: T-056; all phase 6 delivery milestones completed and closed, including their folded review/report obligations.
+            Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/6/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
+            Final boundary: include `docs/dev/reports/IMPLEMENTATION-REPORT.md`, aggregate every unresolved/deferred milestone and phase TODO with provenance and options, and distinguish verified full-target acceptance from pending integration/release effects.
