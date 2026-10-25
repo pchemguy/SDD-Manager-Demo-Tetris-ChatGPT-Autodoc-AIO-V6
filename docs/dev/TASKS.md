@@ -14,7 +14,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 - [ ] Phase 1 — Classic baseline
     - [ ] Milestone 1.1 — Playable falling loop
-        - [ ] T-001 — Establish classic geometry and board rules
+        - [x] T-001 — Establish classic geometry and board rules
+            Completion evidence: RED: npm test observed four intended geometry/collision failures. GREEN: npm test passed 5/5; npm run check passed. Pinned dependencies installed from registry with a lockfile; board rows, spawn cells, pivot/O behavior, hidden bounds and collisions verified. Browser/build acceptance remains T-003 work.
             Scope: package/toolchain setup; src/game/types.ts, geometry.ts, board.ts; unit fixtures.
             Depends on: none. Contract: G-01, R-01 zero-offset subset.
             Evidence: Typecheck and deterministic bounds/spawn/rotation/board fixtures; no full kicks or modern features.
