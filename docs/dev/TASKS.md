@@ -274,7 +274,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-041, T-042. Contract: L-01/L-02, A-08 JSON subset.
             Evidence: Malformed UTF-8/JSON, unknown fields/version, wrong types, dates, duplicate IDs, excess count and byte limits reject as a whole.
             Milestone exit: review the whole 5.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 5.3 — Manual JSON files
+    - [x] Milestone 5.3 — Manual JSON files
         - [x] T-044 — Add JSON Save and atomic Restore below results
             Completion evidence: RED:native JSON path failed on missing Save; modeled DOM append failure then exposed one unreleased download URL. GREEN:209 unit tests, TypeScript/Vite build and6 focused Chromium/Firefox file checks pass after wrapping all download setup in URL cleanup. Real empty and restored ranked downloads preserve records; actual picker restore replaces only after full validation and invalid restore preserves prior rows. File pause composes with user pause, disables overlapping actions/restart and leaves results unchanged on Save. Added bounded codec/abort service and owned picker/FileReader/download lifetimes; further failure/race matrix is T045.
             Scope: leaderboard/files.ts; browser/files.ts, panels.ts; controller operation wiring.
@@ -285,7 +285,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: leaderboard/files.ts; browser/files.ts; controller pause/operation tests.
             Depends on: T-044. Contract: L-04, S-04.
             Evidence: Picker cancellation, file/read/download failures, deadline/stale reply, disabled concurrency and cleanup preserve prior list and other pause reasons.
-        - [ ] T-046 — Verify and document JSON portability in browsers
+        - [x] T-046 — Verify and document JSON portability in browsers
+            Completion evidence: Version0.5.0 metadata/README and leaderboard guide match JSON-only delivery. GREEN:221 unit/check/package and86 complete exact-packaged Chromium/Firefox checks pass. Actual full/empty and extension-mismatched JSON restores, stable fields/ranking, exported bytes and canonical schema download verified; nine invalid upload cases preserve prior values/order. All classic/modern/penetrator/settings/session/file regressions pass. Firefox panel/file-controls screenshot inspected. Independent whole5.3/phase and final guide review found no findings; report5.3/HANDOFF included.
             Scope: tests/browser/JSON file suite; docs/user/LEADERBOARD.md; package/version.
             Depends on: T-044, T-045. Contract: L-01/L-02/L-04 JSON, A-07/A-08/A-09.
             Evidence: Download bytes then restore empty/ten files, invalid restore leaves state, schema download works in Chromium/Firefox; expose JSON-only capability honestly for 0.5.0.

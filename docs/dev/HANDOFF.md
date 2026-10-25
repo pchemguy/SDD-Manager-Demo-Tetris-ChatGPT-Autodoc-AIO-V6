@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase5 milestone5.2 T-043 completion; publication/hosted closure pending.
+Checkpoint: phase5 milestone5.3 T-046 completion; publication/hosted closure pending.
 
 ## Authority and source
 
@@ -10,4 +10,4 @@ Phase4 explicit merge502caaf56e35172f2d28c8f48662dae2982c6835 passed hosted CI40
 
 ## Current result and next work
 
-T-038–T-042 are published/closed; milestone5.1 closed. T-043 completes the JSON adversarial corpus/folded5.2 report. All209 unit tests and TypeScript/Vite package pass; two packaged HTTP inventory checks verify nine members including canonical schema/notices. Independent5.2 review found no findings. No gameplay/presentation change since T-04070-check acceptance; full UI regressions return after file integration. Publish/close T-043 and5.2 before manual JSON file UI T-044, failure/resource tests T-045, browser/documentation/version0.5.0 T-046 and phase reviewT-047. Then explicit integration/release0.5.0 and phase6throughT-057/1.0.0. Full authorization remains; no current TODO/blocker.
+T-038–T-045 are published/closed; milestones5.1/5.2 closed. T-046 completes version0.5.0 metadata/README, leaderboard guide and actual JSON portability corpus, with folded report5.3. Final221 unit/check/package and86 complete exact-packaged Chromium/Firefox checks pass, including all predecessor behavior, actual full/empty/mismatched-extension JSON upload/download/schema and nine invalid uploads preserving prior records. Firefox full leaderboard/file-controls screenshot inspected. Independent whole5.3/phase and final guide/test reviews found no findings. Publish/close T-046 and5.3 before T-047 phase audit/report, explicit main integration, merged checks/push/CI and exact-body reproducible0.5.0 release. Continue phase6T-048–T-057/1.0.0 after verified release. Full authorization remains; no current TODO/blocker.
