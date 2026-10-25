@@ -1,9 +1,9 @@
 /** Serial browser-independent classic movement and logical-time state. */
-import { canPlace, emptyBoard } from './board';
+import { canPlace, clearLines, emptyBoard } from './board';
 import { cells } from './geometry';
 import { PieceSource } from './source';
 import type { Board, Piece, Orientation } from './types';
-export interface GameOptions { random?: () => number; board?: Board; piece?: Piece }
+export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number }
 export class Game {
   private board:Board;
   private active:Piece;
@@ -11,28 +11,38 @@ export class Game {
   private time=0;
   private nextGravity=1000;
   private groundedDeadline:number|null=null;
+  private score=0;
+  private lines=0;
   private readonly source:PieceSource;
   constructor(options:GameOptions={}) {
+    for(const value of [options.lines??0,options.score??0]) if(!Number.isSafeInteger(value)||value<0)throw new RangeError('Counters must be safe nonnegative integers');
+    this.lines=options.lines??0;this.score=options.score??0;
     this.board=(options.board??emptyBoard()).map(row=>[...row]);
     this.source=new PieceSource(options.random);
     this.active=options.piece?{...options.piece}:this.spawnPiece();
     if(!canPlace(this.board,this.active)) this.status='game-over';
+    this.nextGravity=this.interval;
     this.refreshGrounding();
   }
   private spawnPiece():Piece {return {kind:this.source.next(),orientation:0,x:3,y:-1};}
+  private get level():number {return Math.floor(this.lines/10)+1;}
+  private get interval():number {return Math.max(70,1000*Math.pow(.8,this.level-1));}
+  private addScore(points:number):void {this.score=Math.min(Number.MAX_SAFE_INTEGER,this.score+points);}
   /** A detached snapshot prevents renderers from mutating the domain. */
-  get snapshot() { return {board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline}; }
+  get snapshot() { return {board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
   private refreshGrounding():void {
     if(this.status!=='playing') {this.groundedDeadline=null;return;}
     if(canPlace(this.board,{...this.active,y:this.active.y+1})) this.groundedDeadline=null;
-    else if(this.groundedDeadline===null) this.groundedDeadline=this.time+1000;
+    else if(this.groundedDeadline===null) this.groundedDeadline=this.time+this.interval;
   }
   private lock():void {
     if(!canPlace(this.board,this.active) || cells(this.active).some(p=>p.y<0)) {
       this.status='game-over';this.groundedDeadline=null;return;
     }
     for(const {x,y} of cells(this.active)) this.board[y][x]=this.active.kind;
-    this.active=this.spawnPiece();this.groundedDeadline=null;this.nextGravity=this.time+1000;
+    const compacted=clearLines(this.board);this.addScore([0,100,300,500,800][compacted.cleared]*this.level);
+    this.board=compacted.board;this.lines=Math.min(Number.MAX_SAFE_INTEGER,this.lines+compacted.cleared);
+    this.active=this.spawnPiece();this.groundedDeadline=null;this.nextGravity=this.time+this.interval;
     if(!canPlace(this.board,this.active)) this.status='game-over';
     this.refreshGrounding();
   }
@@ -45,7 +55,7 @@ export class Game {
       this.time=due;
       if(this.groundedDeadline!==null && this.groundedDeadline<=this.nextGravity) {this.lock();continue;}
       this.tryTransform({...this.active,y:this.active.y+1});
-      this.nextGravity=this.time+1000;
+      this.nextGravity=this.time+this.interval;
     }
     this.time=to;
   }
@@ -57,5 +67,5 @@ export class Game {
   rotate(direction:-1|1):void {
     this.tryTransform({...this.active,orientation:((this.active.orientation+direction+4)%4) as Orientation});
   }
-  down():void {if(this.tryTransform({...this.active,y:this.active.y+1})) this.nextGravity=this.time+1000;}
+  down():void {if(this.tryTransform({...this.active,y:this.active.y+1})){this.nextGravity=this.time+this.interval;this.addScore(1);}}
 }

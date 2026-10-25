@@ -31,7 +31,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Proactively pin/provision and repeatedly exercise isolated Chromium/Firefox before browser-dependent checks; verify falling/moving/rotating board and inspected rendering.
             Milestone exit: review the whole 1.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 1.2 — Complete classic game
-        - [ ] T-004 — Add simultaneous line clearing scoring and levels
+        - [x] T-004 — Add simultaneous line clearing scoring and levels
+            Completion evidence: RED: three intended compaction/scoring assertions failed before implementation. GREEN: 25 unit tests and TypeScript/Vite build passed. Verified simultaneous immutable compaction, 1–4 line awards at pre-clear level, threshold level/speed change for the next piece, successful-only soft-drop points, zero-line lock and safe score saturation. Browser scoring presentation remains T-006 work.
             Scope: src/game/board.ts, game.ts; line/score unit fixtures.
             Depends on: T-003. Contract: G-06.
             Evidence: One-to-four-line compaction, level-before-clear scoring, speed changes and safe score saturation.

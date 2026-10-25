@@ -6,3 +6,9 @@ export function emptyBoard(): Board { return Array.from({ length: HEIGHT }, () =
 export function canPlace(board: Board, piece: Piece): boolean {
   return cells(piece).every(({x,y}) => x>=0 && x<WIDTH && y>=-2 && y<HEIGHT && (y<0 || board[y][x]===null));
 }
+/** Remove complete rows simultaneously, returning detached compacted storage. */
+export function clearLines(board:Board):{board:Board;cleared:number} {
+  const remaining=board.filter(row=>row.some(cell=>cell===null)).map(row=>[...row]);
+  const cleared=HEIGHT-remaining.length;
+  return {board:[...Array.from({length:cleared},()=>Array(WIDTH).fill(null)),...remaining],cleared};
+}
