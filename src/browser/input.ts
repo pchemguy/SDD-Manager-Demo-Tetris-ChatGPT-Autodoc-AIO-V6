@@ -2,7 +2,7 @@
 import type {Command,Controller} from '../app/controller';
 export interface InputBinding {reset():void;dispose():void}
 export function bindInput(canvas:HTMLCanvasElement,start:HTMLButtonElement,controller:Controller,pause:HTMLButtonElement):InputBinding {
- const keys:Record<string,Command>={ArrowLeft:'left',ArrowRight:'right',ArrowDown:'down',ArrowUp:'cw',KeyX:'cw',KeyZ:'ccw'};
+ const keys:Record<string,Command>={ArrowLeft:'left',ArrowRight:'right',ArrowDown:'down',ArrowUp:'cw',KeyX:'cw',KeyZ:'ccw',Space:'drop',KeyC:'hold',ShiftLeft:'hold',ShiftRight:'hold'};
  const pressed=new Set<string>();let horizontal:string|null=null;
  let horizontalTimer:ReturnType<typeof setTimeout>|undefined;
  let downTimer:ReturnType<typeof setTimeout>|undefined;

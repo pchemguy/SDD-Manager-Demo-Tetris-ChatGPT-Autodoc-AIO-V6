@@ -18,3 +18,32 @@ export function cells(piece: Piece): Point[] {
     return {x:x+piece.x,y:y+piece.y};
   });
 }
+
+// Ordered offsets already use downward-positive y; see normative ROTATION.md.
+type Offset=readonly [number,number];
+const JLSTZ:Record<string,readonly Offset[]>={
+ '01':[[0,0],[-1,0],[-1,-1],[0,2],[-1,2]],
+ '10':[[0,0],[1,0],[1,1],[0,-2],[1,-2]],
+ '12':[[0,0],[1,0],[1,1],[0,-2],[1,-2]],
+ '21':[[0,0],[-1,0],[-1,-1],[0,2],[-1,2]],
+ '23':[[0,0],[1,0],[1,-1],[0,2],[1,2]],
+ '32':[[0,0],[-1,0],[-1,1],[0,-2],[-1,-2]],
+ '30':[[0,0],[-1,0],[-1,1],[0,-2],[-1,-2]],
+ '03':[[0,0],[1,0],[1,-1],[0,2],[1,2]],
+};
+const I:Record<string,readonly Offset[]>={
+ '01':[[0,0],[-2,0],[1,0],[-2,1],[1,-2]],
+ '10':[[0,0],[2,0],[-1,0],[2,-1],[-1,2]],
+ '12':[[0,0],[-1,0],[2,0],[-1,-2],[2,1]],
+ '21':[[0,0],[1,0],[-2,0],[1,2],[-2,-1]],
+ '23':[[0,0],[2,0],[-1,0],[2,-1],[-1,2]],
+ '32':[[0,0],[-2,0],[1,0],[-2,1],[1,-2]],
+ '30':[[0,0],[1,0],[-2,0],[1,2],[-2,-1]],
+ '03':[[0,0],[-1,0],[2,0],[-1,-2],[2,1]],
+};
+/** Fresh candidates let the domain choose its first viable ordinary/penetrator kick. */
+export function rotationCandidates(piece:Piece,direction:-1|1):Piece[] {
+ const orientation=((piece.orientation+direction+4)%4) as Piece['orientation'];
+ const offsets=piece.kind==='O'?[[0,0]]:(piece.kind==='I'?I:JLSTZ)[`${piece.orientation}${orientation}`];
+ return offsets.map(([dx,dy])=>({...piece,orientation,x:piece.x+dx,y:piece.y+dy}));
+}

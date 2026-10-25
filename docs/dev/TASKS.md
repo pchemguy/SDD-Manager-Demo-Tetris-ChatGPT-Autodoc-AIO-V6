@@ -73,51 +73,61 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 2 — Modern play
 
-- [ ] Phase 2 — Modern play
-    - [ ] Milestone 2.1 — Bag and rotation
-        - [ ] T-011 — Implement seven-bag generation and queue semantics
+- [x] Phase 2 — Modern play
+    - [x] Milestone 2.1 — Bag and rotation
+        - [x] T-011 — Implement seven-bag generation and queue semantics
+            Completion evidence: RED: two new queue/permutation tests failed with missing peek. GREEN: 35 unit tests/check and 30 actual Chromium/Firefox regressions passed. Twenty deterministic bags contain every kind once, preview does not consume, exact boundary refill uses six draws, invalid entropy rejects. Updated the classic line-clear replay from impossible repeated I pieces to legal I/J/L; source switch is intentional. HANDOFF records verified predecessor release/CI and phase projection.
             Scope: src/game/source.ts; bag/queue fixtures.
             Depends on: T-010. Contract: G-07.
             Evidence: Every seeded bag contains seven kinds once, boundary draws and preview do not corrupt consumption.
-        - [ ] T-012 — Implement full SRS transformations and kicks
+        - [x] T-012 — Implement full SRS transformations and kicks
+            Completion evidence: RED: all 16 transition cases plus the floor-kick fixture failed before SRS. GREEN: 52 unit tests/check and production build pass. Ordered candidates match the normative tables, actual Game rotation selects the first legal wall/floor/hidden/stack target, and all-kicks rejection preserves board/piece/deadline. Corrected an overstrong empty-board fixture premise by adding real blocking-cell variants for transitions that need a stack to exercise kicks. O/pivot geometry regressions remain green.
             Scope: src/game/geometry.ts, game.ts; rotation fixtures.
             Depends on: T-011. Contract: R-01, G-05.
             Evidence: All eight transitions in each ordered table, wall/floor/stack rejection, O invariance, hidden bounds and unchanged timer on rejected rotation.
-        - [ ] T-013 — Integrate next preview and modern piece selection
+        - [x] T-013 — Integrate next preview and modern piece selection
+            Completion evidence: RED: snapshot next assertion and both-browser missing-preview checks failed before wiring. GREEN: 55 unit tests/check/build, 32 Chromium/Firefox browser checks and final two-browser minimum-viewport CSS recheck pass. Native I wall kick and next advancement verified; playing preview screenshot inspected. Scoped old canvas locators to board after adding preview. Independent milestone review rechecked I-pivot/four-cycle coverage and found no Critical/Important blocker; report 2.1/HANDOFF included.
             Scope: browser/panels.ts; game/controller source wiring; browser tests.
             Depends on: T-011, T-012. Contract: G-07, R-01, A-02.
             Evidence: Visible next matches next spawn, classic replay remains usable, full SRS works in the actual game.
             Milestone exit: review the whole 2.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 2.2 — Ghost and hard drop
-        - [ ] T-014 — Unify ordinary landing projection
+    - [x] Milestone 2.2 — Ghost and hard drop
+        - [x] T-014 — Unify ordinary landing projection
+            Completion evidence: RED: the hidden first-obstruction fixture returned a non-visible target. GREEN: 59 unit tests and TypeScript check pass. Shared ordinary projection now rejects hidden/invalid targets, stops at overhangs rather than lower legal gaps, preserves board data and lands every kind/orientation exactly at the bottom boundary. Grounding consumes this projection; lifecycle/time/SRS/source regressions remain green.
             Scope: src/game/landing.ts; constructed-board unit fixtures.
             Depends on: T-013. Contract: G-09, S-02.
             Evidence: Floor/wall/overhang/stack targets use first obstruction and never overlap settled cells.
-        - [ ] T-015 — Implement hard drop with captured lock timing
+        - [x] T-015 — Implement hard drop with captured lock timing
+            Completion evidence: RED: all four hard-drop contract tests failed on the absent action. GREEN: 63 unit tests and TypeScript check pass. Hard drop uses the shared first-obstruction target, awards two points per traveled row with saturation, waits a full grounding interval, preserves zero-distance clocks/score, ignores no-target states and honors a due lock before a same-time subsequent drop. Browser action and ghost rendering remain T-016.
             Scope: src/game/game.ts; clock/drop tests.
             Depends on: T-014. Contract: G-05/G-09 default follow, S-01/S-02.
             Evidence: Score traveled rows, position at shared target, preserve zero-distance deadline and obey interval-policy boundary ties.
-        - [ ] T-016 — Render ghost and wire the hard-drop action
+        - [x] T-016 — Render ghost and wire the hard-drop action
+            Completion evidence: RED: missing-ghost snapshot/pixel assertions and hidden-row grounding regression failed. GREEN: 65 unit tests, TypeScript/Vite build and 34 actual Chromium/Firefox checks pass. Floor/stack ghost and hard-drop pixel equality, delayed source advancement and held Space across spawning verified; Firefox ghost screenshot inspected. Independent milestone review found R2.2-01, rechecked its timing repair, and found no remaining Critical/Important blocker. Report 2.2/HANDOFF and controls updated.
             Scope: browser/render.ts, input.ts; game/controller snapshots; browser tests.
             Depends on: T-014, T-015. Contract: G-09 always-show subset, A-02/A-03.
             Evidence: Ghost/drop positions match at floor/stacks, active piece remains legible, Space acts once and prior controls remain usable.
             Milestone exit: review the whole 2.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 2.3 — Hold integration
-        - [ ] T-017 — Implement once-per-piece hold and source exchange
+    - [x] Milestone 2.3 — Hold integration
+        - [x] T-017 — Implement once-per-piece hold and source exchange
+            Completion evidence: RED: all five hold fixtures failed on the missing action. GREEN: 70 unit tests and TypeScript check pass. Verified empty versus nonempty queue consumption, once-per-lock guard, fresh position/orientation/gravity/deadline, hold during grounding delay, blocked replacement game over without board mutation, and fresh-game reset. Centralized replacement timing for constructor/lock/hold; existing drop/ghost/hidden-row/SRS regressions pass. UI/key wiring remains T-018.
             Scope: src/game/game.ts; hold/source/time tests.
             Depends on: T-016. Contract: G-08.
             Evidence: Empty versus swap queue consumption, used flag, fresh orientation/timing and blocked replacement game over.
-        - [ ] T-018 — Expose hold state and keyboard controls
+        - [x] T-018 — Expose hold state and keyboard controls
+            Completion evidence: RED: actual Chromium hold UI check failed on the absent Held panel. GREEN: 70 unit tests, TypeScript/Vite build and four focused browser checks pass (hold plus 1024x768 in each browser). Native C and both Shift keys enforce once-per-lock exchange, preserve next during nonempty swap, reject paused commands and reset on restart. Shared colored preview helper presents domain-selected kinds. Independent read-only interaction review found no Critical/Important issue; full phase regressions/package remain T-019.
             Scope: browser/panels.ts, input.ts; controller snapshots.
             Depends on: T-017. Contract: G-08, A-02.
             Evidence: C/Shift swaps once, displays held kind and does not consume next during a nonempty exchange.
-        - [ ] T-019 — Verify modern interactions and document controls
+        - [x] T-019 — Verify modern interactions and document controls
+            Completion evidence: Modern play verified at version 0.2.0: 70 unit tests/check/build; 38 fresh-package Playwright checks (36 page interactions +2 HTTP identity checks) passed. Strengthened exact-ZIP served-byte checks passed after preparation repairs; discarded stale-artifact failures are documented. Native hold repeat across spawn and paused-available rejection strengthened; Firefox held/next/ghost screenshot inspected. Independent milestone/phase interaction and final preparer/docs reviews found no Critical/Important issue. Report 2.3/HANDOFF included; clean release packaging remains pending.
             Scope: tests/browser/modern suites; docs/user/CONTROLS.md; affected modern owners.
             Depends on: T-017, T-018. Contract: G-07–G-09, R-01, A-02/A-03.
             Evidence: Bag/hold/kick/drop/timer combinations in both browsers, screenshots and classic regression; version 0.2.0 packaging metadata.
             Milestone exit: review the whole 2.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 2.4 — Phase review
-        - [ ] T-020 — Review test and report phase 2
+    - [x] Milestone 2.4 — Phase review
+        - [x] T-020 — Review test and report phase 2
+            Completion evidence: Dedicated phase code/interaction and final packaging review found no unresolved Critical/Important issue; R2.2-01 repair rechecked. Clean T019 source passed 70 unit tests/check/build/package and all 38 packaged Playwright checks including exact member-byte HTTP identity. Modern and classic exits pass; actual T011-T019 parent-diff task audit and closed phase1 record preservation pass. Phase report/HANDOFF distinguish candidate source from pending merged/release source and preserve evidence limits.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.2.0.
             Depends on: T-019; all phase 2 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/2/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.

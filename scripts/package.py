@@ -27,7 +27,7 @@ for file in sorted(dist.rglob('*')):
     members[name]=file.read_bytes()
 members['LICENSE']=(ROOT/'LICENSE').read_bytes()
 members['BUILD.json']=(json.dumps({'version':version,'source_commit':source,'dirty':dirty},sort_keys=True)+'\n').encode()
-members['README.txt']=(f'Browser Tetris {version}\n\nExtract this archive, then serve this directory over HTTP.\nFor example: python -m http.server 8000\nOpen http://localhost:8000 in your browser. No application backend is required.\n\nArrow keys move/descend, Up/X and Z rotate, P/Escape pause.\nEnter starts from ready/game-over. Use the explicit Restart button to abandon a run.\nSee the tagged project release for the capabilities included in this version.\n').encode()
+members['README.txt']=(f'Browser Tetris {version}\n\nExtract this archive, then serve this directory over HTTP.\nFor example: python -m http.server 8000\nOpen http://localhost:8000 in your browser. No application backend is required.\n\nArrow keys move/descend, Up/X and Z rotate, Space hard drops, C/Shift holds, P/Escape pause.\nEnter starts from ready/game-over. Use the explicit Restart button to abandon a run.\nSee the tagged project release for the capabilities included in this version.\n').encode()
 with zipfile.ZipFile(OUTPUT,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
     for name,data in sorted(members.items()):
         info=zipfile.ZipInfo(name,date_time=(2000,1,1,0,0,0))
