@@ -52,3 +52,5 @@ The activated falling piece and its outlined ghost are white. It can move or rot
 ## Live settings
 
 The Settings panel controls ghost visibility, hard-drop availability, next preview, hard-drop locking, general locking and hold. Visibility and availability apply immediately while keeping queue/held state. Both locking choices apply when the next piece spawns, including hold replacements; the active piece retains its captured policy. Native selects keep their keyboard behavior. Click the board to return gameplay focus.
+
+Dynamic ghost mode shows the preview only when its entire projected piece is in the lower half of the board. A projection straddling the midline hides. Disabling hard drop leaves the ghost available under the selected visibility mode.

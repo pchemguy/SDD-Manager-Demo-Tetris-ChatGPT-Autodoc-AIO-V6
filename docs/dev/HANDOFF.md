@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase 4 T-028 runtime-policy completion, publication/hosting pending.
+Checkpoint: phase 4 milestone 4.1 T-030 completion, publication/hosting pending.
 
 ## Authority and predecessor
 
@@ -10,4 +10,4 @@ Full T-001–T-057 and six phase releases remain authorized. Phase 3 tasks/revie
 
 phase/4-persistent-configuration was created from that published release parent; integration target main. Governing contracts/design inputs unchanged and accepted QC remains applicable. Exact phase label/four milestone briefs and initial associations for T-028–T-037 issues 37–46 fully verified before execution. Final-list lag for T-037 was settled by read-only reconciliation without replaying writes; no unknown effects remain.
 
-T-028 adds exact six-setting tokens/defaults, selected versus per-spawn captured locking policies, failed-down and immediate modes, live hard-drop/hold availability and ready/restart configuration propagation. One hundred eleven unit tests/check/build pass, including default gameplay regressions, zero-travel drops, hold-spawn capture and same-time ordering. Controls/persistence are upcoming T-029–T-036; version remains 0.3.0 until T-036. Publish/close T-028 before T-029 UI wiring; complete phase review T-037, explicit integration and 0.4.0 release before phase 5. Remaining full scope stays authorized without new approval. Preserve one verified published task-owned result/evidence/initial checkbox per commit and folded reports; prior browser environment limits remain.
+T-028/T-029 are published/closed. T-030 extracts/tests whole-piece ghost visibility and completes native straddle→lower/focus evidence, with report 4.1. Independent complete-milestone code review/recheck finds no Critical/Important issue. Final 114 unit tests/check/build/package and 48 packaged checks pass (46 page interactions +2 HTTP exact-member checks); lower-return screenshot inspected. All six controls operate in session; persistence is upcoming. Publish/close T-030 and milestone 4.1 before T-031 URL/cookie resolution, T-032 independent writes and T-033 startup/browser reload integration. Then T-034–T-036 cross-feature/UI/persistence acceptance, T-037 phase review and explicit integration/release 0.4.0. Remaining full scope stays authorized without new approval. Preserve owning result/evidence/initial checkbox commits and folded reports.

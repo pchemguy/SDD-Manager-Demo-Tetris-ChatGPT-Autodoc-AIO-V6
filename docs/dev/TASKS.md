@@ -179,7 +179,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 ## Phase 4 — Persistent configuration
 
 - [ ] Phase 4 — Persistent configuration
-    - [ ] Milestone 4.1 — Runtime controls
+    - [x] Milestone 4.1 — Runtime controls
         - [x] T-028 — Define runtime settings and alternate lock policies
             Completion evidence: RED: nine runtime-policy assertions failed plus the absent definitions module. GREEN: 111 unit tests, TypeScript/Vite build pass. Exact tokens/defaults and strict value checks, failed Down/gravity, follow versus immediate (including zero travel), captured old deadline/policies, hold replacement capture, live availability with preserved hold/source and pre-start Controller settings are verified. Due lock precedes new-piece immediate drop. HANDOFF records verified 0.3.0 release/CI and phase4 hosted readiness.
             Scope: src/settings/definitions.ts; game/controller policy capture; unit tests.
@@ -190,7 +190,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: browser/panels.ts; controller/settings in-memory wiring.
             Depends on: T-028. Contract: C-01, G-07–G-09, S-03.
             Evidence: All controls work without persistence, hide/disable relevant features immediately and preserve source/hold state.
-        - [ ] T-030 — Implement dynamic ghost and verify runtime settings
+        - [x] T-030 — Implement dynamic ghost and verify runtime settings
+            Completion evidence: Extracted existing whole-piece visibility into a pure contract boundary; its three initial helper assertions failed before extraction. GREEN:114 unit tests/check/build/package and all48 packaged checks pass. Exact-midline I cells, straddling/upper/lower/null modes verified. Native browsers build a real straddling L target, hide/show and move lower to reveal it; native select keys preserve board ownership and ghost survives hardDropoff. Firefox screenshot inspected. Independent whole-milestone review/recheck found no Critical/Important issue; report4.1/HANDOFF included.
             Scope: game/landing snapshots; browser/render.ts; runtime-setting suites.
             Depends on: T-028, T-029. Contract: G-09, C-01, A-04.
             Evidence: Hide straddling/upper ghost, show all-lower ghost; test switching/disabled hold/drop/next and captured policies in playable game.
