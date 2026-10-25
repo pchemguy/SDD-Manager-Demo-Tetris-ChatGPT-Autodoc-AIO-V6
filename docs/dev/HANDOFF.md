@@ -1,8 +1,12 @@
 # Project handoff
 
-Checkpoint: focused SQLite development-startup correction prepared and verified on main for patch release 1.0.1. Current branch: main.
+Checkpoint: 1.0.1 publication verified; user's remaining Windows worker-route failure under correction. Current branch: revision/002_7a57e6d-sqlite-worker-route.
 
 ## Active correction
+
+The user reports the error remains at 7a57e6d. HTTP diagnostics establish that the filesystem worker URL returns HTML while the project-relative URL returns compiled JavaScript with correct imports. [Campaign 002 plan](reviews/002_7a57e6d-sqlite-worker-route/REVISION-PLAN.md) owns the bounded route correction, reproduction, verification, integration and 1.0.2 release. Creation parent/target main and branch-off baseline: 7a57e6d3a1f94539559b096a5fcaa92cd6308ed0. No parent work is suspended. Issue 67 stays open. The prior [1.0.1 publication outcome](reports/RELEASE-1.0.1-OUTCOME.md) records actual completed external effects and the unresolved user report. Stop after this route correction; no gameplay/file-format changes.
+
+## Prior correction context
 
 The reported SQLite worker startup failure is corrected by explicit dependency optimization. [Revision report](reviews/001_fbe036e-sqlite-dev-startup/REVISION-REPORT.md) records the failing baseline, bounded fix, 283 unit/104 packaged checks, four local fresh-cache checks, independent review and successful native Windows CMD/Linux CI 40194571590. The explicit integration incorporates revision tip 5a8e7a44fd17bad0f61e43e5a2de7ba45748a030 into its creation parent main at fbe036e10ae24da75c9363f0c84b442bdc37aa9b; original opening commit is fb2123d1284445777eca2761699075cc951f2dbe. No conflict or executable change was introduced by the merge. No parent work is suspended. The original six phases remain complete. Next: publish/read back the verified main integration, verify its CI, publish the clean pinned 1.0.1 patch and verify downloads, then stop. No gameplay or file-contract changes are authorized or needed.
 
