@@ -307,7 +307,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: leaderboard/sqlite.worker.ts, sqlite.ts; local WASM/build wiring.
             Depends on: T-047. Contract: L-03/L-04, ARCHITECTURE file boundary.
             Evidence: Pinned compatible sql.js/WASM, asynchronous local initialization, operation IDs/error replies, worker disposal and no effect on gameplay/JSON after load failure.
-        - [ ] T-049 — Encode versioned SQLite leaderboard files
+        - [x] T-049 — Encode versioned SQLite leaderboard files
+            Completion evidence: RED:four real SQLite export assertions failed against absent encoder. GREEN:234 unit tests and TypeScript/Vite build pass. Genuine SQLite3 empty/ten exports independently opened: user_version1, exact ordinary high_scores columns/NOTNULL/PK and range constraints, bound insert values, integer/text storage classes, safe score/calendar extremes, stable IDs and integrity exactlyok verified. Invalid/duplicate data reject before output; injected insert failure frees statement and closes DB. Worker now returns transferable encoded bytes; UI/filename/MIME/native download integration is T050.
             Scope: leaderboard/sqlite.ts; real SQLite byte fixtures.
             Depends on: T-048. Contract: L-03.
             Evidence: Genuine database header, user_version=1, exact ordinary table, bound inserts, integer score storage and empty/ten preserved records.
