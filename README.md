@@ -49,7 +49,7 @@ Then set `TETRIS_PACKAGE_TEST=1` in the shell environment and run `npm run test:
 
 On this restricted Linux host, Firefox content processes failed with `/proc/self/uid_map: EPERM`. The diagnosed trusted-local-only override `TETRIS_FIREFOX_NO_CONTENT_SANDBOX=1` was verified with repeated contexts, native input, Canvas output and teardown. It affects only Firefox test launch. Normal hosts/CI use the default sandbox. Browser setup and governance follow [BROWSER_DEV_POLICY](BROWSER_DEV_POLICY.md).
 
-Native keyboard and DOM-control focus are tested. OS-window/tab visibility and persisted-page events use controlled models; actual native window transitions and BFCache eligibility are unestablished. Windows execution has not been verified and follows [WINDOWS_SHELL_POLICY](WINDOWS_SHELL_POLICY.md).
+Native keyboard and DOM-control focus are tested. OS-window/tab visibility and persisted-page events use controlled models; actual native window transitions and BFCache eligibility are unestablished. For 1.0.1, fresh-cache development Save/Restore checks pass on native Windows CI using CMD and Chromium/Firefox, as well as Linux. The full packaged/gameplay suite remains verified on Linux; Windows 10 and the user's particular browser installation were not directly exercised. See the [startup correction report](docs/dev/reviews/001_fbe036e-sqlite-dev-startup/REVISION-REPORT.md) and [Windows shell policy](WINDOWS_SHELL_POLICY.md).
 
 ## Distribution and project records
 

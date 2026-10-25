@@ -1,10 +1,10 @@
 # Project handoff
 
-Checkpoint: focused SQLite development-startup correction opened after release 1.0.0. Current branch: revision/001_fbe036e-sqlite-dev-startup.
+Checkpoint: focused SQLite development-startup correction verified and ready for integration/release 1.0.1. Current branch: revision/001_fbe036e-sqlite-dev-startup.
 
 ## Active correction
 
-The user reports a SQLite worker communication failure under `npm run dev` on Windows. [Revision plan](reviews/001_fbe036e-sqlite-dev-startup/REVISION-PLAN.md) owns the bounded diagnosis, fix, regression checks and integration. Branch creation parent/target is main at fbe036e10ae24da75c9363f0c84b442bdc37aa9b. No parent work is suspended. The original six phases remain complete. Next: reproduce with an empty dependency cache, fix startup without changing accepted gameplay/file contracts, verify Windows/Linux browser evidence, integrate and publish the patch, then stop.
+The reported SQLite worker startup failure is corrected by explicit dependency optimization. [Revision report](reviews/001_fbe036e-sqlite-dev-startup/REVISION-REPORT.md) records the failing baseline, bounded fix, 283 unit/104 packaged checks, four local fresh-cache checks, independent review and successful native Windows CMD/Linux CI 40194571590. Branch creation parent/target is main at fbe036e10ae24da75c9363f0c84b442bdc37aa9b; original opening commit is fb2123d1284445777eca2761699075cc951f2dbe. No parent work is suspended. The original six phases remain complete. Next: explicitly integrate and verify the complete correction, publish/read back main, publish the clean pinned 1.0.1 patch and verify downloads, then stop. No gameplay or file-contract changes are authorized or needed.
 
 ## Completed scope
 
@@ -21,4 +21,4 @@ Release body SHA-256: 78342cd582d25f1abf989fc036be5b77c5156753afe2df542453b0bc8c
 
 ## Remaining boundary
 
-The new SQLite development-startup defect is active under the revision above. Linux HTTP/native Chromium/Firefox were established for 1.0.0; native OS-window/BFCache/picker, HTTPS execution and Windows limits remain explicit in that release's final report.
+The source defect is verified corrected; integration and patch release remain pending. Native Windows startup checks now pass under CMD in both browsers. Full packaged gameplay remains Linux-tested; Windows 10, the user's installed browser, native OS-window/BFCache/picker and HTTPS execution remain outside established evidence.
