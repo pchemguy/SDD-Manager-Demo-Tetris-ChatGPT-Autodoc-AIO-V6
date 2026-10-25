@@ -7,7 +7,9 @@ export function renderPanels(view:View):void {
  set('next',view?.next??'—');
  drawPreview('next-preview',view?.next??null);
  set('held',view?.held??'EMPTY');drawPreview('hold-preview',view?.held??null);
- set('hold-state',!view?'—':view.holdUsed?'USED':'AVAILABLE');
+ set('hold-state',!view?'—':view.penetrator?'LOCKED':view.holdUsed?'USED':'AVAILABLE');
+ set('bonus-count',String(view?.bonuses??0));set('bonus-symbols','⚡'.repeat(view?.bonuses??0));
+ set('penetrator-state',view?.penetrator?'ACTIVE':view?.bonuses?'ACTIVATE':'EARN 4 LINES');
  const score=String(view?.score??0);set('score',score);set('level',String(view?.level??1));set('lines',String(view?.lines??0));
  (document.getElementById('score') as HTMLElement).style.fontSize=score.length>10?'20px':'34px';
  set('status',view?view.status.toUpperCase().replace('-',' '):'READY');

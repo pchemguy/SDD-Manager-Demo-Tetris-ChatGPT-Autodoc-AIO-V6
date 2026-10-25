@@ -134,37 +134,44 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 3 — Penetrator
 
-- [ ] Phase 3 — Penetrator
-    - [ ] Milestone 3.1 — Legal penetration
-        - [ ] T-021 — Implement deepest legal penetrator projection
+- [x] Phase 3 — Penetrator
+    - [x] Milestone 3.1 — Legal penetration
+        - [x] T-021 — Implement deepest legal penetrator projection
+            Completion evidence: RED: four new penetrator projection fixtures failed against ordinary-only landing. GREEN: 75 unit tests and TypeScript check pass. Shared service enumerates deepest visible non-overlapping target below obstructions, permits transient overlap, handles isolated gaps/no-target/current bounds, preserves occupied cells and matches independent bottom-up enumeration across 280 seeded kind/orientation cases. Ordinary/time/SRS/hold regressions remain green; predecessor release and phase projection recorded in HANDOFF.
             Scope: src/game/landing.ts; adversarial board fixtures.
             Depends on: T-020. Contract: P-02, S-02.
             Evidence: Enumerated deepest targets below blockers, intermediate overlap, board boundaries and no-target cases.
-        - [ ] T-022 — Implement viability-checked penetrator transitions
+        - [x] T-022 — Implement viability-checked penetrator transitions
+            Completion evidence: RED: six viability/activation domain tests failed on the absent transition. GREEN: 81 unit tests and TypeScript check pass. Penetrator transforms/kicks require a deepest legal target, cross occupied cells without mutation, reject impossible lateral candidates, preserve/cancel grounding correctly and retain the gravity schedule. Activation validates before spending, repeats reject and active hold cannot transfer the ability. A bounded initial-bonus injection supports domain fixtures; normal games still start at zero and player awards/hotkey/presentation remain T024-T026. Shared projection selection keeps consumers coherent.
             Scope: src/game/game.ts; geometry/landing collaborators; domain fixtures.
             Depends on: T-021. Contract: P-01/P-02, G-05, R-01.
             Evidence: Traversal/ordered kicks retain a legal target; transient overlap never locks; activation grounding preserves or cancels deadlines correctly.
-        - [ ] T-023 — Integrate penetrator ghost drop and legal locking
+        - [x] T-023 — Integrate penetrator ghost drop and legal locking
+            Completion evidence: RED: three integration assertions failed before exposing activation in snapshots. GREEN: 84 unit tests/check/build/package and 38 packaged normal-player/HTTP checks pass. Exact traces verify ghost/deepest-drop equality, gravity across occupied rows into an isolated gap, whole-interval legal lock, four new cells with all old cells preserved, activation reset and detached overlap snapshots. Independent complete-milestone review/recheck found no Critical/Important issue. Report3.1/HANDOFF distinguish domain ability evidence from upcoming earned-bonus/B/white browser acceptance.
             Scope: src/game/game.ts, landing.ts; renderer snapshots; integration fixtures.
             Depends on: T-021, T-022. Contract: P-02, G-09, S-02, A-05 legal-motion subset.
             Evidence: Ghost/drop deepest equality, crossing occupied rows, ordinary-versus-penetrator distinction, no overwritten cells and legal-only final lock.
             Milestone exit: review the whole 3.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/3/3.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 3.2 — Earn and activate
-        - [ ] T-024 — Award and cap penetrator bonuses
+    - [x] Milestone 3.2 — Earn and activate
+        - [x] T-024 — Award and cap penetrator bonuses
+            Completion evidence: RED: four award/future-activation assertions failed before four-line awards. GREEN: 94 unit tests and TypeScript check pass. Exactly four simultaneous lines add one bonus, cap at three, zero-to-three line clears add none, and an activated clear ends the old activation before awarding a future use. Fresh games reset zero; bounded fixture funding rejects invalid values. Existing legal traversal/drop/hold/timing regressions pass.
             Scope: src/game/game.ts; scoring/bonus fixtures.
             Depends on: T-023. Contract: P-03.
             Evidence: Four-line clears award exactly one, zero-to-three cap, penetrator clear awards future bonus and new game resets.
-        - [ ] T-025 — Wire activation spending and active hold rejection
+        - [x] T-025 — Wire activation spending and active hold rejection
+            Completion evidence: RED: three activation-routing assertions failed before the Controller route. GREEN: 98 unit tests and TypeScript/Vite build pass. B maps through the one-shot gameplay input path; Controller tests verify one spend with extra funding, active hold rejection/source preservation, paused activation rejection while funded, no-target preservation and due four-line lock/award before same-time activation of the new piece. Native earned-bonus/B/white acceptance remains T-026; domain guards are shared with prior viability work.
             Scope: src/game/game.ts; browser/input.ts; activation/hold fixtures.
             Depends on: T-024. Contract: P-01/P-03, G-08.
             Evidence: B spends once only after viable activation, rejects impossible/repeated activation without spending, and blocks hold while active.
-        - [ ] T-026 — Present and verify the complete bonus mechanic
+        - [x] T-026 — Present and verify the complete bonus mechanic
+            Completion evidence: RED: real Chromium bonus-panel assertion failed before presentation. GREEN: 99 unit tests/check/build, 40 packaged Playwright checks and final two-browser package-byte recheck pass. A generated/production-domain-validated seven-bag replay naturally earns/spends/locks in both browsers, verifies four white cells/white deepest ghost, active hold ban, indicator updates and preserved occupied bridge. Firefox screenshot inspected; min viewport/regressions pass. Version0.3.0, player/accessibility/package help and report3.2/HANDOFF complete. Independent milestone/phase review and docs recheck found no Critical/Important issue.
             Scope: browser/render.ts, panels.ts; browser penetrator suite; player help.
             Depends on: T-024, T-025. Contract: P-01–P-03, A-05.
             Evidence: Entirely white active piece, nonwhite regular colors, one symbol per bonus, earn→spend→lock demonstration, modern regressions and 0.3.0 metadata.
             Milestone exit: review the whole 3.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/3/3.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 3.3 — Phase review
-        - [ ] T-027 — Review test and report phase 3
+    - [x] Milestone 3.3 — Phase review
+        - [x] T-027 — Review test and report phase 3
+            Completion evidence: Dedicated owner/independent full-phase code and interaction review found no unresolved Critical/Important issue. Clean T026 source passed 99 unit tests/check/build/package and40 packaged Playwright checks, including natural native earn-spend-penetrate-lock and exact member bytes; screenshot inspected. Actual T021-T026 owning-commit audit and closed-record preservation passed. Phase report/HANDOFF distinguish clean candidate from pending main release source and record environment limits/integration gates.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.3.0.
             Depends on: T-026; all phase 3 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/3/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.

@@ -4,7 +4,7 @@ import { cells,rotationCandidates } from './geometry';
 import { PieceSource } from './source';
 import { landing } from './landing';
 import type { Board, Piece, Kind } from './types';
-export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number;gameId?:string }
+export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number;gameId?:string;bonuses?:number }
 export interface GameOverEvent {type:'game-over';gameId:string;score:number;lines:number;level:number}
 export class Game {
   private readonly gameId:string;
@@ -21,11 +21,15 @@ export class Game {
   private lines=0;
   private held:Kind|null=null;
   private holdUsed=false;
+  private penetrator=false;
+  private bonuses=0;
   private readonly source:PieceSource;
   constructor(options:GameOptions={}) {
     this.gameId=options.gameId??'game';
     for(const value of [options.lines??0,options.score??0]) if(!Number.isSafeInteger(value)||value<0)throw new RangeError('Counters must be safe nonnegative integers');
     this.lines=options.lines??0;this.score=options.score??0;
+    this.bonuses=options.bonuses??0;
+    if(!Number.isInteger(this.bonuses)||this.bonuses<0||this.bonuses>3)throw new RangeError('Bonuses must be an integer from zero to three');
     this.board=(options.board??emptyBoard()).map(row=>[...row]);
     this.source=new PieceSource(options.random);
     this.active=options.piece?{...options.piece}:this.spawnPiece();
@@ -43,15 +47,19 @@ export class Game {
   private addScore(points:number):void {this.score=Math.min(Number.MAX_SAFE_INTEGER,this.score+points);}
   private endGame():void {
     if(this.status==='game-over')return;
-    this.status='game-over';this.groundedDeadline=null;
+    this.status='game-over';this.groundedDeadline=null;this.penetrator=false;
     this.events.push({type:'game-over',gameId:this.gameId,score:this.score,lines:this.lines,level:this.level});
   }
   /** A detached snapshot prevents renderers from mutating the domain. */
-  get snapshot() { return {held:this.held,holdUsed:this.holdUsed,ghost:landing(this.board,this.active),next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
+  get snapshot() { return {penetrator:this.penetrator,bonuses:this.bonuses,held:this.held,holdUsed:this.holdUsed,ghost:this.project(),next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
+  /** One projection selection is shared by all ordinary/penetrator consumers. */
+  private project(piece:Piece=this.active):Piece|null {
+    return landing(this.board,piece,this.penetrator?'penetrator':'ordinary');
+  }
   private refreshGrounding():void {
     if(this.status!=='playing') {this.groundedDeadline=null;return;}
-    const target=landing(this.board,this.active);
-    if((target&&target.y>this.active.y)||(!target&&canPlace(this.board,{...this.active,y:this.active.y+1}))) this.groundedDeadline=null;
+    const target=this.project();
+    if((target&&target.y>this.active.y)||(!target&&!this.penetrator&&canPlace(this.board,{...this.active,y:this.active.y+1}))) this.groundedDeadline=null;
     else if(this.groundedDeadline===null) this.groundedDeadline=this.time+this.interval;
   }
   private lock():void {
@@ -59,7 +67,9 @@ export class Game {
       this.endGame();return;
     }
     for(const {x,y} of cells(this.active)) this.board[y][x]=this.active.kind;
+    this.penetrator=false;
     const compacted=clearLines(this.board);this.addScore([0,100,300,500,800][compacted.cleared]*this.level);
+    if(compacted.cleared===4)this.bonuses=Math.min(3,this.bonuses+1);
     this.board=compacted.board;this.lines=Math.min(Number.MAX_SAFE_INTEGER,this.lines+compacted.cleared);
     this.holdUsed=false;this.active=this.spawnPiece();this.startPieceTiming();
   }
@@ -77,23 +87,28 @@ export class Game {
     this.time=to;
   }
   private tryTransform(candidate:Piece):boolean {
-    if(this.status!=='playing' || !canPlace(this.board,candidate)) return false;
+    if(this.status!=='playing' || !(this.penetrator?this.project(candidate)!==null:canPlace(this.board,candidate))) return false;
     this.active=candidate;this.refreshGrounding();return true;
   }
   move(dx:-1|1):void {this.tryTransform({...this.active,x:this.active.x+dx});}
   rotate(direction:-1|1):void {
     for(const candidate of rotationCandidates(this.active,direction))if(this.tryTransform(candidate))break;
   }
+  /** Spend only after viability succeeds; normal games earn funding via line clears. */
+  activatePenetrator():boolean {
+    if(this.status!=='playing'||this.penetrator||this.bonuses===0||!landing(this.board,this.active,'penetrator'))return false;
+    this.bonuses--;this.penetrator=true;this.refreshGrounding();return true;
+  }
   /** Empty hold consumes next; a nonempty exchange never touches the queue. */
   hold():void {
-    if(this.status!=='playing'||this.holdUsed)return;
+    if(this.status!=='playing'||this.holdUsed||this.penetrator)return;
     const replacement=this.held??this.source.next();this.held=this.active.kind;
     this.active=this.spawnPiece(replacement);this.holdUsed=true;this.startPieceTiming();
   }
   /** Follow the default captured interval policy; zero travel preserves both clocks. */
   hardDrop():void {
     if(this.status!=='playing')return;
-    const target=landing(this.board,this.active);if(!target)return;
+    const target=this.project();if(!target)return;
     const distance=target.y-this.active.y;
     if(distance>0&&this.tryTransform(target)){
       this.nextGravity=this.time+this.interval;this.addScore(2*distance);
