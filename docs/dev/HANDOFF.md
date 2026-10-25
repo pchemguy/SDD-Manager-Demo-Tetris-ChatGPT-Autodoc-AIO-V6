@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase 3 T-021 projection completion, publication/hosting pending.
+Checkpoint: phase 3 milestone 3.1 T-023 completion, publication/hosting pending.
 
 ## Authority and predecessor
 
@@ -10,4 +10,4 @@ Full T-001–T-057 and six phase releases remain authorized. Phase 2 tasks/revie
 
 phase/3-penetrator was created from that published release parent; integration target main. Governing requirements/design inputs unchanged, accepted QC remains applicable. Exact phase label/milestone briefs and initial associations for T-021–T-027 issues 30–36 are fully read back/verified before implementation. Direct protected REST projection settled all effects; no unknown effects remain.
 
-T-021 adds deepest fully visible, non-overlapping penetrator projection, preserving ordinary behavior. Adversarial and seeded-orientation unit fixtures pass; this is a domain increment, not yet a player activation capability. Publish/close T-021 before T-022 viability transitions; complete T-023 legal ghost/drop/locking, then T-024–T-026 bonuses/activation/white presentation and T-027 phase review. Continue through explicit integration and 0.3.0 release, then remaining authorized phases. Preserve one verified published owning task per commit and folded boundary reports. Native OS-window/BFCache/Windows evidence limits remain.
+T-021/T-022 are published/closed. T-023 exposes activation in snapshots and completes ghost/drop/crossing/legal-lock integration fixtures, with report 3.1. Independent complete-milestone code review/recheck finds no Critical/Important blocker. Final 84 unit tests/check/build/package and 38 normal-player/served-byte Playwright regressions pass. Activated motion is domain-fixture evidence; natural earned-bonus/B/white browser acceptance remains T-026. Publish/close T-023 and milestone 3.1, then T-024 awards/cap, T-025 B/controller integration, T-026 presentation/full mechanic and T-027 phase review. Continue explicit integration/release 0.3.0 and remaining authorized phases without another approval. Preserve one verified published owning task per commit and folded boundary reports.

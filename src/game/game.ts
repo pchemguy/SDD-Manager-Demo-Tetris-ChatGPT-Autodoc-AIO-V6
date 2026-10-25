@@ -51,7 +51,7 @@ export class Game {
     this.events.push({type:'game-over',gameId:this.gameId,score:this.score,lines:this.lines,level:this.level});
   }
   /** A detached snapshot prevents renderers from mutating the domain. */
-  get snapshot() { return {bonuses:this.bonuses,held:this.held,holdUsed:this.holdUsed,ghost:this.project(),next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
+  get snapshot() { return {penetrator:this.penetrator,bonuses:this.bonuses,held:this.held,holdUsed:this.holdUsed,ghost:this.project(),next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
   /** One projection selection is shared by all ordinary/penetrator consumers. */
   private project(piece:Piece=this.active):Piece|null {
     return landing(this.board,piece,this.penetrator?'penetrator':'ordinary');

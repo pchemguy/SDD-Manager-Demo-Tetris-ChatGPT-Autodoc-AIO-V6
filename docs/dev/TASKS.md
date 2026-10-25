@@ -135,7 +135,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 ## Phase 3 — Penetrator
 
 - [ ] Phase 3 — Penetrator
-    - [ ] Milestone 3.1 — Legal penetration
+    - [x] Milestone 3.1 — Legal penetration
         - [x] T-021 — Implement deepest legal penetrator projection
             Completion evidence: RED: four new penetrator projection fixtures failed against ordinary-only landing. GREEN: 75 unit tests and TypeScript check pass. Shared service enumerates deepest visible non-overlapping target below obstructions, permits transient overlap, handles isolated gaps/no-target/current bounds, preserves occupied cells and matches independent bottom-up enumeration across 280 seeded kind/orientation cases. Ordinary/time/SRS/hold regressions remain green; predecessor release and phase projection recorded in HANDOFF.
             Scope: src/game/landing.ts; adversarial board fixtures.
@@ -146,7 +146,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/game.ts; geometry/landing collaborators; domain fixtures.
             Depends on: T-021. Contract: P-01/P-02, G-05, R-01.
             Evidence: Traversal/ordered kicks retain a legal target; transient overlap never locks; activation grounding preserves or cancels deadlines correctly.
-        - [ ] T-023 — Integrate penetrator ghost drop and legal locking
+        - [x] T-023 — Integrate penetrator ghost drop and legal locking
+            Completion evidence: RED: three integration assertions failed before exposing activation in snapshots. GREEN: 84 unit tests/check/build/package and 38 packaged normal-player/HTTP checks pass. Exact traces verify ghost/deepest-drop equality, gravity across occupied rows into an isolated gap, whole-interval legal lock, four new cells with all old cells preserved, activation reset and detached overlap snapshots. Independent complete-milestone review/recheck found no Critical/Important issue. Report3.1/HANDOFF distinguish domain ability evidence from upcoming earned-bonus/B/white browser acceptance.
             Scope: src/game/game.ts, landing.ts; renderer snapshots; integration fixtures.
             Depends on: T-021, T-022. Contract: P-02, G-09, S-02, A-05 legal-motion subset.
             Evidence: Ghost/drop deepest equality, crossing occupied rows, ordinary-versus-penetrator distinction, no overwritten cells and legal-only final lock.
