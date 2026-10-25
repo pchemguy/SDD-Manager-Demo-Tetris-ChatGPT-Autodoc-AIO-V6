@@ -300,7 +300,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 6 — SQLite portability
 
-- [ ] Phase 6 — SQLite portability
+- [x] Phase 6 — SQLite portability
     - [x] Milestone 6.1 — SQLite encoding
         - [x] T-048 — Bundle a lazy bounded SQLite worker
             Completion evidence: RED:worker suite failed importing absent SQLite runtime while221 predecessors passed. GREEN:229 unit tests, TypeScript/Vite build and4 native Chromium/Firefox component probes pass. Pinned sql.js1.15.1/types1.4.11; real local WASM initialization/database close, operation IDs/stale replies, error/post/construction/malformed-reply paths, abort/deadline cleanup and termination verified. Native probes confirm local WASM200/error reply/zero remaining workers and working JSON download/gameplay after forced load failure. Worker/WASM/notices bundle locally; actual file encoder/import remain assigned next tasks and unadvertised. Fixture ArrayBuffer typing corrected; HANDOFF records verified0.5.0/CI/assets and phase6 readiness.
@@ -352,8 +352,9 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-054, T-055. Contract: Full SPEC and Phase 6 exits.
             Evidence: Reproducible 1.0.0 static package, correct local worker/WASM/schema URLs, notices and truthful validated commands; exclude credentials/cache/skills/provenance from product.
             Milestone exit: review the whole 6.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 6.4 — Phase review
-        - [ ] T-057 — Review test and report phase 6
+    - [x] Milestone 6.4 — Phase review
+        - [x] T-057 — Review test and report phase 6
+            Completion evidence: Complete product/phase source review and final producer/docs recheck report zero remaining Critical/Important/Minor findings; unchanged final1.0 payload passed283 unit/check/package and104 exact-packaged Chromium/Firefox checks without skips. Audited actual T048–056 owning commits, preserved closed reports, verified delivery issue/milestone closure and report links. Final implementation report mapsA01–A09 and aggregates all historical TODO provenance: none unresolved/deferred; environment limits explicit. Phase/HANDOFF distinguish verified full-target product acceptance from pending main integration/CI/clean release effects. Final task composition will be audited after commit.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 1.0.0.
             Depends on: T-056; all phase 6 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/6/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.

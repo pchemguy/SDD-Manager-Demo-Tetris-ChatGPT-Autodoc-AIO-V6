@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase6 milestone6.3 T-056 complete product completion; publication/hosted closure pending.
+Checkpoint: phase6 review T-057 full target completion; publication/hosted closure pending.
 
 ## Authority and source
 
@@ -10,6 +10,6 @@ Phase5 explicit main mergeccec12dd82b7ad625515bbaad1e000066dfddec6 passed hosted
 
 ## Current result and next work
 
-T-048–T-055 are published/closed; milestones6.1/6.2 closed. T-056 completes version1.0.0 package/lock metadata, standalone archive instructions, README/AGENTS navigation and folded report6.3. Final283 unit/check/package and104 complete exact-packaged Chromium/Firefox checks pass with no skips; two candidate ZIP builds match, exact11 members/pinned local WASM/canonical schema/full production notices and documentation links verified. Firefox final panel/file-help screenshot inspected. Independent complete-product source and final producer/guide reviews found no findings. Candidate metadata truthfully remains dirty=true; final clean exact-release packaging remains later.
+T-048–T-056 and delivery milestones6.1–6.3 are published/closed. T-057 owns final phase and IMPLEMENTATION-REPORT plus completion evidence. Complete-product/phase source reviews and final producer/documentation recheck find no remaining findings. Final unchanged1.0.0 payload passed283 unit/check/package and104 exact-packaged Chromium/Firefox checks with no skips; reproducible candidate11-member package/schema/WASM/notices/links and final screenshot verified. Actual task audit throughT-056 passes; prior closed phase reports unchanged. All historical TODO sections aggregated with provenance: no unresolved/deferred functional work; environment evidence limits explicitly retained.
 
-Publish/close T-056/6.3 before T-057 phase report plus final IMPLEMENTATION-REPORT and refreshed handoff. Audit actual task commits and aggregate all earlier TODO notes with provenance; all inspected historical notes are None or outside-increment work now delivered. Then explicitly merge into main, run merged checks, publish/readback/verify hosted CI and create exact-body clean reproducible1.0.0 tag/release/assets/downloads. Record actual final release outcome after publication without rewriting closed phase reports. Full range remains authorized; no current functional TODO/blocker. Existing Linux/HTTP/localFirefox override and modeled OS-window/BFCache/picker/Windows limits remain.
+Publish/close T-057/6.4, audit actual final commit, explicitly merge complete phase into main from release3d981272ce51100f6631a7b7601be6578f396043, run merged checks and publish/readback/verify hosted CI. Then exact-body direct main1.0.0 release commit/tag, clean reproducible source-bound package/assets/latest/anonymous download verification. Record actual final release outcome separately without rewriting closed phase reports. Full remaining finalization remains authorized; no current functional blocker. Linux/HTTP/native Chromium/Firefox established; native OS-window/BFCache/picker/HTTPS/Windows limits as final report.
