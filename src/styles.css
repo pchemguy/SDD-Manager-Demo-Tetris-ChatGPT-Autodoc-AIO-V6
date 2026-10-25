@@ -5,3 +5,5 @@
 .piece-card{padding:12px 18px!important;margin:12px 0}.piece-card h2{display:flex;justify-content:space-between;margin:0}.piece-card output{color:#8ce4c4}.piece-card canvas{border:0;background:transparent;margin:auto}
 
 .game-layout{align-items:start}
+
+.piece-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.piece-card .hint{margin:5px 0 0;font-size:9px}.piece-card h2 output{font-size:9px;letter-spacing:0}

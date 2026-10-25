@@ -22,3 +22,13 @@ test('ghost previews floor and stack drops and held Space never drops the next p
  const stackGhost=await pixel(4,18);expect(stackGhost[0]).toBeLessThan(150);
  await page.keyboard.press('Space');await expect(page.locator('#score')).toHaveText('74');expect((await pixel(4,18))[0]).toBe(250);
 });
+test('C and Shift hold once per piece, preserve next on swap and reset on restart',async({page})=>{
+ await page.clock.install({time:new Date('2026-01-01T00:00:00Z')});await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'));
+ await page.addInitScript(()=>{Math.random=()=>0;});await page.goto('/');await page.keyboard.press('Enter');
+ await expect(page.locator('#held')).toHaveText('EMPTY');await page.keyboard.press('c');await expect(page.locator('#held')).toHaveText('I');await expect(page.locator('#next')).toHaveText('T');await expect(page.locator('#hold-state')).toHaveText('USED');
+ await page.keyboard.press('ShiftLeft');await expect(page.locator('#held')).toHaveText('I');await expect(page.locator('#next')).toHaveText('T');
+ await page.keyboard.press('Space');await page.clock.runFor(1016);await expect(page.locator('#hold-state')).toHaveText('AVAILABLE');await expect(page.locator('#next')).toHaveText('S');
+ await page.keyboard.press('ShiftRight');await expect(page.locator('#held')).toHaveText('T');await expect(page.locator('#next')).toHaveText('S');await page.keyboard.press('c');await expect(page.locator('#held')).toHaveText('T');
+ await page.keyboard.press('p');await page.keyboard.press('c');await expect(page.locator('#held')).toHaveText('T');
+ await page.getByRole('button',{name:/Restart/}).click();await expect(page.locator('#held')).toHaveText('EMPTY');await expect(page.locator('#next')).toHaveText('Z');await expect(page.locator('#score')).toHaveText('0');
+});

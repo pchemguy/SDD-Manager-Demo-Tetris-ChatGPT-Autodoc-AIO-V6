@@ -114,7 +114,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/game.ts; hold/source/time tests.
             Depends on: T-016. Contract: G-08.
             Evidence: Empty versus swap queue consumption, used flag, fresh orientation/timing and blocked replacement game over.
-        - [ ] T-018 — Expose hold state and keyboard controls
+        - [x] T-018 — Expose hold state and keyboard controls
+            Completion evidence: RED: actual Chromium hold UI check failed on the absent Held panel. GREEN: 70 unit tests, TypeScript/Vite build and four focused browser checks pass (hold plus 1024x768 in each browser). Native C and both Shift keys enforce once-per-lock exchange, preserve next during nonempty swap, reject paused commands and reset on restart. Shared colored preview helper presents domain-selected kinds. Independent read-only interaction review found no Critical/Important issue; full phase regressions/package remain T-019.
             Scope: browser/panels.ts, input.ts; controller snapshots.
             Depends on: T-017. Contract: G-08, A-02.
             Evidence: C/Shift swaps once, displays held kind and does not consume next during a nonempty exchange.

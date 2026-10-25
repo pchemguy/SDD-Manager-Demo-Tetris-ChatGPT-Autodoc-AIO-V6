@@ -35,3 +35,7 @@ The current development game draws each group of seven pieces from one shuffled 
 ## Ghost and hard drop
 
 The outlined ghost previews the same landing selected by Space. Hard drop awards two points per traveled row and follows the default full gravity-interval delay before locking. A drop that travels zero rows does not extend an existing deadline. Holding Space does not drop later pieces automatically.
+
+## Hold
+
+Press C or either Shift key to store the active kind. Hold is available once until that piece locks. An empty hold consumes Next; exchanging a stored kind leaves Next unchanged. The replacement returns to its spawn position/orientation with fresh gravity and lock timing. The panel shows the stored kind and AVAILABLE or USED state. Restart clears hold.
