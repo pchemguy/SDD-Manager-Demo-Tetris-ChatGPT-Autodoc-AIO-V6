@@ -12,7 +12,7 @@ const initial=initializeSettings(settingsPort);
 let settings=initial.settings;
 const persistenceStatus=(warnings:string[])=>{document.querySelector('#settings-status')!.textContent=warnings.length?warnings.join(' '):'Settings saved in cookies and URL when selected.';};
 persistenceStatus(initial.warnings);
-const controller=new Controller(view=>{renderBoard(canvas,view);renderPanels(view,settings);if(view?.status!=='playing')input?.reset();});
+const controller=new Controller((view,results)=>{renderBoard(canvas,view);renderPanels(view,settings,results);if(view?.status!=='playing')input?.reset();});
 controller.configure(settings);
 const unbindSettings=bindSettings((key,value)=>{settings={...settings,[key]:value};controller.configure(settings);persistenceStatus(saveSetting(settingsPort,key,value));});
 input=bindInput(canvas,document.querySelector<HTMLButtonElement>('#start')!,controller,document.querySelector<HTMLButtonElement>('#pause')!);
@@ -20,7 +20,7 @@ let frame=0;
 const tick=(now:number)=>{controller.frame(now);frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);
 let suspended=false;
 window.addEventListener('pagehide',(event)=>{
- cancelAnimationFrame(frame);input?.reset();
+ controller.clearResults();cancelAnimationFrame(frame);input?.reset();
  if(event.persisted)suspended=true;
  else {input?.dispose();unbindSettings();}
 });

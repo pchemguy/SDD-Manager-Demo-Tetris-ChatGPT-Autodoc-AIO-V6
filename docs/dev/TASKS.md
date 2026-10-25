@@ -240,7 +240,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 ## Phase 5 — JSON leaderboard
 
 - [ ] Phase 5 — JSON leaderboard
-    - [ ] Milestone 5.1 — Session results
+    - [x] Milestone 5.1 — Session results
         - [x] T-038 — Implement result validation ranking and top ten
             Completion evidence: RED:leaderboard validation suite failed to import absent modules while144 predecessor tests passed. GREEN:173 unit tests and TypeScript check pass. Strict real canonical UTC years0001–9999/leap dates, exact stable ASCII IDs/fields, safe nonnegative scores, whole-array duplicate/count rejection, deterministic score/time/ASCII ranking, top10 trimming, detached snapshots and atomic invalid replacement verified. HANDOFF records published0.4.0/CI/assets, phase5 hosted readiness and unchanged accepted input QC.
             Scope: src/leaderboard/validation.ts, store.ts; result fixtures.
@@ -251,7 +251,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: app/controller.ts; injected ID/time provider; lifecycle fixtures.
             Depends on: T-038. Contract: L-01, G-02, S-01.
             Evidence: Unique ID/time on first completion, exclude abandoned games, retain restored-ID uniqueness and no duplicate events.
-        - [ ] T-040 — Render and verify page-lifetime results
+        - [x] T-040 — Render and verify page-lifetime results
+            Completion evidence: RED:selected native Chromium completion assertion failed on missing rows before UI wiring. GREEN:177 unit/check/package and70 complete exact-packaged Chromium/Firefox checks pass. Four native session cases include eleven completions/top10, unique IDs/UTC, nonzero ranking, abandonment exclusion, restart retention and reload/settings behavior. Two additional packaged top10 screenshot runs pass; Firefox panel visually inspected. Modeled persisted-page clearing explicit. Independent whole-milestone read-only review found no findings; report5.1/HANDOFF included.
             Scope: browser/panels.ts; browser result suite.
             Depends on: T-038, T-039. Contract: L-01, A-07.
             Evidence: Rank/score/time labels, top ten after games, restart retention and reload clearing with unchanged persistent settings.
