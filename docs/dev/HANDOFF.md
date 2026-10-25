@@ -1,11 +1,11 @@
 # Project handoff
 
-Checkpoint: milestone 1.3 browser delivery, T-009 completion awaiting publication/hosting.
+Checkpoint: phase 1 T-010 review completion, publication/hosting pending.
 
-## Authority and state
+## Authority and provenance
 
-Full T-001–T-057 implementation and six phase releases remain authorized by “Do qc and full implementation”. Accepted preparation is published on main at b18661c3f18fec5ff19536cb60f76e09e4d9d046. Current branch phase/1-classic-baseline was created from that parent; integration target main. T-001–T-008 are published with closed issues; milestones 1.1 and 1.2 are closed. T-009 adds packaged-server and minimum viewport acceptance plus report 1.3.
+Full T-001–T-057 and six releases are authorized. Current phase/1-classic-baseline was created from accepted main preparation b18661c3f18fec5ff19536cb60f76e09e4d9d046; main is its integration parent. T-001–T-009 are published/closed and delivery milestones 1.1–1.3 closed. T-010 assesses all classic exits and includes PHASE-REPORT. Independent phase review finds no Critical/Important blocker; owner inspected task persistence through T-009.
 
-## Evidence and continuation
+## Evidence and next steps
 
-Thirty unit tests/check/build and thirty packaged Chromium/Firefox browser checks pass. Screenshot inspected; independent milestone/phase code review finds no Critical/Important issue. Native OS-window transitions, Windows and hosted CI are unverified. Publish/read back T-009 and close its issue/milestone, then T-010 phase review/persistence audit. Only a complete verified phase integrates with an explicit two-parent merge, merged checks and publication; release 0.1.0 follows before phase 2 activation. Continue full authorized range without another approval.
+Thirty unit tests/check/build and thirty packaged browser checks pass; screenshot inspected. Evidence limits: native OS-window transitions, Windows and hosted CI not established. Publish/read back T-010 and close its issue/review milestone. Audit its actual owning commit. Explicitly merge complete phase into refreshed actual default main with --no-ff --no-commit, reconcile this handoff, run merged checks and publish/read back. Observe hosted CI. Prepare exact-body release notes/commit on main, tag and package clean source 0.1.0, publish/verify GitHub release assets/body/downloads. Only then project/branch phase 2 and continue full range; no new approval required.

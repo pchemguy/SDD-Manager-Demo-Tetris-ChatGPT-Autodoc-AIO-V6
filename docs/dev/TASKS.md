@@ -12,7 +12,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 1 — Classic baseline
 
-- [ ] Phase 1 — Classic baseline
+- [x] Phase 1 — Classic baseline
     - [x] Milestone 1.1 — Playable falling loop
         - [x] T-001 — Establish classic geometry and board rules
             Completion evidence: RED: npm test observed four intended geometry/collision failures. GREEN: npm test passed 5/5; npm run check passed. Pinned dependencies installed from registry with a lockfile; board rows, spawn cells, pivot/O behavior, hidden bounds and collisions verified. Browser/build acceptance remains T-003 work.
@@ -64,8 +64,9 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-007, T-008. Contract: A-01/A-03/A-09 baseline, Phase 1 exits.
             Evidence: Actual packaged/server path in Chromium/Firefox, Canvas screenshot inspection, keyboard/lifecycle/time regressions and no missing essential classic action.
             Milestone exit: review the whole 1.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 1.4 — Phase review
-        - [ ] T-010 — Review test and report phase 1
+    - [x] Milestone 1.4 — Phase review
+        - [x] T-010 — Review test and report phase 1
+            Completion evidence: Independent read-only phase code review and owner cross-milestone inspection found no Critical/Important blockers. Classic exits pass: 30 unit tests/check/build and 30 packaged Chromium/Firefox checks, inspected screenshot. Actual parent-diff audit verified T001-T009 single-task result/evidence/initial checkbox commits and folded reports. Phase report/HANDOFF record source, release readiness, limits and pending integration/provider effects.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.1.0.
             Depends on: T-009; all phase 1 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/1/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
