@@ -2,7 +2,7 @@
 
 ## Current gate
 
-State: Ready for strategy only; layout coverage pending. TASKS derivation is blocked until combined PLAN/layout review. Owner: sdd-plan, 2026-10-25.
+State: Ready for combined PLAN/layout task derivation. Strategy and placement have both been assessed. Owner: sdd-plan, 2026-10-25.
 
 Reviewed PLAN SHA-256: `7a29ec2c6ded7f444f889b992d54827d3b52be285fb5e5376b04a7715c3014f9`. No implementation/browser/release execution or whole-package QC is claimed.
 
@@ -44,3 +44,11 @@ Mapped every SPEC group to a useful phase and checked inclusions/deferrals, depe
 All phases reserve a dedicated one-task review milestone. Every delivery milestone has review/testing/repair/report/HANDOFF obligations; TASKS must assign folded versus standalone units by actual counts. Phase release gates follow verified integration/publication and do not mistake intermediate subset acceptance for full-target completion.
 
 Confirmed strategy findings: none. Counts are 17 delivery milestones plus six excluded phase-review milestones; counts do not establish scope quality by themselves. Placement and proposed task-sized changes have not been assessed: layout is the next required input. No correction/recheck cycle was needed for strategy.
+
+## Revision 1 — Combined PLAN/layout assessment
+
+Reviewed layout SHA-256 `26db9e2f0fcabc0a26b9d6039425478254da3b2a191e865e867f8d884c1c0c5e` with unchanged PLAN SHA-256 `7a29ec2c6ded7f444f889b992d54827d3b52be285fb5e5376b04a7715c3014f9` and the governing identities above. Owner: sdd-plan, 2026-10-25.
+
+Checked every decomposed component against source/check locations, dependency direction, capability increments, integration/packaging and generated-artifact exclusions. All six phases have physical homes for their domain, browser, validation and acceptance work. No behavioral or strategic change was required. The normative schema has one maintained owner; the public copy is generated and byte-checked. The SQLite worker/WASM and static-base paths have explicit packaging ownership. Test fixtures distinguish controlled orchestration checks from actual database/browser acceptance.
+
+Confirmed placement findings: none. Combined gate: Ready; TASKS can be derived from these inputs. Future source/test paths are stated as intended allocations and do not claim implementation. No whole-package QC or runtime acceptance was performed. The initial strategy review remains valid; this section adds its previously pending placement coverage.
