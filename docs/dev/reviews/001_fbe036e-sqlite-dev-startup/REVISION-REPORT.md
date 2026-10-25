@@ -10,7 +10,7 @@ The user reported `SQLite worker failed to communicate` under `npm run dev` on W
 
 Vite now explicitly pre-optimizes `sql.js`, which is imported only through the lazy worker and was outside its initial page scan. No source-level worker protocol, SQLite codec, database schema or gameplay behavior changed. SQLite WASM remains lazy and local. The patch version is 1.0.1.
 
-The new `npm run test:dev` suite creates a separate real server and empty optimizer cache for each action and browser. It exercises first SQLite Save and first SQLite Restore independently, verifies actual SQLite/JSON data, no page reload, lazy same-origin WASM and worker cleanup. Its configuration inherits the isolated Chromium/Firefox setup. CI adds this suite on Linux and Windows and checks revision pushes before integration.
+The new `npm run test:dev` suite creates a separate real server and empty optimizer cache for each action and browser. It exercises first SQLite Save and first SQLite Restore independently, verifies actual SQLite/JSON data, no page reload, lazy same-origin WASM and worker cleanup. Its configuration inherits the isolated Chromium/Firefox setup. CI adds this suite on Linux and Windows and checks revision pushes before integration. The Windows job explicitly uses CMD to match repository Windows policy; Linux uses Bash.
 
 ## Verification
 
@@ -25,4 +25,4 @@ Local execution is Linux with Node 24.22.1, Vite 8.3.5, Playwright 1.64.1, isola
 
 ## Remaining effects
 
-Local action A-001 is verified. Publish/read back the correction, inspect native Windows/Linux CI, integrate the verified boundary explicitly into main, then build and publish the clean pinned 1.0.1 release and verify downloads. Campaign closure is pending those effects; this report does not claim them from planned configuration.
+Local action A-001 is verified and source correction 37b6d2470ebd592569ba89d9e4437d1384719dd8 is published/read back. Initial hosted run 40194266092 passed the Linux startup job; its Windows shell was then made explicitly CMD before final validation. The initial run is superseded by the shell-corrected run, not final acceptance. Inspect native Windows/Linux CI, integrate the verified boundary explicitly into main, then build and publish the clean pinned 1.0.1 release and verify downloads. Campaign closure is pending those effects; this report does not claim them from planned configuration.
