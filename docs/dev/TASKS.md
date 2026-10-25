@@ -241,7 +241,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 - [ ] Phase 5 — JSON leaderboard
     - [ ] Milestone 5.1 — Session results
-        - [ ] T-038 — Implement result validation ranking and top ten
+        - [x] T-038 — Implement result validation ranking and top ten
+            Completion evidence: RED:leaderboard validation suite failed to import absent modules while144 predecessor tests passed. GREEN:173 unit tests and TypeScript check pass. Strict real canonical UTC years0001–9999/leap dates, exact stable ASCII IDs/fields, safe nonnegative scores, whole-array duplicate/count rejection, deterministic score/time/ASCII ranking, top10 trimming, detached snapshots and atomic invalid replacement verified. HANDOFF records published0.4.0/CI/assets, phase5 hosted readiness and unchanged accepted input QC.
             Scope: src/leaderboard/validation.ts, store.ts; result fixtures.
             Depends on: T-037. Contract: L-01.
             Evidence: Safe integers, stable IDs, strict calendar UTC, duplicate rejection, deterministic ties and truncation.

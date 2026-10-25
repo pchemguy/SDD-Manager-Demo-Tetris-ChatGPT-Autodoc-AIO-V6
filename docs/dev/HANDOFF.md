@@ -15,3 +15,7 @@ T-028–T-036 are published/closed and all delivery milestones4.1–4.3 closed/r
 ## Release 0.4.0 boundary
 
 Full previous-tag range through502caaf56e35172f2d28c8f48662dae2982c6835 is reviewed: ten owning task commits plus explicit cumulative merge, no omitted changes. Previous notes ownership/hash verified and atomically refreshed. Exact body is used for this direct-main release commit and GitHub notes. Main merge publication and merged144 unit/66 packaged checks are verified; hosted CI and final clean reproducible package/tag/assets/download checks remain publisher prerequisites. After verified publication activate phase5 from the exact released commit.
+
+## Phase 5 activation and predecessor outcome
+
+Phase4 integration502caaf56e35172f2d28c8f48662dae2982c6835 passed hosted CI40185294644. Release0.4.0 source/tag a3a86f513b5eab119d9f1c1f3186db8712ec8da4 is published/latest, with exact notes/body/tag and anonymous asset bytes verified. ZIP SHA256 b68611e6535e8a2e09cb4cfa634118cf6f30fa1ea9386e4b8780d9196ee48ff1; body SHA256581718bc2764d497b8c9fd6bfb83c29a71feb687ad0d85eb72b16653864d1171. Phase5 branch phase/5-json-leaderboard was created from that release, target main. Label/four milestones and T-038–T-047 issues47–56 fully reconciled before execution. No unknown effects. Accepted governing design/spec/plan/layout bytes remain unchanged; TASKS differences are completion/evidence only, so current QC applies. T-038 owns pure validation/ranking/store; full authorization remains throughT-057.
