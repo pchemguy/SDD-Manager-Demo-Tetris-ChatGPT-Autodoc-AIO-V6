@@ -73,7 +73,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 2 — Modern play
 
-- [ ] Phase 2 — Modern play
+- [x] Phase 2 — Modern play
     - [x] Milestone 2.1 — Bag and rotation
         - [x] T-011 — Implement seven-bag generation and queue semantics
             Completion evidence: RED: two new queue/permutation tests failed with missing peek. GREEN: 35 unit tests/check and 30 actual Chromium/Firefox regressions passed. Twenty deterministic bags contain every kind once, preview does not consume, exact boundary refill uses six draws, invalid entropy rejects. Updated the classic line-clear replay from impossible repeated I pieces to legal I/J/L; source switch is intentional. HANDOFF records verified predecessor release/CI and phase projection.
@@ -125,8 +125,9 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-017, T-018. Contract: G-07–G-09, R-01, A-02/A-03.
             Evidence: Bag/hold/kick/drop/timer combinations in both browsers, screenshots and classic regression; version 0.2.0 packaging metadata.
             Milestone exit: review the whole 2.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 2.4 — Phase review
-        - [ ] T-020 — Review test and report phase 2
+    - [x] Milestone 2.4 — Phase review
+        - [x] T-020 — Review test and report phase 2
+            Completion evidence: Dedicated phase code/interaction and final packaging review found no unresolved Critical/Important issue; R2.2-01 repair rechecked. Clean T019 source passed 70 unit tests/check/build/package and all 38 packaged Playwright checks including exact member-byte HTTP identity. Modern and classic exits pass; actual T011-T019 parent-diff task audit and closed phase1 record preservation pass. Phase report/HANDOFF distinguish candidate source from pending merged/release source and preserve evidence limits.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.2.0.
             Depends on: T-019; all phase 2 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/2/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
