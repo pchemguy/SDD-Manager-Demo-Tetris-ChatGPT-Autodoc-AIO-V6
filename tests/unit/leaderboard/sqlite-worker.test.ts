@@ -1,6 +1,6 @@
 /** Worker protocol and ownership checks plus real local WASM initialization. */
 import {afterEach,expect,it,vi} from 'vitest';
-import {sqliteOperation,bounded,type SQLiteWorker} from '../../../src/leaderboard/files';
+import {sqliteOperation,bounded,codecs,type SQLiteWorker} from '../../../src/leaderboard/files';
 import {loadSQLite} from '../../../src/leaderboard/sqlite';
 import {readFileSync} from 'node:fs';
 class FakeWorker extends EventTarget implements SQLiteWorker {
@@ -9,7 +9,7 @@ class FakeWorker extends EventTarget implements SQLiteWorker {
  terminate=vi.fn();
  reply(data:unknown){this.dispatchEvent(new MessageEvent('message',{data}));}
 }
-afterEach(()=>vi.useRealTimers());
+afterEach(()=>{vi.useRealTimers();vi.unstubAllGlobals();});
 it('initializes the pinned local WASM asynchronously and closes a real database',async()=>{
  const SQL=await loadSQLite({wasmBinary:new Uint8Array(readFileSync('node_modules/sql.js/dist/sql-wasm.wasm')).buffer});const db=new SQL.Database();try{expect(db.exec('SELECT sqlite_version(), 1+1')[0].values[0]).toEqual([expect.stringMatching(/^3\./),2]);}finally{db.close();}
 });
@@ -32,4 +32,9 @@ it('worker construction/post/reply failures reject without a leaked worker',asyn
 });
 it('the existing whole-operation deadline terminates a pending SQLite worker',async()=>{
  vi.useFakeTimers();const worker=new FakeWorker();const outcome=bounded(signal=>sqliteOperation('encode',[],signal,()=>worker),new AbortController().signal).catch(e=>e);await Promise.resolve();await vi.advanceTimersByTimeAsync(10000);expect((await outcome).message).toMatch(/10000 ms/);expect(worker.terminate).toHaveBeenCalledTimes(1);expect(vi.getTimerCount()).toBe(0);
+});
+
+it('content dispatch uses an owned SQLite input copy and JSON stays worker-independent',async()=>{
+ const workers:FakeWorker[]=[];vi.stubGlobal('Worker',class extends FakeWorker {constructor(){super();workers.push(this);}});
+ const input=new TextEncoder().encode('SQLite format 3\0');const result=codecs.decode(input,new AbortController().signal);expect(workers).toHaveLength(1);const worker=workers[0];expect(worker.sent?.action).toBe('decode');expect(worker.sent?.payload).not.toBe(input);expect(input.byteLength).toBe(16);worker.reply({id:worker.sent!.id,ok:true,result:[]});expect(await result).toEqual([]);expect(await codecs.decode(new TextEncoder().encode('{"formatVersion":1,"results":[]}'),new AbortController().signal)).toEqual([]);expect(workers).toHaveLength(1);
 });

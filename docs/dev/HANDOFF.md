@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase6 milestone6.1 T-050 SQLite export completion; publication/hosted closure pending.
+Checkpoint: phase6 milestone6.2 T-053 SQLite restore completion; publication/hosted closure pending.
 
 ## Authority and source
 
@@ -10,8 +10,6 @@ Phase5 explicit main mergeccec12dd82b7ad625515bbaad1e000066dfddec6 passed hosted
 
 ## Current result and next work
 
-T-048/T-049 are published/closed. T-050 completes native format selection and SQLite filename/MIME/download integration, with folded report6.1. Final234 unit/check/package and90 complete exact-packaged Chromium/Firefox checks pass. Actual empty/ten downloads independently inspected with Python SQLite; local lazy WASM, protocol/deadline/abort cleanup, worker teardown and JSON/gameplay after forced load failure verified. Independent whole6.1 review found no findings. SQLite restore remains explicitly unavailable/unwired until6.2, not a claimed export capability.
+T-048–T-052 are published/closed; milestone6.1 closed. T-053 completes bounded content-detected SQLite Restore and folded report6.2. Final283 unit/check/package and100 complete exact-packaged Chromium/Firefox checks pass. Header/tail ranges read admitted bytes once, JSON/SQLite limits precede whole reads/initialization, full schema/storage/record validation precedes atomic replacement. Actual native valid/invalid restores, held-init cancel/timeout, unchanged history/user pause and zero workers verified; independent whole6.2 review found no findings.
 
-Publish/close T-050 and6.1 before T-051 identity/integrity/schema, T-052 actual storage/row/bounds and T-053 content-detected atomic native Restore/folded6.2. Then T-054 help, T-055 cross-format/subdirectory acceptance, T-056 final package/folded6.3 and T-057 complete review/final implementation report. Explicit main integration/CI and exact1.0.0 release follow. Preserve one owning result/evidence/initial checkbox per commit and publication/readback/hosted lifecycle before advancement. Full remaining scope remains authorized without another approval pause.
-
-Existing Linux/HTTP/localFirefox override and modeled OS-window/BFCache/picker/Windows limits remain. No current blocker. Test-design review confirms equivalent ordinary WITHOUT ROWID schemas may pass required metadata; external CHECK text need not match literal DDL. REAL1.0 fixture must independently prove its actual storage class, numeric value and integrity before testing rejection.
+Publish/close T-053/6.2 before T-054 dual-format help, T-055 cross-format/subdirectory acceptance, T-056 version1.0.0 package/folded6.3 and T-057 complete source review/final implementation report. Explicit main integration/CI and exact1.0.0 release follow. Full remaining scope remains authorized without another approval pause; keep owning result/evidence/initial checkbox commits and verified publication/hosted lifecycle. Prior closed reports are unchanged. Existing Linux/HTTP/localFirefox override and modeled OS-window/BFCache/picker/Windows limits remain. No current TODO or blocker.

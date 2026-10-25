@@ -1,6 +1,8 @@
 /** Actual downloaded databases are inspected by a second SQLite implementation. */
 import {test,expect} from '@playwright/test';
 import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
+test.beforeAll(()=>{execFileSync('python',['tests/fixtures/generate-sqlite.py','.cache/browser-sqlite-fixtures'],{timeout:10000});});
 async function downloadBytes(download:import('@playwright/test').Download){const stream=await download.createReadStream();const chunks:Buffer[]=[];for await(const chunk of stream!)chunks.push(Buffer.from(chunk));return Buffer.concat(chunks);}
 function inspect(bytes:Buffer){return JSON.parse(execFileSync('python',['tests/fixtures/inspect-sqlite.py'],{input:bytes,encoding:'utf8',timeout:10000}));}
 const full=Array.from({length:10},(_,i)=>({id:'result'+i,score:i===9?9007199254740991:i,timestamp:i===0?'0001-01-01T00:00:00.000Z':'2026-01-01T00:00:00.000Z'}));
@@ -14,4 +16,31 @@ test('lazy local SQLite empty/ten downloads preserve every field and JSON export
 test('native SQLite initialization failure preserves history, JSON downloads and gameplay',async({page})=>{
  await page.route('**/*.wasm',route=>route.abort());await page.goto('/');const chooser=page.waitForEvent('filechooser');await page.locator('#restore').click();await (await chooser).setFiles({name:'scores.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({formatVersion:1,results:full.slice(0,1)}))});await expect(page.locator('#results tr')).toHaveCount(1);const before=await page.locator('#results').innerHTML();
  await page.getByLabel('Save format',{exact:true}).selectOption('sqlite');await page.locator('#save').click();await expect(page.locator('#file-status')).toContainText('Error');await expect.poll(()=>page.workers().length).toBe(0);expect(await page.locator('#results').innerHTML()).toBe(before);await page.getByLabel('Save format',{exact:true}).selectOption('json');const offered=page.waitForEvent('download');await page.locator('#save').click();expect(JSON.parse((await downloadBytes(await offered)).toString()).results).toEqual(full.slice(0,1));await expect(page.locator('#file-status')).toContainText('Download offered');await page.locator('#start').click();const board=page.locator('#board'),position=await board.evaluate((c:HTMLCanvasElement)=>c.toDataURL());await page.keyboard.press('ArrowLeft');expect(await board.evaluate((c:HTMLCanvasElement)=>c.toDataURL())).not.toBe(position);
+});
+
+async function upload(page:import('@playwright/test').Page,bytes:Buffer,name='scores.sqlite'){
+ const chooser=page.waitForEvent('filechooser');await page.locator('#restore').click();await (await chooser).setFiles({name,mimeType:'application/octet-stream',buffer:bytes});
+}
+const fixture=(name:string)=>readFileSync('.cache/browser-sqlite-fixtures/'+name+'.sqlite');
+test('restores SQLite by content with unsorted stable records, JSON output and empty replacement',async({page})=>{
+ await page.goto('/');await upload(page,fixture('rows-unsorted'),'misnamed.json');await expect(page.locator('#file-status')).toContainText('Restored 3');expect(await page.locator('#results tr').evaluateAll(rows=>rows.map(row=>(row as HTMLElement).dataset.resultId))).toEqual(['A','Z','a']);
+ const offered=page.waitForEvent('download');await page.locator('#save').click();const document=JSON.parse((await downloadBytes(await offered)).toString());expect(document.results.map((r:{id:string})=>r.id)).toEqual(['A','Z','a']);await expect(page.locator('#file-status')).toContainText('Download offered');await upload(page,fixture('valid-empty'),'empty.data');await expect(page.locator('#file-status')).toContainText('Restored 0');await expect(page.locator('#results tr')).toHaveCount(0);await expect.poll(()=>page.workers().length).toBe(0);
+});
+test('invalid SQLite schema, corruption and row corpus preserves the complete prior list',async({page})=>{
+ test.setTimeout(60000);await page.goto('/');await upload(page,Buffer.from(JSON.stringify({formatVersion:1,results:full})));await expect(page.locator('#results tr')).toHaveCount(10);const before=await page.locator('#results').innerHTML();
+ for(const name of ['version-two','extra-trigger','extra-index','generated-virtual','nullable-score','corrupt-btree','truncated','real-one','unsafe-integer','invalid-calendar','eleven-rows','duplicate-ids']){await upload(page,fixture(name));await expect(page.locator('#file-status')).toContainText('Error');await expect(page.locator('#start')).toBeEnabled();expect(await page.locator('#results').innerHTML()).toBe(before);await expect.poll(()=>page.workers().length).toBe(0);}
+});
+test('failed SQLite restore initialization leaves history and JSON functional',async({page})=>{
+ await page.route('**/*.wasm',route=>route.abort());await page.goto('/');await upload(page,Buffer.from(JSON.stringify({formatVersion:1,results:full})));await expect(page.locator('#results tr')).toHaveCount(10);const before=await page.locator('#results').innerHTML();await upload(page,fixture('rows-unsorted'));await expect(page.locator('#file-status')).toContainText('Error');expect(await page.locator('#results').innerHTML()).toBe(before);await expect.poll(()=>page.workers().length).toBe(0);await upload(page,Buffer.from('{"formatVersion":1,"results":[]}'));await expect(page.locator('#file-status')).toContainText('Restored 0');await expect(page.locator('#results tr')).toHaveCount(0);
+});
+test('native pending SQLite work cancels or times out without replacing or unpausing',async({page})=>{
+ test.setTimeout(30000);await page.clock.install();const pending:import('@playwright/test').Route[]=[];await page.route('**/*.wasm',route=>{pending.push(route);});await page.goto('/');await upload(page,Buffer.from(JSON.stringify({formatVersion:1,results:full.slice(0,1)})));await expect(page.locator('#results tr')).toHaveCount(1);const before=await page.locator('#results').innerHTML();await page.locator('#start').click();await page.getByRole('button',{name:'Pause',exact:true}).click();
+ await upload(page,fixture('rows-unsorted'));await expect.poll(()=>pending.length).toBe(1);await page.locator('#file-cancel').click();await expect(page.locator('#file-status')).toContainText('Canceled');await expect.poll(()=>page.workers().length).toBe(0);await pending[0].continue().catch(()=>{});expect(await page.locator('#results').innerHTML()).toBe(before);await expect(page.locator('#status')).toHaveText('PAUSED');
+ await upload(page,fixture('rows-unsorted'));await expect.poll(()=>pending.length).toBe(2);await page.clock.fastForward(10000);await expect(page.locator('#file-status')).toContainText('10000 ms');await expect.poll(()=>page.workers().length).toBe(0);await pending[1].continue().catch(()=>{});expect(await page.locator('#results').innerHTML()).toBe(before);await expect(page.locator('#status')).toHaveText('PAUSED');await expect(page.locator('#start')).toBeEnabled();await page.unroute('**/*.wasm');
+});
+test('size bounds precede full reads and SQLite initialization',async({page})=>{
+ const wasm:string[]=[];page.on('request',request=>{if(new URL(request.url()).pathname.endsWith('.wasm'))wasm.push(request.url());});
+ await page.addInitScript(()=>{const sizes:number[]=[];(window as unknown as {readSizes:number[]}).readSizes=sizes;const original=FileReader.prototype.readAsArrayBuffer;FileReader.prototype.readAsArrayBuffer=function(blob){sizes.push(blob.size);original.call(this,blob);};});await page.goto('/');
+ const huge=Buffer.alloc(1048577);huge.write('SQLite format 3\0');await upload(page,huge);await expect(page.locator('#file-status')).toContainText('1048576-byte');expect(await page.evaluate(()=>(window as unknown as {readSizes:number[]}).readSizes)).toEqual([]);expect(wasm).toEqual([]);
+ await upload(page,Buffer.alloc(65537,32),'oversized.json');await expect(page.locator('#file-status')).toContainText('65536-byte');expect(await page.evaluate(()=>(window as unknown as {readSizes:number[]}).readSizes)).toEqual([16]);expect(wasm).toEqual([]);
 });

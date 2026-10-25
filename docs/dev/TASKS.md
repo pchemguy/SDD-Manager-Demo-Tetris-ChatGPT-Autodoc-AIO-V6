@@ -318,7 +318,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-048, T-049. Contract: L-03 export, L-04 Save.
             Evidence: SQLite export through real UI, actual downloaded database inspection and cleanup in both browsers; preserve JSON export.
             Milestone exit: review the whole 6.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 6.2 — Validated SQLite restore
+    - [x] Milestone 6.2 — Validated SQLite restore
         - [x] T-051 — Validate SQLite identity integrity and schema
             Completion evidence: RED:four structural-scope assertions failed against absent validated read scope. GREEN:263 unit tests and TypeScript/Vite build pass. Genuine Python-generated corpus verifies version/header/truncation/btree corruption, table identity/count, extra tables/views/triggers/indexes/unique constraints, complete column order/types/NOTNULL/PK and hidden/generated flags, virtual tables and protection flags before row callbacks. Equivalent reformatted and ordinary WITHOUT ROWID schemas accepted; automatic PK metadata allowed. Fixed queries only, no imported DDL execution. Disposable DB closes on callback failure; fixture/inspection connections explicitly close. Row/storage validation remains T052.
             Scope: leaderboard/sqlite.ts; real corrupt/schema fixture corpus.
@@ -329,7 +329,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: leaderboard/sqlite.ts; shared validation; database row fixtures.
             Depends on: T-051. Contract: L-01/L-03.
             Evidence: Integer storage class/safe range, text IDs/calendar UTC, duplicates/eleventh row and file size; valid unsorted data ranks identically to JSON.
-        - [ ] T-053 — Integrate bounded atomic SQLite restore
+        - [x] T-053 — Integrate bounded atomic SQLite restore
+            Completion evidence: RED:actual SQLite Restore was incorrectly attempted as UTF-8 JSON. GREEN:283 unit/check/package and100 complete exact-packaged Chromium/Firefox checks pass. Content classifier admits bounded header/tail ranges once, validates read lengths and JSON/SQLite limits before full reads/worker initialization. Worker integrates protected schema/storage/record decode; controller commits only validated candidates. Thirty focused native file checks include valid/empty/misnamed SQLite, twelve invalid databases preserving rows, failed init preserving JSON, real held-init cancellation/10000ms timeout retaining user pause and zero workers, plus actual pre-read bounds. Unit protocol ignores stale replies. Global test budget expanded, product deadline unchanged. Independent6.2 review found no findings; report6.2/HANDOFF included.
             Scope: sqlite.worker.ts; files/controller ports; browser restore tests.
             Depends on: T-051, T-052. Contract: L-03/L-04, S-04.
             Evidence: Content-detected restore, no partial state, initialization/read failure, timeout/cancel/stale reply and resource teardown preserve JSON and existing scores.

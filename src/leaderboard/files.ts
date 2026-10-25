@@ -2,10 +2,11 @@
 import {encodeJSON,decodeJSON,JSON_LIMIT} from './json';
 import {validateResults,type Result} from './validation';
 export type Format='json'|'sqlite';
-export interface SelectedFile {size:number;read(signal:AbortSignal):Promise<Uint8Array>}
+function isSQLite(bytes:Uint8Array):boolean {const header='SQLite format 3\0';return bytes.length>=16&&[...header].every((char,i)=>bytes[i]===char.charCodeAt(0));}
+export interface SelectedFile {size:number;read(signal:AbortSignal,start?:number,end?:number):Promise<Uint8Array>}
 export interface FilePort {pick(signal:AbortSignal):Promise<SelectedFile|null>;download(bytes:Uint8Array,name:string,mime:string,signal:AbortSignal):Promise<void>}
 export interface Codecs {encode(format:Format,results:readonly Result[],signal:AbortSignal):Promise<Uint8Array>;decode(bytes:Uint8Array,signal:AbortSignal):Promise<Result[]>}
-export const codecs:Codecs={encode:async(format,results,signal)=>format==='sqlite'?sqliteOperation('encode',results,signal):encodeJSON(results),decode:async bytes=>decodeJSON(bytes)};
+export const codecs:Codecs={encode:async(format,results,signal)=>format==='sqlite'?sqliteOperation('encode',results,signal):encodeJSON(results),decode:async(bytes,signal)=>isSQLite(bytes)?sqliteOperation('decode',bytes,signal):decodeJSON(bytes)};
 export function checkActive(signal:AbortSignal):void {if(signal.aborted)throw new DOMException('Operation canceled.','AbortError');}
 /** One deadline includes codec initialization; abort is propagated to owned work. */
 export function bounded<T>(work:(signal:AbortSignal)=>Promise<T>,parent:AbortSignal):Promise<T> {
@@ -26,8 +27,15 @@ export async function saveFile(format:Format,results:readonly Result[],port:File
 }
 export async function restoreFile(port:FilePort,signal:AbortSignal,codec:Codecs=codecs):Promise<Result[]|null> {
  checkActive(signal);const file=await port.pick(signal);checkActive(signal);if(!file)return null;
- if(!Number.isSafeInteger(file.size)||file.size<0||file.size>JSON_LIMIT)throw new Error('JSON file exceeds the 65536-byte limit.');
- const bytes=await file.read(signal);checkActive(signal);
+ if(!Number.isSafeInteger(file.size)||file.size<0)throw new Error('Invalid file size.');
+ if(file.size>1048576)throw new Error('File exceeds the 1048576-byte limit.');
+ const headSize=Math.min(16,file.size),head=await file.read(signal,0,headSize);checkActive(signal);
+ if(head.byteLength!==headSize)throw new Error('File read returned an unexpected number of bytes.');
+ const limit=isSQLite(head)?1048576:JSON_LIMIT;
+ if(file.size>limit)throw new Error('JSON file exceeds the 65536-byte limit.');
+ const bytes=new Uint8Array(file.size);bytes.set(head);
+ if(file.size>headSize){const tail=await file.read(signal,headSize,file.size);checkActive(signal);if(tail.byteLength!==file.size-headSize)throw new Error('File read returned an unexpected number of bytes.');bytes.set(tail,headSize);}
+
  return bounded(child=>codec.decode(bytes,child),signal);
 }
 
