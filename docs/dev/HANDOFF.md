@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase5 milestone5.1 T-040 completion; publication/hosted closure pending.
+Checkpoint: phase5 milestone5.2 T-043 completion; publication/hosted closure pending.
 
 ## Authority and source
 
@@ -10,6 +10,4 @@ Phase4 explicit merge502caaf56e35172f2d28c8f48662dae2982c6835 passed hosted CI40
 
 ## Current result and next work
 
-T-038/T-039 published/closed; T-040 renders session results and clears them on leaving/reload while restart retains them. Folded milestone review found no findings. Final177 unit/check/package and70 exact-packaged Chromium/Firefox checks passed; two additional packaged top-ten screenshot runs passed and Firefox panel inspected. Report5.1 records actual boundaries. Modeled persisted-page events do not establish BFCache eligibility; existing Linux/HTTP/localFirefox override/OS-window/Windows limits remain.
-
-Publish/close T-040 and milestone5.1 before T-041 canonical strict schema, T-042 JSON codec and T-043 adversarial corpus/folded5.2 review. Then manual file UI/cancellation/portability T-044–T-046, phase5 reviewT-047 and explicit main integration/0.5.0 release. Continue phase6 throughT-057 and1.0.0 without another approval pause. Keep each owning result/evidence/initial checkbox in one commit, publish/readback before advancing and close hosted lifecycle. No current TODO or blocker.
+T-038–T-042 are published/closed; milestone5.1 closed. T-043 completes the JSON adversarial corpus/folded5.2 report. All209 unit tests and TypeScript/Vite package pass; two packaged HTTP inventory checks verify nine members including canonical schema/notices. Independent5.2 review found no findings. No gameplay/presentation change since T-04070-check acceptance; full UI regressions return after file integration. Publish/close T-043 and5.2 before manual JSON file UI T-044, failure/resource tests T-045, browser/documentation/version0.5.0 T-046 and phase reviewT-047. Then explicit integration/release0.5.0 and phase6throughT-057/1.0.0. Full authorization remains; no current TODO/blocker.

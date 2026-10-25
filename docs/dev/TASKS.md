@@ -257,7 +257,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-038, T-039. Contract: L-01, A-07.
             Evidence: Rank/score/time labels, top ten after games, restart retention and reload clearing with unchanged persistent settings.
             Milestone exit: review the whole 5.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 5.2 — JSON contract
+    - [x] Milestone 5.2 — JSON contract
         - [x] T-041 — Compile and publish the canonical JSON Schema
             Completion evidence: RED:schema suite failed on absent codec module before implementation. GREEN:183 unit tests and TypeScript/Vite build pass. Actual canonical draft2020-12 schema compiles once with pinned Ajv8.20.0, strict custom real-calendar utc-timestamp and mutation/coercion/default/removal disabled. Structural/wrong-type/calendar fixtures reject without input mutation. Public/dist schema bytes equal canonical source; exact full MIT/BSD production license texts verified in notices (initial header-wording check corrected). Official Ajv docs and registry version/integrity inspected.
             Scope: src/leaderboard/json.ts; canonical schema import; scripts/copy-schema.mjs; generated public schema.
@@ -268,7 +268,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/leaderboard/json.ts; validation.ts collaborators; JSON fixtures.
             Depends on: T-041. Contract: L-02, L-04 JSON dispatch subset.
             Evidence: Versioned UTF-8 export, bounded input, schema-first and semantic validation; empty/ten/unsorted round trips preserve values.
-        - [ ] T-043 — Verify JSON failures and codec compatibility
+        - [x] T-043 — Verify JSON failures and codec compatibility
+            Completion evidence: Expanded real-file adversarial characterization passes209 unit tests without production repair: exact/next-byte limits, fatal UTF-8, structure/version/fields/types, safe scores/calendar UTC, duplicate IDs/eleventh result, ASCII ties and standard JSON parsing. TypeScript/Vite package and both packaged HTTP/member checks pass, including exact canonical schema and full dependency notices. Independent whole5.2 review found no findings; report5.2/HANDOFF distinguish current codec/assets evidence from predecessor70-check UI acceptance and upcoming manual files.
             Scope: tests/unit/leaderboard/json.test.ts; invalid-file fixtures; affected codec owners.
             Depends on: T-041, T-042. Contract: L-01/L-02, A-08 JSON subset.
             Evidence: Malformed UTF-8/JSON, unknown fields/version, wrong types, dates, duplicate IDs, excess count and byte limits reject as a whole.
