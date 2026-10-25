@@ -30,7 +30,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-001, T-002. Contract: G-01/G-03 initial keys, S-01/S-05, A-01 playable subset.
             Evidence: Proactively pin/provision and repeatedly exercise isolated Chromium/Firefox before browser-dependent checks; verify falling/moving/rotating board and inspected rendering.
             Milestone exit: review the whole 1.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 1.2 — Complete classic game
+    - [x] Milestone 1.2 — Complete classic game
         - [x] T-004 — Add simultaneous line clearing scoring and levels
             Completion evidence: RED: three intended compaction/scoring assertions failed before implementation. GREEN: 25 unit tests and TypeScript/Vite build passed. Verified simultaneous immutable compaction, 1–4 line awards at pre-clear level, threshold level/speed change for the next piece, successful-only soft-drop points, zero-line lock and safe score saturation. Browser scoring presentation remains T-006 work.
             Scope: src/game/board.ts, game.ts; line/score unit fixtures.
@@ -41,7 +41,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/game.ts; app/controller.ts; lifecycle/time tests.
             Depends on: T-004. Contract: G-02, G-05, S-01, A-01/A-03.
             Evidence: Spawn/top-out, one completion event, restart preservation boundaries and frozen/restored logical deadlines.
-        - [ ] T-006 — Present classic stats and lifecycle controls
+        - [x] T-006 — Present classic stats and lifecycle controls
+            Completion evidence: RED: missing-stats UI test failed before UI implementation; Enter regression failed with live score reset before repair. GREEN: 30 unit tests, TypeScript/Vite build and 16 browser checks passed (8 each). Native controls and controlled-clock browser flows verify a scored line clear, stats, pause/resume, game over/restart and Enter/P/Escape guards. Independent milestone review rechecked fixes; report 1.2 and HANDOFF included.
             Scope: browser/panels.ts; controller/render composition; browser classic suite.
             Depends on: T-004, T-005. Contract: G-01–G-06, S-05, A-01.
             Evidence: Play a scored game, pause/resume, lose and restart through real controls in both browsers; stats match domain.

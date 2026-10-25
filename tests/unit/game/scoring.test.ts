@@ -18,6 +18,9 @@ it('scores successful soft-drop rows only and saturates safely',()=>{
 it('gives no line points for a lock without a clear',()=>{
  const g=new Game({piece:{kind:'O',orientation:0,x:3,y:18}});g.advance(1000);expect(g.snapshot.score).toBe(0);expect(g.snapshot.lines).toBe(0);
 });
+it('does not award a point for a blocked Down before saturation',()=>{
+ const g=new Game({piece:{kind:'O',orientation:0,x:3,y:18},score:12});g.down();expect(g.snapshot.score).toBe(12);
+});
 it.each([[1,100],[2,300],[3,500],[4,800]])('scores %i simultaneous lines at the pre-clear level', (count,points)=>{
  const b=emptyBoard();for(let y=20-count;y<20;y++)for(let x=0;x<10;x++)if(x!==4)b[y][x]='Z';
  const g=new Game({board:b,piece:{kind:'I',orientation:1,x:2,y:16},lines:10});g.advance(800);
