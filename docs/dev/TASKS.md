@@ -196,7 +196,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-028, T-029. Contract: G-09, C-01, A-04.
             Evidence: Hide straddling/upper ghost, show all-lower ghost; test switching/disabled hold/drop/next and captured policies in playable game.
             Milestone exit: review the whole 4.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 4.2 — Settings persistence
+    - [x] Milestone 4.2 — Settings persistence
         - [x] T-031 — Resolve URL cookie and default per setting
             Completion evidence: RED:12 source-resolution assertions failed against the initial default-only resolver. GREEN:127 unit tests and TypeScript check pass. All six keys resolve valid unique URL, then valid unique decoded complete-name cookie, then default independently. Explicit defaults enter the cookie-write plan; omissions/invalid URLs schedule no default replacement. Covered mixed sources, duplicate/case/whitespace/empty/malformed values, duplicate/invalid cookies, unknown names, exact matching and detached defaults. Pure resolver performs no browser writes.
             Scope: src/settings/service.ts; synthetic source fixtures.
@@ -207,7 +207,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/settings/browser.ts, service.ts; adapter failure tests.
             Depends on: T-031. Contract: C-03/C-04.
             Evidence: Exact cookie flags, valid explicit-default writes, no omitted/default overwrite, changed-key replaceState and unrelated URL preservation.
-        - [ ] T-033 — Integrate startup reload and persistence feedback
+        - [x] T-033 — Integrate startup reload and persistence feedback
+            Completion evidence: RED:three selected Chromium startup/persistence assertions failed before wiring. GREEN:138 unit tests, TypeScript/build/package,18 focused persistence and66 complete packaged browser checks pass. Actual cookies/query/reloads cover all six keys and explicit defaults/omissions; history state/length/foreign query/fragment preserved. Modeled cookie/history failures leave live play and independent writes usable. Independent read-only milestone review found no findings; report4.2/HANDOFF included.
             Scope: src/main.ts; controller/panels; browser configuration suite.
             Depends on: T-031, T-032. Contract: C-01–C-04, A-06.
             Evidence: Resolve before first spawn; actual reload/cookies/query, separate write failures, visible warnings and working session controls.

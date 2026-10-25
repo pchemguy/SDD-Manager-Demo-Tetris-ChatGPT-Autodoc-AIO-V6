@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase 4 milestone 4.1 T-030 completion, publication/hosting pending.
+Checkpoint: phase 4 milestone 4.2 T-033 completion, publication/hosting pending.
 
 ## Authority and predecessor
 
@@ -10,4 +10,4 @@ Full T-001–T-057 and six phase releases remain authorized. Phase 3 tasks/revie
 
 phase/4-persistent-configuration was created from that published release parent; integration target main. Governing contracts/design inputs unchanged and accepted QC remains applicable. Exact phase label/four milestone briefs and initial associations for T-028–T-037 issues 37–46 fully verified before execution. Final-list lag for T-037 was settled by read-only reconciliation without replaying writes; no unknown effects remain.
 
-T-028/T-029 are published/closed. T-030 extracts/tests whole-piece ghost visibility and completes native straddle→lower/focus evidence, with report 4.1. Independent complete-milestone code review/recheck finds no Critical/Important issue. Final 114 unit tests/check/build/package and 48 packaged checks pass (46 page interactions +2 HTTP exact-member checks); lower-return screenshot inspected. All six controls operate in session; persistence is upcoming. Publish/close T-030 and milestone 4.1 before T-031 URL/cookie resolution, T-032 independent writes and T-033 startup/browser reload integration. Then T-034–T-036 cross-feature/UI/persistence acceptance, T-037 phase review and explicit integration/release 0.4.0. Remaining full scope stays authorized without new approval. Preserve owning result/evidence/initial checkbox commits and folded reports.
+T-028–T-032 are published and closed; milestone 4.1 is closed. T-033 integrates startup resolution before game creation, independent writes and nonblocking feedback. Independent read-only milestone 4.2 review finds no Critical/Important/Minor issue. Unit138 and focused persistence18 checks pass; full packaged checks are recorded in its completion evidence. Report4.2 owns the review, with unchanged contracts and actual HTTP versus modeled failure/HTTPS limits. Publish/close T-033 and milestone4.2 before T-034 cross-feature policy tests, T-035 configuration help, T-036 version0.4 acceptance and T-037 phase review/integration/release. Full remaining scope through T-057 stays authorized.
