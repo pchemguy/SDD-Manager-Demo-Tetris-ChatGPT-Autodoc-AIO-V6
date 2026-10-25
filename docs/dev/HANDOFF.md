@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: prospective explicit phase5 integration into main.
+Checkpoint: direct main release0.5.0 after published integrationccec12dd82b7ad625515bbaad1e000066dfddec6.
 
 ## Authority and source
 
@@ -11,3 +11,7 @@ Phase4 explicit merge502caaf56e35172f2d28c8f48662dae2982c6835 passed hosted CI40
 ## Current result and next work
 
 T-038–T-046 and delivery milestones5.1–5.3 are published/closed. T-047 owns complete phase review/report; source reviews/recheck found no findings. Final unchanged T-046 payload passed221 unit/check/package and86 exact-packaged Chromium/Firefox checks; Firefox leaderboard/files screenshot inspected. Actual task audit throughT-046 passes and previous closed phase reports are unchanged. T-047/5.4 published/closed; actual final task audit passes. Explicit merge parents are a3a86f513b5eab119d9f1c1f3186db8712ec8da4 andcca2bdf78ff0fc00a56d7043b0d162dedf676e15. Merged221 unit/check/package and86 packaged browser checks pass. Merge publication/hosted CI precede exact-body clean reproducible0.5.0 release/tag/assets/downloads. Advisory prerelease reminder emitted; no new approval pause. After verified release activate phase6 from its exact release commit and executeT-048–T-057 through1.0.0. Full authorization remains; no current TODO/blocker.
+
+## Release 0.5.0 boundary
+
+Complete previous-tag range throughccec12dd82b7ad625515bbaad1e000066dfddec6 reviewed: ten task results plus explicit cumulative integration. Previous notes ownership/hash verified and atomically refreshed. This direct-main release commit uses the exact complete notes body for GitHub. Merge publication and merged221 unit/86 packaged checks verified. Hosted CI and final clean reproducible package/tag/assets/download checks remain publisher prerequisites. Activate phase6 only after verified release.
