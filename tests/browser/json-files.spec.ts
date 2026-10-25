@@ -1,0 +1,52 @@
+/** Real picker/download bytes exercise replacement through normal controls. */
+import {test,expect} from '@playwright/test';
+const results=[{id:'low',score:1,timestamp:'2026-01-01T00:00:00.000Z'},{id:'high',score:9007199254740991,timestamp:'0001-01-01T00:00:00.000Z'}];
+async function downloadBytes(download:import('@playwright/test').Download){const stream=await download.createReadStream();const chunks:Buffer[]=[];for await(const chunk of stream!)chunks.push(Buffer.from(chunk));return Buffer.concat(chunks);}
+test('downloads empty JSON and restores/re-exports stable ranked records through native UI',async({page})=>{
+ await page.goto('/');let offered=page.waitForEvent('download');await page.getByRole('button',{name:'Save',exact:true}).click();let download=await offered;expect(download.suggestedFilename()).toMatch(/\.json$/);expect(JSON.parse((await downloadBytes(download)).toString())).toEqual({formatVersion:1,results:[]});await expect(page.locator('#file-status')).toContainText('Download offered');
+ const chooser=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await (await chooser).setFiles({name:'scores.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({formatVersion:1,results}))});await expect(page.locator('#results tr')).toHaveCount(2);await expect(page.locator('#file-status')).toContainText('Restored 2');
+ offered=page.waitForEvent('download');await page.getByRole('button',{name:'Save',exact:true}).click();download=await offered;expect(JSON.parse((await downloadBytes(download)).toString())).toEqual({formatVersion:1,results:[results[1],results[0]]});await expect(page.locator('#file-status')).toContainText('Download offered');
+});
+test('file pause composes with user pause and invalid restore is atomic',async({page})=>{
+ await page.clock.install();await page.goto('/');await page.locator('#start').click();await page.getByRole('button',{name:'Pause',exact:true}).click();
+ const picker=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await expect(page.locator('#start')).toBeDisabled();await expect(page.getByRole('button',{name:'Save',exact:true})).toBeDisabled();await (await picker).setFiles({name:'valid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({formatVersion:1,results}))});await expect(page.locator('#file-status')).toContainText('Restored 2');await expect(page.locator('#status')).toHaveText('PAUSED');
+ const before=await page.locator('#results').innerHTML();const second=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await (await second).setFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({formatVersion:1,results:[results[0],results[0]]}))});await expect(page.locator('#file-status')).toContainText('Error');expect(await page.locator('#results').innerHTML()).toBe(before);await expect(page.locator('#status')).toHaveText('PAUSED');await expect(page.locator('#start')).toBeEnabled();
+});
+test('modeled download DOM failure revokes its URL and releases controls',async({page})=>{
+ await page.addInitScript(()=>{
+  const live=new Set<string>();(window as unknown as {liveDownloads:Set<string>}).liveDownloads=live;
+  const create=URL.createObjectURL.bind(URL),revoke=URL.revokeObjectURL.bind(URL);URL.createObjectURL=blob=>{const url=create(blob);live.add(url);return url;};URL.revokeObjectURL=url=>{live.delete(url);revoke(url);};
+  const append=Element.prototype.append;Element.prototype.append=function(...nodes){if(nodes.some(n=>n instanceof HTMLAnchorElement))throw new Error('Download DOM unavailable');append.apply(this,nodes);};
+ });
+ await page.goto('/');await page.getByRole('button',{name:'Save',exact:true}).click();await expect(page.locator('#file-status')).toContainText('Error');await expect(page.locator('#start')).toBeEnabled();expect(await page.evaluate(()=>(window as unknown as {liveDownloads:Set<string>}).liveDownloads.size)).toBe(0);
+});
+test('modeled picker cancellation and explicit Cancel preserve results and user pause',async({page})=>{
+ await page.goto('/');const first=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await (await first).setFiles({name:'scores.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({formatVersion:1,results}))});await expect(page.locator('#results tr')).toHaveCount(2);const before=await page.locator('#results').innerHTML();await page.locator('#start').click();await page.getByRole('button',{name:'Pause',exact:true}).click();
+ let picker=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await picker;await page.locator('input[type=file]').dispatchEvent('cancel');await expect(page.locator('#file-status')).toContainText('No file selected');await expect(page.locator('input[type=file]')).toHaveCount(0);await expect(page.locator('#status')).toHaveText('PAUSED');
+ picker=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await picker;await page.locator('#file-cancel').click();await expect(page.locator('#file-status')).toContainText('Canceled');expect(await page.locator('#results').innerHTML()).toBe(before);await expect(page.locator('input[type=file]')).toHaveCount(0);await expect(page.locator('#start')).toBeEnabled();await expect(page.locator('#status')).toHaveText('PAUSED');
+});
+test('modeled FileReader error preserves a completed result and releases the picker',async({page})=>{
+ await page.clock.install();await page.addInitScript(()=>{Math.random=()=>0;FileReader.prototype.readAsArrayBuffer=function(){queueMicrotask(()=>this.dispatchEvent(new ProgressEvent('error')));};});await page.goto('/');await page.locator('#start').click();await page.clock.fastForward(240000);await expect(page.locator('#results tr')).toHaveCount(1);const before=await page.locator('#results').innerHTML();
+ const picker=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await (await picker).setFiles({name:'scores.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({formatVersion:1,results}))});await expect(page.locator('#file-status')).toContainText('File could not be read');expect(await page.locator('#results').innerHTML()).toBe(before);await expect(page.locator('#start')).toBeEnabled();await expect(page.locator('input[type=file]')).toHaveCount(0);
+});
+test('modeled empty download exception is reported as failure',async({page})=>{
+ await page.addInitScript(()=>{HTMLAnchorElement.prototype.click=function(){throw undefined;};});await page.goto('/');await page.getByRole('button',{name:'Save',exact:true}).click();await expect(page.locator('#file-status')).toContainText('Error');await expect(page.locator('#start')).toBeEnabled();
+});
+test('ten-record portability, content over extension, empty replacement and schema download',async({page})=>{
+ await page.goto('/');const full=Array.from({length:10},(_,i)=>({id:['a','Z','A','b','c','d','e','f','g','max9'][i],score:i===9?9007199254740991:i%3,timestamp:i===9?'9999-12-31T23:59:59.999Z':'2026-01-01T00:00:00.000Z'}));
+ const upload=async(buffer:Buffer,name:string)=>{const chooser=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await (await chooser).setFiles({name,mimeType:'application/octet-stream',buffer});};
+ await upload(Buffer.from(JSON.stringify({formatVersion:1,results:full})),'mismatched.sqlite');await expect(page.locator('#results tr')).toHaveCount(10);
+ const offered=page.waitForEvent('download');await page.getByRole('button',{name:'Save',exact:true}).click();const exported=JSON.parse((await downloadBytes(await offered)).toString());expect(exported.results).toEqual(['max9','A','d','g','Z','c','f','a','b','e'].map(id=>full.find(r=>r.id===id)));await expect(page.locator('#file-status')).toContainText('Download offered');
+ const schema=page.waitForEvent('download');await page.getByRole('link',{name:'Download JSON Schema'}).click();const {readFileSync}=await import('node:fs');expect(await downloadBytes(await schema)).toEqual(readFileSync('docs/dev/spec/LEADERBOARD-SCHEMA.json'));
+ await upload(Buffer.from('{"formatVersion":1,"results":[]}'),'empty.data');await expect(page.locator('#file-status')).toContainText('Restored 0');await expect(page.locator('#results tr')).toHaveCount(0);
+});
+test('invalid real upload corpus leaves every prior record unchanged',async({page})=>{
+ test.setTimeout(30000);await page.goto('/');const upload=async(buffer:Buffer)=>{const chooser=page.waitForEvent('filechooser');await page.getByRole('button',{name:'Restore',exact:true}).click();await (await chooser).setFiles({name:'scores.json',mimeType:'application/json',buffer});};
+ await upload(Buffer.from(JSON.stringify({formatVersion:1,results})));await expect(page.locator('#results tr')).toHaveCount(2);const before=await page.locator('#results').innerHTML();
+ const malformed=[Buffer.from([255]),Buffer.from('{'),Buffer.alloc(65537,32),...[
+  {formatVersion:2,results:[]},{formatVersion:1,results:[],extra:1},{formatVersion:1,results:[{...results[0],score:'1'}]},
+  {formatVersion:1,results:[{...results[0],timestamp:'2026-02-29T00:00:00.000Z'}]},{formatVersion:1,results:[results[0],results[0]]},
+  {formatVersion:1,results:Array.from({length:11},(_,i)=>({...results[0],id:'row'+i}))},
+ ].map(value=>Buffer.from(JSON.stringify(value)))];
+ for(const bytes of malformed){await upload(bytes);await expect(page.locator('#file-status')).toContainText('Error');await expect(page.locator('#start')).toBeEnabled();expect(await page.locator('#results').innerHTML()).toBe(before);await expect(page.locator('input[type=file]')).toHaveCount(0);}
+});

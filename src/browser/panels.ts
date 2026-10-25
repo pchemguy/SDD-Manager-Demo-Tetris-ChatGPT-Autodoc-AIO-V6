@@ -2,8 +2,13 @@
 import {cells,COLORS} from '../game/geometry';
 import type {Kind} from '../game/types';
 import type {View} from '../app/controller';
+import type {Result} from '../leaderboard/validation';
+const resultCache=new WeakMap<HTMLElement,string>();
 import {DEFAULTS,KEYS,isSettingValue,type Settings,type SettingKey} from '../settings/definitions';
-export function renderPanels(view:View,settings:Readonly<Settings>=view?.settings??DEFAULTS):void {
+export function renderPanels(view:View,settings:Readonly<Settings>=view?.settings??DEFAULTS,results:readonly Result[]=[],busy=false):void {
+ for(const id of ['save','restore','file-format'])(document.getElementById(id) as HTMLButtonElement|HTMLSelectElement).disabled=busy;
+ document.getElementById('file-cancel')!.hidden=!busy;
+ renderResults(results);
  const set=(id:string,value:string)=>{const node=document.getElementById(id)!;if(node.textContent!==value)node.textContent=value;};
  for(const key of KEYS){const select=document.getElementById('setting-'+key) as HTMLSelectElement;if(select.value!==settings[key])select.value=settings[key];}
  set('next',settings.next==='off'?'OFF':view?.next??'—');
@@ -18,8 +23,8 @@ export function renderPanels(view:View,settings:Readonly<Settings>=view?.setting
  (document.getElementById('score') as HTMLElement).style.fontSize=score.length>10?'20px':'34px';
  set('status',view?view.status.toUpperCase().replace('-',' '):'READY');
  const start=document.querySelector<HTMLButtonElement>('#start')!;
- start.firstChild!.textContent=view?'Restart ':'Start game ';
- const pause=document.querySelector<HTMLButtonElement>('#pause')!;pause.disabled=!view||view.status==='game-over';pause.textContent=view?.status==='paused'?'Resume':'Pause';
+ start.disabled=busy;start.firstChild!.textContent=view?'Restart ':'Start game ';
+ const pause=document.querySelector<HTMLButtonElement>('#pause')!;pause.disabled=busy||!view||view.status==='game-over';pause.textContent=view?.status==='paused'?'Resume':'Pause';
 }
 
 /** Small fixed-frame previews are pure presentations of domain-selected kinds. */
@@ -42,4 +47,13 @@ export function bindSettings(onChange:<K extends SettingKey>(key:K,value:Setting
   onChange(key,select.value);
  };
  root.addEventListener('change',change);return()=>root.removeEventListener('change',change);
+}
+
+/** Render text only and update rows only when the detached collection changes. */
+function renderResults(results:readonly Result[]):void {
+ const root=document.getElementById('results')!;const key=JSON.stringify(results);if(resultCache.get(root)===key)return;
+ const rows=results.map((result,index)=>{const row=document.createElement('tr');row.dataset.resultId=result.id;
+  for(const value of [String(index+1),String(result.score)]){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}
+  const cell=document.createElement('td'),time=document.createElement('time');time.dateTime=result.timestamp;time.textContent=result.timestamp.replace('T',' ');cell.append(time);row.append(cell);return row;
+ });root.replaceChildren(...rows);document.getElementById('leaderboard-empty')!.hidden=results.length>0;resultCache.set(root,key);
 }

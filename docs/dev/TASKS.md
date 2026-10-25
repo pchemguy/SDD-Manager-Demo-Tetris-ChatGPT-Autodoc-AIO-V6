@@ -239,51 +239,61 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 5 — JSON leaderboard
 
-- [ ] Phase 5 — JSON leaderboard
-    - [ ] Milestone 5.1 — Session results
-        - [ ] T-038 — Implement result validation ranking and top ten
+- [x] Phase 5 — JSON leaderboard
+    - [x] Milestone 5.1 — Session results
+        - [x] T-038 — Implement result validation ranking and top ten
+            Completion evidence: RED:leaderboard validation suite failed to import absent modules while144 predecessor tests passed. GREEN:173 unit tests and TypeScript check pass. Strict real canonical UTC years0001–9999/leap dates, exact stable ASCII IDs/fields, safe nonnegative scores, whole-array duplicate/count rejection, deterministic score/time/ASCII ranking, top10 trimming, detached snapshots and atomic invalid replacement verified. HANDOFF records published0.4.0/CI/assets, phase5 hosted readiness and unchanged accepted input QC.
             Scope: src/leaderboard/validation.ts, store.ts; result fixtures.
             Depends on: T-037. Contract: L-01.
             Evidence: Safe integers, stable IDs, strict calendar UTC, duplicate rejection, deterministic ties and truncation.
-        - [ ] T-039 — Record each game-over result exactly once
+        - [x] T-039 — Record each game-over result exactly once
+            Completion evidence: RED:four completion lifecycle tests failed against missing results integration. GREEN:177 unit tests and TypeScript check pass. Controller records first game-over exactly once including zero, preserves history across restart without abandoned results, injects completion IDs/UTC time, retries restored-ID collisions, and provides detached validated replacement/clear ports. Default UUIDv4 uses browser crypto getRandomValues for HTTP compatibility; domain completion/input/pause regressions remain green.
             Scope: app/controller.ts; injected ID/time provider; lifecycle fixtures.
             Depends on: T-038. Contract: L-01, G-02, S-01.
             Evidence: Unique ID/time on first completion, exclude abandoned games, retain restored-ID uniqueness and no duplicate events.
-        - [ ] T-040 — Render and verify page-lifetime results
+        - [x] T-040 — Render and verify page-lifetime results
+            Completion evidence: RED:selected native Chromium completion assertion failed on missing rows before UI wiring. GREEN:177 unit/check/package and70 complete exact-packaged Chromium/Firefox checks pass. Four native session cases include eleven completions/top10, unique IDs/UTC, nonzero ranking, abandonment exclusion, restart retention and reload/settings behavior. Two additional packaged top10 screenshot runs pass; Firefox panel visually inspected. Modeled persisted-page clearing explicit. Independent whole-milestone read-only review found no findings; report5.1/HANDOFF included.
             Scope: browser/panels.ts; browser result suite.
             Depends on: T-038, T-039. Contract: L-01, A-07.
             Evidence: Rank/score/time labels, top ten after games, restart retention and reload clearing with unchanged persistent settings.
             Milestone exit: review the whole 5.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 5.2 — JSON contract
-        - [ ] T-041 — Compile and publish the canonical JSON Schema
+    - [x] Milestone 5.2 — JSON contract
+        - [x] T-041 — Compile and publish the canonical JSON Schema
+            Completion evidence: RED:schema suite failed on absent codec module before implementation. GREEN:183 unit tests and TypeScript/Vite build pass. Actual canonical draft2020-12 schema compiles once with pinned Ajv8.20.0, strict custom real-calendar utc-timestamp and mutation/coercion/default/removal disabled. Structural/wrong-type/calendar fixtures reject without input mutation. Public/dist schema bytes equal canonical source; exact full MIT/BSD production license texts verified in notices (initial header-wording check corrected). Official Ajv docs and registry version/integrity inspected.
             Scope: src/leaderboard/json.ts; canonical schema import; scripts/copy-schema.mjs; generated public schema.
             Depends on: T-040. Contract: L-02 and LEADERBOARD-SCHEMA.json.
             Evidence: Pinned schema validator without coercion/default/removal, registered strict UTC format, downloadable schema byte equality and invalid-calendar corpus.
-        - [ ] T-042 — Implement JSON encode and validated decode
+        - [x] T-042 — Implement JSON encode and validated decode
+            Completion evidence: RED:three valid codec paths failed against missing exports. GREEN:187 unit tests and TypeScript check pass. UTF-8 versioned JSON empty/ten and unsorted round trips preserve exact IDs/safe scores/UTC timestamps and rank deterministically. Decode enforces65536 bytes before fatal UTF-8 parsing, validates complete data against actual compiled schema then shared semantic invariants; codec returns detached candidates and never changes session state. Invalid syntax/UTF-8/version and invalid exports reject.
             Scope: src/leaderboard/json.ts; validation.ts collaborators; JSON fixtures.
             Depends on: T-041. Contract: L-02, L-04 JSON dispatch subset.
             Evidence: Versioned UTF-8 export, bounded input, schema-first and semantic validation; empty/ten/unsorted round trips preserve values.
-        - [ ] T-043 — Verify JSON failures and codec compatibility
+        - [x] T-043 — Verify JSON failures and codec compatibility
+            Completion evidence: Expanded real-file adversarial characterization passes209 unit tests without production repair: exact/next-byte limits, fatal UTF-8, structure/version/fields/types, safe scores/calendar UTC, duplicate IDs/eleventh result, ASCII ties and standard JSON parsing. TypeScript/Vite package and both packaged HTTP/member checks pass, including exact canonical schema and full dependency notices. Independent whole5.2 review found no findings; report5.2/HANDOFF distinguish current codec/assets evidence from predecessor70-check UI acceptance and upcoming manual files.
             Scope: tests/unit/leaderboard/json.test.ts; invalid-file fixtures; affected codec owners.
             Depends on: T-041, T-042. Contract: L-01/L-02, A-08 JSON subset.
             Evidence: Malformed UTF-8/JSON, unknown fields/version, wrong types, dates, duplicate IDs, excess count and byte limits reject as a whole.
             Milestone exit: review the whole 5.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 5.3 — Manual JSON files
-        - [ ] T-044 — Add JSON Save and atomic Restore below results
+    - [x] Milestone 5.3 — Manual JSON files
+        - [x] T-044 — Add JSON Save and atomic Restore below results
+            Completion evidence: RED:native JSON path failed on missing Save; modeled DOM append failure then exposed one unreleased download URL. GREEN:209 unit tests, TypeScript/Vite build and6 focused Chromium/Firefox file checks pass after wrapping all download setup in URL cleanup. Real empty and restored ranked downloads preserve records; actual picker restore replaces only after full validation and invalid restore preserves prior rows. File pause composes with user pause, disables overlapping actions/restart and leaves results unchanged on Save. Added bounded codec/abort service and owned picker/FileReader/download lifetimes; further failure/race matrix is T045.
             Scope: leaderboard/files.ts; browser/files.ts, panels.ts; controller operation wiring.
             Depends on: T-043. Contract: L-04 JSON, S-04.
             Evidence: Actual download/upload path, immutable save snapshot, fully validated replace-not-merge and gameplay/file-action pause.
-        - [ ] T-045 — Handle file cancellation errors and resource cleanup
+        - [x] T-045 — Handle file cancellation errors and resource cleanup
+            Completion evidence: RED:pre-aborted restore still opened picker; two falsy codec rejections and a modeled empty download exception incorrectly appeared successful. Repairs guard before picker and discriminate fulfillment/rejection explicitly. GREEN:221 unit tests, TypeScript/Vite build and12 focused Chromium/Firefox file checks pass. Tests cover immutable save, size-before-read, picker cancellation/no deadline, codec deadline including initialization, abort propagation, late candidate/download rejection, timer disposal, file/read/download errors, composed user/file pause, overlap/restart guards, picker/URL cleanup and unchanged prior values/order. Native OS dialog cancellation remains modeled distinctly.
             Scope: leaderboard/files.ts; browser/files.ts; controller pause/operation tests.
             Depends on: T-044. Contract: L-04, S-04.
             Evidence: Picker cancellation, file/read/download failures, deadline/stale reply, disabled concurrency and cleanup preserve prior list and other pause reasons.
-        - [ ] T-046 — Verify and document JSON portability in browsers
+        - [x] T-046 — Verify and document JSON portability in browsers
+            Completion evidence: Version0.5.0 metadata/README and leaderboard guide match JSON-only delivery. GREEN:221 unit/check/package and86 complete exact-packaged Chromium/Firefox checks pass. Actual full/empty and extension-mismatched JSON restores, stable fields/ranking, exported bytes and canonical schema download verified; nine invalid upload cases preserve prior values/order. All classic/modern/penetrator/settings/session/file regressions pass. Firefox panel/file-controls screenshot inspected. Independent whole5.3/phase and final guide review found no findings; report5.3/HANDOFF included.
             Scope: tests/browser/JSON file suite; docs/user/LEADERBOARD.md; package/version.
             Depends on: T-044, T-045. Contract: L-01/L-02/L-04 JSON, A-07/A-08/A-09.
             Evidence: Download bytes then restore empty/ten files, invalid restore leaves state, schema download works in Chromium/Firefox; expose JSON-only capability honestly for 0.5.0.
             Milestone exit: review the whole 5.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 5.4 — Phase review
-        - [ ] T-047 — Review test and report phase 5
+    - [x] Milestone 5.4 — Phase review
+        - [x] T-047 — Review test and report phase 5
+            Completion evidence: Complete phase source/tests/guide/resource reviews and final recheck find no remaining findings; final unchanged payload passed221 unit/check/package and86 packaged browser checks. Actual T038–046 owning commit audit passes; prior closed reports unchanged; all delivery issues/milestones closed/read back. Phase report/HANDOFF distinguish accepted JSON-only0.5 scope, modeled/native limits and pending integration/CI/release effects; no unresolved phase TODO.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.5.0.
             Depends on: T-046; all phase 5 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/5/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
