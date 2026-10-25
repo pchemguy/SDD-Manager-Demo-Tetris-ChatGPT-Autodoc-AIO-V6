@@ -180,7 +180,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 - [ ] Phase 4 — Persistent configuration
     - [ ] Milestone 4.1 — Runtime controls
-        - [ ] T-028 — Define runtime settings and alternate lock policies
+        - [x] T-028 — Define runtime settings and alternate lock policies
+            Completion evidence: RED: nine runtime-policy assertions failed plus the absent definitions module. GREEN: 111 unit tests, TypeScript/Vite build pass. Exact tokens/defaults and strict value checks, failed Down/gravity, follow versus immediate (including zero travel), captured old deadline/policies, hold replacement capture, live availability with preserved hold/source and pre-start Controller settings are verified. Due lock precedes new-piece immediate drop. HANDOFF records verified 0.3.0 release/CI and phase4 hosted readiness.
             Scope: src/settings/definitions.ts; game/controller policy capture; unit tests.
             Depends on: T-027. Contract: C-01, G-05, S-03.
             Evidence: Exact tokens/defaults, failed-down and immediate hard-drop modes, same-time boundaries and next-spawn snapshots.

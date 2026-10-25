@@ -4,7 +4,8 @@ import { cells,rotationCandidates } from './geometry';
 import { PieceSource } from './source';
 import { landing } from './landing';
 import type { Board, Piece, Kind } from './types';
-export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number;gameId?:string;bonuses?:number }
+import {DEFAULTS,type Settings} from '../settings/definitions';
+export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number;gameId?:string;bonuses?:number;settings?:Settings }
 export interface GameOverEvent {type:'game-over';gameId:string;score:number;lines:number;level:number}
 export class Game {
   private readonly gameId:string;
@@ -23,6 +24,8 @@ export class Game {
   private holdUsed=false;
   private penetrator=false;
   private bonuses=0;
+  private settings:Settings={...DEFAULTS};
+  private locking:Pick<Settings,'lock'|'hardDropLock'>={lock:DEFAULTS.lock,hardDropLock:DEFAULTS.hardDropLock};
   private readonly source:PieceSource;
   constructor(options:GameOptions={}) {
     this.gameId=options.gameId??'game';
@@ -30,6 +33,7 @@ export class Game {
     this.lines=options.lines??0;this.score=options.score??0;
     this.bonuses=options.bonuses??0;
     if(!Number.isInteger(this.bonuses)||this.bonuses<0||this.bonuses>3)throw new RangeError('Bonuses must be an integer from zero to three');
+    this.settings={...(options.settings??DEFAULTS)};
     this.board=(options.board??emptyBoard()).map(row=>[...row]);
     this.source=new PieceSource(options.random);
     this.active=options.piece?{...options.piece}:this.spawnPiece();
@@ -38,6 +42,7 @@ export class Game {
   private spawnPiece(kind:Kind=this.source.next()):Piece {return {kind,orientation:0,x:3,y:-1};}
   /** All replacement paths establish fresh spawn clocks and collision checks. */
   private startPieceTiming():void {
+    this.locking={lock:this.settings.lock,hardDropLock:this.settings.hardDropLock};
     this.groundedDeadline=null;this.nextGravity=this.time+this.interval;
     if(!canPlace(this.board,this.active))this.endGame();
     this.refreshGrounding();
@@ -51,13 +56,13 @@ export class Game {
     this.events.push({type:'game-over',gameId:this.gameId,score:this.score,lines:this.lines,level:this.level});
   }
   /** A detached snapshot prevents renderers from mutating the domain. */
-  get snapshot() { return {penetrator:this.penetrator,bonuses:this.bonuses,held:this.held,holdUsed:this.holdUsed,ghost:this.project(),next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
+  get snapshot() { return {settings:{...this.settings},locking:{...this.locking},penetrator:this.penetrator,bonuses:this.bonuses,held:this.held,holdUsed:this.holdUsed,ghost:this.project(),next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
   /** One projection selection is shared by all ordinary/penetrator consumers. */
   private project(piece:Piece=this.active):Piece|null {
     return landing(this.board,piece,this.penetrator?'penetrator':'ordinary');
   }
   private refreshGrounding():void {
-    if(this.status!=='playing') {this.groundedDeadline=null;return;}
+    if(this.status!=='playing'||this.locking.lock==='failed-down') {this.groundedDeadline=null;return;}
     const target=this.project();
     if((target&&target.y>this.active.y)||(!target&&!this.penetrator&&canPlace(this.board,{...this.active,y:this.active.y+1}))) this.groundedDeadline=null;
     else if(this.groundedDeadline===null) this.groundedDeadline=this.time+this.interval;
@@ -81,7 +86,7 @@ export class Game {
       if(due>to) break;
       this.time=due;
       if(this.groundedDeadline!==null && this.groundedDeadline<=this.nextGravity) {this.lock();continue;}
-      this.tryTransform({...this.active,y:this.active.y+1});
+      this.descend();
       this.nextGravity=this.time+this.interval;
     }
     this.time=to;
@@ -90,6 +95,14 @@ export class Game {
     if(this.status!=='playing' || !(this.penetrator?this.project(candidate)!==null:canPlace(this.board,candidate))) return false;
     this.active=candidate;this.refreshGrounding();return true;
   }
+  /** Failed-down locks only after an actual descent attempt, never a lateral rejection. */
+  private descend():boolean {
+    if(this.tryTransform({...this.active,y:this.active.y+1}))return true;
+    if(this.status==='playing'&&this.locking.lock==='failed-down'&&(!this.penetrator||this.project()?.y===this.active.y))this.lock();
+    return false;
+  }
+  /** Selection changes do not advance time or reinterpret an active piece's policies. */
+  configure(settings:Settings):void {this.settings={...settings};}
   move(dx:-1|1):void {this.tryTransform({...this.active,x:this.active.x+dx});}
   rotate(direction:-1|1):void {
     for(const candidate of rotationCandidates(this.active,direction))if(this.tryTransform(candidate))break;
@@ -101,18 +114,20 @@ export class Game {
   }
   /** Empty hold consumes next; a nonempty exchange never touches the queue. */
   hold():void {
-    if(this.status!=='playing'||this.holdUsed||this.penetrator)return;
+    if(this.status!=='playing'||this.settings.hold==='off'||this.holdUsed||this.penetrator)return;
     const replacement=this.held??this.source.next();this.held=this.active.kind;
     this.active=this.spawnPiece(replacement);this.holdUsed=true;this.startPieceTiming();
   }
-  /** Follow the default captured interval policy; zero travel preserves both clocks. */
+  /** Availability is live; the hard-drop/general lock choices are captured at spawn. */
   hardDrop():void {
-    if(this.status!=='playing')return;
+    if(this.status!=='playing'||this.settings.hardDrop==='off')return;
     const target=this.project();if(!target)return;
     const distance=target.y-this.active.y;
-    if(distance>0&&this.tryTransform(target)){
+    if(distance>0){
+      if(!this.tryTransform(target))return;
       this.nextGravity=this.time+this.interval;this.addScore(2*distance);
     }
+    if(this.locking.hardDropLock==='immediate')this.lock();
   }
-  down():void {if(this.tryTransform({...this.active,y:this.active.y+1})){this.nextGravity=this.time+this.interval;this.addScore(1);}}
+  down():void {if(this.descend()){this.nextGravity=this.time+this.interval;this.addScore(1);}}
 }
