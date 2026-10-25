@@ -324,7 +324,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: leaderboard/sqlite.ts; real corrupt/schema fixture corpus.
             Depends on: T-050. Contract: L-03.
             Evidence: Header/version/integrity, complete column/hidden/type/PK checks, reject views/triggers/extra objects and never execute imported SQL.
-        - [ ] T-052 — Validate every SQLite result and input bound
+        - [x] T-052 — Validate every SQLite result and input bound
+            Completion evidence: RED:three row-decoder/storage/bounded-read assertions failed against absent decoder. GREEN:280 unit tests and TypeScript/Vite build pass. Actual Python-generated unsorted/ten/empty files rank identically to JSON and preserve safe fields. REAL1.0 fixture patches its identified record payload only and independently proves typeof=real/value1/integrityok; decoder rejects it while INTEGER1 passes. Unsafe integer, negative/fraction/text/blob values, invalid IDs/calendar/times and excess rows reject. Duplicate-corrupted PK file rejects at integrity gate; shared duplicate semantics already verified. LIMIT11 is observed against50 rows; >1MiB rejects before DB construction. Statements and DB handles close on every path; native atomic integration remains T053.
             Scope: leaderboard/sqlite.ts; shared validation; database row fixtures.
             Depends on: T-051. Contract: L-01/L-03.
             Evidence: Integer storage class/safe range, text IDs/calendar UTC, duplicates/eleventh row and file size; valid unsorted data ranks identically to JSON.

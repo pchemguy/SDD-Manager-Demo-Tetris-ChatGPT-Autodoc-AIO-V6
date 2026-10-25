@@ -1,9 +1,9 @@
 /** Pure SQLite runtime boundary; the browser worker supplies its local WASM URL. */
 import initSqlJs from 'sql.js';
-import type {SqlJsConfig,SqlJsStatic} from 'sql.js';
+import type {SqlJsConfig,SqlJsStatic,Database} from 'sql.js';
+import {rank,validateResult,validateResults,type Result} from './validation';
 export function loadSQLite(config?:SqlJsConfig):Promise<SqlJsStatic> {return initSqlJs(config);}
 
-import {rank,validateResults,type Result} from './validation';
 /** Fresh creation is separate from import; only fixed SQL and bound values execute. */
 export function encodeSQLite(SQL:SqlJsStatic,values:readonly Result[]):Uint8Array {
  const results=rank(validateResults(values));const db=new SQL.Database();
@@ -15,7 +15,6 @@ export function encodeSQLite(SQL:SqlJsStatic,values:readonly Result[]):Uint8Arra
  }finally{db.close();}
 }
 
-import type {Database} from 'sql.js';
 export const SQLITE_LIMIT=1048576;
 const HEADER='SQLite format 3\0';
 function scalar(db:Database,sql:string){const rows=db.exec(sql);if(rows.length!==1||rows[0].values.length!==1||rows[0].values[0].length!==1)throw new Error('Invalid SQLite metadata.');return rows[0].values[0][0];}
@@ -47,4 +46,18 @@ export function withValidatedSQLite<T>(SQL:SqlJsStatic,bytes:Uint8Array,read:(db
   return read(db);
  }catch(error){throw new Error('Invalid SQLite database: '+(error instanceof Error?error.message:String(error)));}
  finally{db.close();}
+}
+
+/** Actual storage classes are checked before JavaScript record invariants. */
+export function decodeSQLite(SQL:SqlJsStatic,bytes:Uint8Array):Result[] {
+ return withValidatedSQLite(SQL,bytes,db=>{
+  const results:Result[]=[];
+  const statement=db.prepare('SELECT id,score,timestamp,typeof(id),typeof(score),typeof(timestamp) FROM high_scores LIMIT 11');
+  try{while(statement.step()){
+   const row=statement.get();
+   if(row[3]!=='text'||row[4]!=='integer'||row[5]!=='text')throw new Error('Invalid SQLite value storage class.');
+   results.push(validateResult({id:row[0],score:row[1],timestamp:row[2]}));
+  }}finally{statement.free();}
+  return rank(validateResults(results));
+ });
 }
