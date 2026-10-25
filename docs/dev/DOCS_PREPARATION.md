@@ -7,7 +7,7 @@
 - Approval basis: The user explicitly approved PROJECT and its presented decisions on 2026-10-25 ("Approve"). Autodoc preapproves ARCHITECTURE through TASKS; technical QC remains required.
 - Tracking: enabled for documentation preparation and implementation by root AGENTS.md. Before repository writes, native milestone 1 (`sdd-docs-main`) and issues 1–9 were created and all standard bodies/associations read back against bundled 0.15.3 definitions.
 - Publication: every owned commit must be pushed/read back before progression. Reporting: Standard after Explicit bootstrap; Minimal and Explicit remain available.
-- Next boundary: publish/read back DOCS-008 and close/read back issue 8; stop before DOCS-009, package QC, integration and implementation activation.
+- Prior boundary: publish/read back DOCS-008 and close/read back issue 8; stop before DOCS-009, package QC, integration and implementation activation.
 
 ## Scope source
 
@@ -41,3 +41,9 @@ The user accepted all presented gameplay, session-lifetime, technology and versi
 ## Pending transitions
 
 Preceding preparation completions through DOCS-007 were published with exact Git readback and their evidence comments/closed-completed issue states verified. This DOCS-008 completion requires push/readback and issue 8 closure/readback. Reconcile actual effects before retry. DOCS-009 and documentation milestone 1 remain open; no package-QC run, documentation integration, implementation projection or product release is authorized by this checkpoint.
+
+## Full-delivery authorization and package QC
+
+The user explicitly requested "Do qc and full implementation" on 2026-10-25. This advances beyond the autodoc stop, authorizes DOCS-009 and complete T-001–T-057 execution through all six phases, including prerequisite document integration, task/phase tracking, verification, integration and the originally requested phase releases. No repeated implementation-range checkpoint is required. Technical, publication and tracking gates remain mandatory.
+
+DOCS-009: whole-package QC passed; see DOCS-QC-REPORT.md for exact reviewed product identities, checks and limits. This checkpoint includes the report, initial DOCS-009 completion and updated HANDOFF. Pending: completion push/readback and issue 9 closure; explicit documentation merge into main, merged checks/push/readback, then milestone 1 closure/readback. Implementation begins only afterward, with phase 1 projection and branch setup.
