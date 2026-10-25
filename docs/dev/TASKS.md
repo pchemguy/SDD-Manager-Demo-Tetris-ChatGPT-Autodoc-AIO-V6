@@ -134,7 +134,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 3 — Penetrator
 
-- [ ] Phase 3 — Penetrator
+- [x] Phase 3 — Penetrator
     - [x] Milestone 3.1 — Legal penetration
         - [x] T-021 — Implement deepest legal penetrator projection
             Completion evidence: RED: four new penetrator projection fixtures failed against ordinary-only landing. GREEN: 75 unit tests and TypeScript check pass. Shared service enumerates deepest visible non-overlapping target below obstructions, permits transient overlap, handles isolated gaps/no-target/current bounds, preserves occupied cells and matches independent bottom-up enumeration across 280 seeded kind/orientation cases. Ordinary/time/SRS/hold regressions remain green; predecessor release and phase projection recorded in HANDOFF.
@@ -169,8 +169,9 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-024, T-025. Contract: P-01–P-03, A-05.
             Evidence: Entirely white active piece, nonwhite regular colors, one symbol per bonus, earn→spend→lock demonstration, modern regressions and 0.3.0 metadata.
             Milestone exit: review the whole 3.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/3/3.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 3.3 — Phase review
-        - [ ] T-027 — Review test and report phase 3
+    - [x] Milestone 3.3 — Phase review
+        - [x] T-027 — Review test and report phase 3
+            Completion evidence: Dedicated owner/independent full-phase code and interaction review found no unresolved Critical/Important issue. Clean T026 source passed 99 unit tests/check/build/package and40 packaged Playwright checks, including natural native earn-spend-penetrate-lock and exact member bytes; screenshot inspected. Actual T021-T026 owning-commit audit and closed-record preservation passed. Phase report/HANDOFF distinguish clean candidate from pending main release source and record environment limits/integration gates.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.3.0.
             Depends on: T-026; all phase 3 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/3/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.
