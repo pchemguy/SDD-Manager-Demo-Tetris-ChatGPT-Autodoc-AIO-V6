@@ -1,15 +1,11 @@
 # Project handoff
 
-Checkpoint: milestone 1.2 complete classic game, T-006 completion pending publication/hosting.
+Checkpoint: milestone 1.3 browser delivery, T-009 completion awaiting publication/hosting.
 
-## Workflow and authority
+## Authority and state
 
-Main implementation, full authorized T-001–T-057 and six releases under "Do qc and full implementation". TASKS/PLAN/SPEC/layout and repository policies govern. Package QC and published documentation integration are complete; phase 1 projection verified before code.
+Full T-001–T-057 implementation and six phase releases remain authorized by “Do qc and full implementation”. Accepted preparation is published on main at b18661c3f18fec5ff19536cb60f76e09e4d9d046. Current branch phase/1-classic-baseline was created from that parent; integration target main. T-001–T-008 are published with closed issues; milestones 1.1 and 1.2 are closed. T-009 adds packaged-server and minimum viewport acceptance plus report 1.3.
 
-## Branch and outcome
+## Evidence and continuation
 
-Working phase/1-classic-baseline; creation parent/integration target main; branch-off b18661c3f18fec5ff19536cb60f76e09e4d9d046. T-001–T-005 are published/closed; milestone 1.1 is closed. T-006 adds visible stats/lifecycle controls and report `reports/phases/1/1.2.md`. Thirty unit tests/build and sixteen browser checks passed; independent review rechecked the repaired Enter shortcut. Browser setup/limits remain in report 1.1.
-
-## Next and pending effects
-
-Publish/read back T-006, close/read back its task issue and milestone 1.2 (host milestone 3). Then implement T-007–T-010 browser delivery/phase review. Preserve one verified task per closing commit, folded review evidence, hosted closures and complete-phase merge/release gates. No phase is integrated or released yet; the full authorized range continues without a new human checkpoint.
+Thirty unit tests/check/build and thirty packaged Chromium/Firefox browser checks pass. Screenshot inspected; independent milestone/phase code review finds no Critical/Important issue. Native OS-window transitions, Windows and hosted CI are unverified. Publish/read back T-009 and close its issue/milestone, then T-010 phase review/persistence audit. Only a complete verified phase integrates with an explicit two-parent merge, merged checks and publication; release 0.1.0 follows before phase 2 activation. Continue full authorized range without another approval.

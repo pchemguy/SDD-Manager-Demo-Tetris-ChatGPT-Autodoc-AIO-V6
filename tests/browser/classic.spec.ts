@@ -63,3 +63,15 @@ test('gates Enter and handles one-shot pause keys without losing the run',async(
  await page.keyboard.press('Escape');await expect(page.locator('#status')).toHaveText('PLAYING');await page.clock.fastForward(240000);await expect(page.locator('#status')).toHaveText('GAME OVER');
  await page.keyboard.press('Enter');await expect(page.locator('#status')).toHaveText('PLAYING');await expect(page.locator('#score')).toHaveText('0');
 });
+
+test('fits the minimum desktop viewport without clipped controls',async({page},info)=>{
+ await page.setViewportSize({width:1024,height:768});await page.goto('/');
+ const fits=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth);
+ expect(fits).toBe(true);
+ for(const selector of ['canvas','#start','#pause','#score','#lines']){
+  const box=await page.locator(selector).boundingBox();expect(box).not.toBeNull();
+  expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.y).toBeGreaterThanOrEqual(0);
+  expect(box!.x+box!.width).toBeLessThanOrEqual(1024);expect(box!.y+box!.height).toBeLessThanOrEqual(768);
+ }
+ await page.screenshot({path:info.outputPath('desktop-1024.png')});
+});

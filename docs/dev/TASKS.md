@@ -47,7 +47,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-004, T-005. Contract: G-01–G-06, S-05, A-01.
             Evidence: Play a scored game, pause/resume, lose and restart through real controls in both browsers; stats match domain.
             Milestone exit: review the whole 1.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 1.3 — Browser delivery
+    - [x] Milestone 1.3 — Browser delivery
         - [x] T-007 — Implement controlled key repeat and focus pause
             Completion evidence: RED: native held-key test failed at the first 150 ms repeat boundary. GREEN: 30 unit tests, TypeScript/Vite build and 28 supported browser checks passed (14 each). Verified 150/50 repeat, latest-direction/fresh-delay behavior, held-state cleanup, native DOM control/key ownership and modeled blur/visibility/user-pause composition. Independent review found no Critical/Important code issue. Controlled probes disproved an extra native tab-focus test premise in headless sessions; removed that invalid assertion and documented that OS-window transitions are not established, rather than claiming models are native evidence.
             Scope: browser/input.ts; app/controller.ts; focus/repeat tests.
@@ -58,7 +58,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: build/CI configuration; package lock/version; README, docs/user/CONTROLS.md.
             Depends on: T-007. Contract: S-05, Phase 1 delivery/release requirements.
             Evidence: Reproducible static build and validated setup/check commands; baseline version 0.1.0 and truthful controls, assets and notices.
-        - [ ] T-009 — Verify classic browser acceptance and repair blockers
+        - [x] T-009 — Verify classic browser acceptance and repair blockers
+            Completion evidence: Thirty unit tests/check/build and 30 actual packaged-server browser checks passed (15 Chromium/15 Firefox). Verified minimum 1024x768 essential bounds and inspected Firefox screenshot; static asset responses succeeded. Independent whole-milestone/phase code review found no Critical/Important issue. CI now runs the extracted package; YAML parsed. Report 1.3 and HANDOFF retain native OS-focus, Windows and hosted-CI evidence limits.
             Scope: tests/browser/classic suites and rendering fixtures; affected baseline owners.
             Depends on: T-007, T-008. Contract: A-01/A-03/A-09 baseline, Phase 1 exits.
             Evidence: Actual packaged/server path in Chromium/Firefox, Canvas screenshot inspection, keyboard/lifecycle/time regressions and no missing essential classic action.
