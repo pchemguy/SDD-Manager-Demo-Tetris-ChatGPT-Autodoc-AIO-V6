@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase6 milestone6.2 T-053 SQLite restore completion; publication/hosted closure pending.
+Checkpoint: phase6 milestone6.3 T-056 complete product completion; publication/hosted closure pending.
 
 ## Authority and source
 
@@ -10,6 +10,6 @@ Phase5 explicit main mergeccec12dd82b7ad625515bbaad1e000066dfddec6 passed hosted
 
 ## Current result and next work
 
-T-048–T-052 are published/closed; milestone6.1 closed. T-053 completes bounded content-detected SQLite Restore and folded report6.2. Final283 unit/check/package and100 complete exact-packaged Chromium/Firefox checks pass. Header/tail ranges read admitted bytes once, JSON/SQLite limits precede whole reads/initialization, full schema/storage/record validation precedes atomic replacement. Actual native valid/invalid restores, held-init cancel/timeout, unchanged history/user pause and zero workers verified; independent whole6.2 review found no findings.
+T-048–T-055 are published/closed; milestones6.1/6.2 closed. T-056 completes version1.0.0 package/lock metadata, standalone archive instructions, README/AGENTS navigation and folded report6.3. Final283 unit/check/package and104 complete exact-packaged Chromium/Firefox checks pass with no skips; two candidate ZIP builds match, exact11 members/pinned local WASM/canonical schema/full production notices and documentation links verified. Firefox final panel/file-help screenshot inspected. Independent complete-product source and final producer/guide reviews found no findings. Candidate metadata truthfully remains dirty=true; final clean exact-release packaging remains later.
 
-Publish/close T-053/6.2 before T-054 dual-format help, T-055 cross-format/subdirectory acceptance, T-056 version1.0.0 package/folded6.3 and T-057 complete source review/final implementation report. Explicit main integration/CI and exact1.0.0 release follow. Full remaining scope remains authorized without another approval pause; keep owning result/evidence/initial checkbox commits and verified publication/hosted lifecycle. Prior closed reports are unchanged. Existing Linux/HTTP/localFirefox override and modeled OS-window/BFCache/picker/Windows limits remain. No current TODO or blocker.
+Publish/close T-056/6.3 before T-057 phase report plus final IMPLEMENTATION-REPORT and refreshed handoff. Audit actual task commits and aggregate all earlier TODO notes with provenance; all inspected historical notes are None or outside-increment work now delivered. Then explicitly merge into main, run merged checks, publish/readback/verify hosted CI and create exact-body clean reproducible1.0.0 tag/release/assets/downloads. Record actual final release outcome after publication without rewriting closed phase reports. Full range remains authorized; no current functional TODO/blocker. Existing Linux/HTTP/localFirefox override and modeled OS-window/BFCache/picker/Windows limits remain.

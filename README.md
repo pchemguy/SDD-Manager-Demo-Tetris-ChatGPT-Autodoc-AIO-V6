@@ -1,33 +1,58 @@
 # Browser Tetris
 
-A browser-based Tetris project with a playable-classic-first delivery target. The complete intended scope includes modern play, a penetrator bonus, configurable assistance, cookie/URL settings persistence, a session leaderboard and manual JSON/SQLite result files.
+A static single-player Tetris game with classic scoring and levels, seven-bag randomization, full SRS wall kicks, hold, ghost and hard drop. Four-line clears earn up to three penetrator bonuses: press B to activate a white piece that crosses occupied cells to its deepest legal landing.
 
-The current source provides a playable classic loop plus seven-bag generation, full SRS wall kicks, next preview, ghost, hard drop and once-per-piece hold. Four-line clears earn capped penetrator bonuses; B activates a white piece that can traverse occupied cells to a legal deepest landing. Grounded pieces use a full gravity-interval lock delay; controlled repeat, pause/restart and readable stats are included. The [latest published release](https://github.com/pchemguy/SDD-Manager-Demo-Tetris-ChatGPT-Autodoc-AIO-V6/releases/latest) supplies a static ZIP and checksum. Six native settings include dynamic ghost visibility, alternate locking policies and independent URL/cookie persistence. A page-lifetime top-ten leaderboard supports manual schema-validated JSON Save and atomic Restore. SQLite portability remains planned. Accepted requirements and progress are in [PROJECT](docs/dev/PROJECT.md), [TASKS](docs/dev/TASKS.md) and [HANDOFF](docs/dev/HANDOFF.md). Preparation QC/integration passed; full implementation is authorized and tracked by phase.
+Six native settings control assistance and locking. Each restores independently from a valid URL value, saved cookie or default; changes preserve unrelated URL content. Dynamic ghost hides upper/straddling landings. Locking policies are captured at each new or hold-replacement spawn.
 
-See [SDD Manager usage](SDD-MANAGER.md) and the [AI-assisted development disclosure](AI_DISCLOSURE.md). Development follows the [project instructions](AGENTS.md) and [browser development policy](BROWSER_DEV_POLICY.md).
+Completed games enter a page-lifetime top ten. Manual JSON/SQLite Save and validated atomic Restore preserve stable IDs, safe scores and canonical UTC times. The canonical JSON Schema is downloadable. SQLite runs in a bounded disposable worker with local WASM; all runtime assets are bundled.
 
-## Development checks
+Download the static ZIP and checksum from the [latest release](https://github.com/pchemguy/SDD-Manager-Demo-Tetris-ChatGPT-Autodoc-AIO-V6/releases/latest). Extract and serve over HTTP(S), including from a subdirectory. For example:
 
-Use Node.js 24 and the committed lockfile. These commands are validated on Linux:
+```text
+python -m http.server 8000
+```
+
+Open `http://localhost:8000`. No application backend or account is required. See the [controls](docs/user/CONTROLS.md), [configuration](docs/user/CONFIGURATION.md) and [leaderboard/file guide](docs/user/LEADERBOARD.md).
+
+## Development and verification
+
+Use Node.js 24, Python 3.11+ and the committed lockfile. Python supports SQLite fixture/inspection tests and packaging. Commands validated on Linux:
 
 ```text
 npm ci --ignore-scripts
-npm test
 npm run check
+npm test
+npm run dev
 ```
 
-`npm run dev` starts the local game; `npm run build` produces static assets in `dist/`. Build, 221 unit tests and 86 packaged Playwright checks have passed on Linux across Chromium/Firefox, including actual JSON uploads/downloads and two exact source/asset HTTP checks. Hosted CI passed for the first four published phases; see milestone reports for evidence and limits. Windows follows WINDOWS_SHELL_POLICY.md; no PowerShell is required.
+`npm run build` creates `dist/`; `npm run package` builds `.cache/releases/browser-tetris.zip` and its SHA-256 file. The versioned candidate passes 283 unit tests and 104 packaged Playwright checks across Chromium/Firefox, including actual uploads/downloads, cross-format data preservation, subdirectory local assets and two exact served-byte inventory checks. Independent milestone/phase/product reviews found no remaining code findings. Detailed evidence and limits are in [development reports](docs/dev/reports/), [TASKS](docs/dev/TASKS.md) and [HANDOFF](docs/dev/HANDOFF.md).
 
 ## Browser checks
 
-Set `PLAYWRIGHT_BROWSERS_PATH` to an absolute dedicated directory for installation and execution. The test config defaults to this repository's `.cache/playwright`. Provision the locked runner's matching Chromium headless shell and Firefox with `node node_modules/playwright/cli.js install --only-shell chromium firefox`, then run `npm run test:browser`.
+Use an absolute dedicated browser cache for installation and execution. The configuration defaults to `.cache/playwright`. Install the locked runner's compatible Chromium headless shell and Firefox:
 
-On this restricted Linux host, Firefox content processes failed with `/proc/self/uid_map: EPERM`; the policy-approved trusted-local-only override was verified with repeated contexts, interaction, Canvas screenshots and teardown. Set `TETRIS_FIREFOX_NO_CONTENT_SANDBOX=1` only for that diagnosed environment. The flag affects Firefox test launch only. Normal hosts/CI use the default sandbox. See the milestone report for exact official download fallback evidence and resource-lifetime limits.
+```text
+node node_modules/playwright/cli.js install --only-shell chromium firefox
+npm run test:browser
+```
 
-Browser evidence distinguishes native keyboard/DOM-control focus from modeled window-blur/visibility events. This headless runner reports `document.hasFocus()` true for selected/background pages, even in controlled probes with focus overrides disabled. Native OS-window/tab focus and visibility transitions are not established here; the suite verifies the corresponding application handlers and pause composition with modeled events, without claiming OS-window evidence.
+For exact packaged acceptance, run:
 
-## Distribution and CI
+```text
+npm run package
+python scripts/prepare-package-test.py
+```
 
-`npm run package` builds the static game and writes `.cache/releases/browser-tetris.zip` plus its SHA-256 file. Python 3.11+ is needed only for packaging or the optional local static server. The ZIP contains the playable entry/assets, license, use instructions and BUILD.json version/source/dirty metadata. Sorted members, fixed timestamps and modes make repeated packaging of the same tree reproducible. A dirty candidate is not a verified release source. After packaging, `python scripts/prepare-package-test.py` prepares that exact ZIP and a byte inventory; set `TETRIS_PACKAGE_TEST=1` for `npm run test:browser` to exercise it. CI uses this sequence.
+Then set `TETRIS_PACKAGE_TEST=1` in the shell environment and run `npm run test:browser`. The test server mounts the selected ZIP's extracted contents at `/` and `/demo/`; per-browser HTTP checks verify every member against an independent ZIP inventory. Packaged acceptance includes both prefix deployment and ordinary play.
 
-The [leaderboard guide](docs/user/LEADERBOARD.md) documents session results and JSON files. The [configuration guide](docs/user/CONFIGURATION.md) explains persistence and policies. The [player guide](docs/user/CONTROLS.md) describes the delivered controls and HTTP serving. The CI workflow checks main integrations and pull requests with Node 24 and both managed browsers; its existence does not imply a hosted run has passed. It has Contents read only and does not publish releases. Workflow action revisions are pinned to the inspected official v7 commits.
+On this restricted Linux host, Firefox content processes failed with `/proc/self/uid_map: EPERM`. The diagnosed trusted-local-only override `TETRIS_FIREFOX_NO_CONTENT_SANDBOX=1` was verified with repeated contexts, native input, Canvas output and teardown. It affects only Firefox test launch. Normal hosts/CI use the default sandbox. Browser setup and governance follow [BROWSER_DEV_POLICY](BROWSER_DEV_POLICY.md).
+
+Native keyboard and DOM-control focus are tested. OS-window/tab visibility and persisted-page events use controlled models; actual native window transitions and BFCache eligibility are unestablished. Windows execution has not been verified and follows [WINDOWS_SHELL_POLICY](WINDOWS_SHELL_POLICY.md).
+
+## Distribution and project records
+
+Archives contain the runnable entry/assets, worker/WASM, canonical schema, required licenses/notices, standalone instructions and BUILD.json version/source/dirty metadata. Sorted members with fixed timestamps/modes support reproducibility. Final release packaging uses a clean pinned main release commit, matching tag/notes and verified uploaded/downloaded asset bytes. Credentials, caches, skills and development logs are excluded.
+
+The [CI workflow](.github/workflows/ci.yml) runs checks on main integrations and pull requests with pinned official actions, Node 24 and both browsers. It has Contents read only and does not publish releases. Actual hosted outcomes are recorded at release boundaries.
+
+Accepted design and contracts are in [PROJECT](docs/dev/PROJECT.md), [ARCHITECTURE](docs/dev/ARCHITECTURE.md) and [SPEC](docs/dev/SPEC.md). See [SDD Manager usage](SDD-MANAGER.md), [AI-assisted disclosure](AI_DISCLOSURE.md) and [project instructions](AGENTS.md).

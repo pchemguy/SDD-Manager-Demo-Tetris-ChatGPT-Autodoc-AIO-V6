@@ -335,7 +335,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-051, T-052. Contract: L-03/L-04, S-04.
             Evidence: Content-detected restore, no partial state, initialization/read failure, timeout/cancel/stale reply and resource teardown preserve JSON and existing scores.
             Milestone exit: review the whole 6.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/6/6.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 6.3 — Dual-format delivery
+    - [x] Milestone 6.3 — Dual-format delivery
         - [x] T-054 — Complete format selection and file help
             Completion evidence: Completed player guide and accessible file help for both formats, content-over-extension replacement, stable field/rank rules, exact schema/SQLite metadata, actual storage classes, byte/deadline bounds, cancel/failure preservation and lazy-runtime isolation. Save/Restore/format control share descriptive help and nonblocking ready/operation status. TypeScript/Vite build and4 focused Chromium/Firefox actual dual-format download/content-restore checks pass. Existing283-unit/100-packaged acceptance covers unchanged codec/controller logic; final cross-format/subdirectory/package checks remain T055–056.
             Scope: browser/panels.ts, files.ts; docs/user/LEADERBOARD.md; schema link.
@@ -346,7 +346,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: tests/browser/dual-format suite; packaged worker/WASM/schema paths; affected owners.
             Depends on: T-054. Contract: A-01–A-09 complete applicable coverage.
             Evidence: JSON→SQLite→JSON value preservation, empty/ten/invalid files, subdirectory static deployment, local assets/no CDN and complete predecessor regressions in both browsers.
-        - [ ] T-056 — Package and document the complete product
+        - [x] T-056 — Package and document the complete product
+            Completion evidence: Version1.0.0 metadata, full standalone/player/developer instructions and navigation complete. GREEN:283 unit/check/package and104 complete exact-packaged Chromium/Firefox checks pass with no skips; final Firefox panel inspected. Two candidate ZIP builds match; exact11 members/local pinned WASM/canonical schema/all production license texts and doc links verified. Candidate dirty/source metadata truthful; final clean release build pending. Independent complete-product and final producer/docs review found no findings; report6.3/HANDOFF included. No behavior drift; final audit/report/integration/CI/release remain T057 boundaries.
             Scope: package/version/build/CI assets; README, user guides and release-note inputs.
             Depends on: T-054, T-055. Contract: Full SPEC and Phase 6 exits.
             Evidence: Reproducible 1.0.0 static package, correct local worker/WASM/schema URLs, notices and truthful validated commands; exclude credentials/cache/skills/provenance from product.
