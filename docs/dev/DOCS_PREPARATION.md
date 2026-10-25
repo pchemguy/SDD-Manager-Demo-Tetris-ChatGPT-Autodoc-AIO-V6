@@ -7,7 +7,7 @@
 - Approval basis: The user explicitly approved PROJECT and its presented decisions on 2026-10-25 ("Approve"). Autodoc preapproves ARCHITECTURE through TASKS; technical QC remains required.
 - Tracking: enabled for documentation preparation and implementation by root AGENTS.md. Before repository writes, native milestone 1 (`sdd-docs-main`) and issues 1–9 were created and all standard bodies/associations read back against bundled 0.15.3 definitions.
 - Publication: every owned commit must be pushed/read back before progression. Reporting: Standard after Explicit bootstrap; Minimal and Explicit remain available.
-- Next boundary: publish/read back DOCS-005 and close/read back issue 5; continue to DOCS-006 within autodoc preapproval.
+- Next boundary: publish/read back DOCS-006 and close/read back issue 6; continue to DOCS-007 within autodoc preapproval.
 
 ## Scope source
 
@@ -22,7 +22,7 @@ The user's 2026-10-25 project request is the complete target. Preserve its playa
 | DOCS-003 | Accepted under user-selected autodoc preapproval after explicit PROJECT approval. Scoped owner QC passed: `docs/dev/ARCHITECTURE.md` SHA-256 `afd0c9d33a017ab2456061098763febb6700afc222f168bb4e55209179b29488`. Initial checklist completion and evidence are in this checkpoint; publication/closure must follow. |
 | DOCS-004 | Accepted under user-selected autodoc preapproval after explicit PROJECT approval. Scoped owner QC passed: `docs/dev/DECOMPOSITION.md` SHA-256 `a10c96c6d030e25bedfb4c08c56b2b509ea09ef86ccd960fbc713f2edcb91107`. Initial checklist completion and evidence are in this checkpoint; publication/closure must follow. |
 | DOCS-005 | Accepted under user-selected autodoc preapproval after explicit PROJECT approval. Scoped owner QC passed: `docs/dev/SPEC.md` SHA-256 `c23d34279910953298f7bb1e1b0efbd0da8fe7cc5f639899c816f0b5b8ac3a5a`; `docs/dev/spec/GAMEPLAY.md` SHA-256 `3f5f86115108b7bab2d69d01d953690ebafd4b2ffb63f48724354221fa37d225`; `docs/dev/spec/ROTATION.md` SHA-256 `5dcb2682df56cc2ebdea6b29794fc5b547cb8599145d444897c54d037d3c67f1`; `docs/dev/spec/CONFIGURATION.md` SHA-256 `7bce1c97539bcd31dc775979b9d4cbe7be9a469e79f4ca61224071f46db8d3c9`; `docs/dev/spec/LEADERBOARD.md` SHA-256 `86ca42a8c88050e542abcb9a938a7363e6bcd1d3a60168db7717f9285d7b00d4`; `docs/dev/spec/LEADERBOARD-SCHEMA.json` SHA-256 `5b24a01939d53dc185c421aaa34173f1b3e8cfd545695519e77c8574426e7cd6`; `docs/dev/SPEC-REVIEW-REPORT.md` SHA-256 `7f2ced32ed1594175a5e3d176bf440fac738f2ceb3ba176ea962ec75071c68b8`. Initial checklist completion and evidence are in this checkpoint; publication/closure must follow. |
-| DOCS-006 | Pending; scoped autodoc preapproval applies. |
+| DOCS-006 | Accepted under user-selected autodoc preapproval after explicit PROJECT approval. Scoped owner QC passed: `docs/dev/PLAN.md` SHA-256 `7a29ec2c6ded7f444f889b992d54827d3b52be285fb5e5376b04a7715c3014f9`; `docs/dev/PLAN-REVIEW-REPORT.md` SHA-256 `3d02ab8664177aa612ce378f4691c711507135d2225f92fdb1d6ed76a3baf5cd`. Initial checklist completion and evidence are in this checkpoint; publication/closure must follow. |
 | DOCS-007 | Pending; scoped autodoc preapproval applies. |
 | DOCS-008 | Pending; scoped autodoc preapproval applies. |
 | DOCS-009 | Not selected: autodoc stops before whole-package QC. |
@@ -40,4 +40,4 @@ The user accepted all presented gameplay, session-lifetime, technology and versi
 
 ## Pending transitions
 
-Preceding preparation completions through DOCS-004 were published with exact Git readback and their evidence comments/closed-completed issue states verified. This DOCS-005 completion requires push/readback and issue 5 closure/readback. Reconcile actual effects before retry. DOCS-009 and documentation milestone 1 remain open; no package-QC run, documentation integration, implementation projection or product release is authorized by this checkpoint.
+Preceding preparation completions through DOCS-005 were published with exact Git readback and their evidence comments/closed-completed issue states verified. This DOCS-006 completion requires push/readback and issue 6 closure/readback. Reconcile actual effects before retry. DOCS-009 and documentation milestone 1 remain open; no package-QC run, documentation integration, implementation projection or product release is authorized by this checkpoint.
