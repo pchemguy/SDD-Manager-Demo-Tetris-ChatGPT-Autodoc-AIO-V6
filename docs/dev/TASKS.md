@@ -108,7 +108,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Depends on: T-014, T-015. Contract: G-09 always-show subset, A-02/A-03.
             Evidence: Ghost/drop positions match at floor/stacks, active piece remains legible, Space acts once and prior controls remain usable.
             Milestone exit: review the whole 2.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 2.3 — Hold integration
+    - [x] Milestone 2.3 — Hold integration
         - [x] T-017 — Implement once-per-piece hold and source exchange
             Completion evidence: RED: all five hold fixtures failed on the missing action. GREEN: 70 unit tests and TypeScript check pass. Verified empty versus nonempty queue consumption, once-per-lock guard, fresh position/orientation/gravity/deadline, hold during grounding delay, blocked replacement game over without board mutation, and fresh-game reset. Centralized replacement timing for constructor/lock/hold; existing drop/ghost/hidden-row/SRS regressions pass. UI/key wiring remains T-018.
             Scope: src/game/game.ts; hold/source/time tests.
@@ -119,7 +119,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: browser/panels.ts, input.ts; controller snapshots.
             Depends on: T-017. Contract: G-08, A-02.
             Evidence: C/Shift swaps once, displays held kind and does not consume next during a nonempty exchange.
-        - [ ] T-019 — Verify modern interactions and document controls
+        - [x] T-019 — Verify modern interactions and document controls
+            Completion evidence: Modern play verified at version 0.2.0: 70 unit tests/check/build; 38 fresh-package Playwright checks (36 page interactions +2 HTTP identity checks) passed. Strengthened exact-ZIP served-byte checks passed after preparation repairs; discarded stale-artifact failures are documented. Native hold repeat across spawn and paused-available rejection strengthened; Firefox held/next/ghost screenshot inspected. Independent milestone/phase interaction and final preparer/docs reviews found no Critical/Important issue. Report 2.3/HANDOFF included; clean release packaging remains pending.
             Scope: tests/browser/modern suites; docs/user/CONTROLS.md; affected modern owners.
             Depends on: T-017, T-018. Contract: G-07–G-09, R-01, A-02/A-03.
             Evidence: Bag/hold/kick/drop/timer combinations in both browsers, screenshots and classic regression; version 0.2.0 packaging metadata.

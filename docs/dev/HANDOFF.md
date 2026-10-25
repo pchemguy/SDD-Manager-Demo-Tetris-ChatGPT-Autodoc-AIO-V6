@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: phase 2 milestone 2.2 T-016 completion, publication/hosting pending.
+Checkpoint: phase 2 milestone 2.3 T-019 completion, publication/hosting pending.
 
 ## Authority and baseline
 
@@ -8,4 +8,4 @@ Full T-001–T-057 and six phase releases remain authorized. Phase 1 tasks/revie
 
 ## Phase 2 state
 
-phase/2-modern-play branches from f4954adc94ada5fb6f52e392098f5742ff54de07; parent/integration target main. Accepted governing inputs unchanged; prior QC remains applicable. Verified phase label, native milestones 6–9 and issues 20–29 (T-011–T-020), exact briefs and initial associations. Native helper partial timeout and transient final list lag were reconciled without duplicate writes. T-011–T-015 are published/closed; milestone 2.1 is closed. T-016 adds ghost/Space wiring and a bounded repair of hidden-row grounding R2.2-01 found by independent review. The exact regression failed then passed; review recheck finds no remaining Critical/Important issue. Final 65 unit tests/check/build and 34 browser checks pass; ghost screenshot inspected. Report 2.2 included. Publish/close T-016 and milestone 2.2, then continue T-017–T-020 hold/phase review, explicit merge and 0.2.0 release. Later phases remain authorized. Preserve one owning task per verified published commit.
+phase/2-modern-play branches from f4954adc94ada5fb6f52e392098f5742ff54de07; parent/integration target main. Accepted governing inputs unchanged; prior QC remains applicable. Verified phase label, native milestones 6–9 and issues 20–29 (T-011–T-020), exact briefs and initial associations. Native helper partial timeout and transient final list lag were reconciled without duplicate writes. T-011–T-018 are published/closed; milestones 2.1/2.2 are closed. T-019 completes modern verification/docs/version 0.2.0 and report 2.3. Independent whole-milestone/phase interaction review and final package-preparer recheck find no Critical/Important issue. Seventy unit tests/check/build and 38 packaged Playwright checks pass (36 browser interactions +2 HTTP checks); strengthened exact-ZIP HTTP checks also pass. Held/next/ghost screenshot inspected. Discarded stale-artifact run and corrected preparation are recorded, not accepted as product evidence. Actual task parent-diff audit passed T-011–T-018. Publish/close T-019 and milestone 2.3; execute T-020 phase review/audit, then explicit main merge, merged verification/publication, hosted CI and clean 0.2.0 release. Continue remaining authorized phases without new approval. Preserve one owning task per verified published commit.

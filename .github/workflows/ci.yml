@@ -26,7 +26,7 @@ jobs:
       - run: npm test
       - run: node node_modules/playwright/cli.js install --with-deps --only-shell chromium firefox
       - run: npm run package
-      - run: python -m zipfile -e .cache/releases/browser-tetris.zip .cache/package-test
+      - run: python scripts/prepare-package-test.py
       - run: npm run test:browser
         env:
           TETRIS_PACKAGE_TEST: '1'
