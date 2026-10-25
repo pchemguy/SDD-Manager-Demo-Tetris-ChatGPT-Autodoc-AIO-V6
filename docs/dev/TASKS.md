@@ -341,7 +341,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: browser/panels.ts, files.ts; docs/user/LEADERBOARD.md; schema link.
             Depends on: T-053. Contract: L-02–L-04, S-05.
             Evidence: Save offers JSON/SQLite, Restore accepts either by content, extension mismatch handled, clear errors and preserved record fields.
-        - [ ] T-055 — Verify cross-format and packaged browser behavior
+        - [x] T-055 — Verify cross-format and packaged browser behavior
+            Completion evidence: Expanded acceptance characterization passes283 unit tests and104 complete exact-packaged Chromium/Firefox checks without product repair. Actual JSON→SQLite→JSON empty/ten downloads/restores preserve exact safe scores/IDs/calendar timestamps and replace marker history; extension mismatch succeeds by content. Real read-only HTTP /demo mount verifies every observed HTTP request stays local under prefix, including actual worker/WASM/schema/icon paths. Vite relative base already handles packaged URLs. All predecessor regression/invalid/cancel/timeout cases pass; independent complete-product/source review found no findings. Dedicated prefix server is test infrastructure only.
             Scope: tests/browser/dual-format suite; packaged worker/WASM/schema paths; affected owners.
             Depends on: T-054. Contract: A-01–A-09 complete applicable coverage.
             Evidence: JSON→SQLite→JSON value preservation, empty/ten/invalid files, subdirectory static deployment, local assets/no CDN and complete predecessor regressions in both browsers.
