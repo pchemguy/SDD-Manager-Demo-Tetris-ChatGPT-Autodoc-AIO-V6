@@ -80,5 +80,14 @@ export class Game {
   rotate(direction:-1|1):void {
     for(const candidate of rotationCandidates(this.active,direction))if(this.tryTransform(candidate))break;
   }
+  /** Follow the default captured interval policy; zero travel preserves both clocks. */
+  hardDrop():void {
+    if(this.status!=='playing')return;
+    const target=landing(this.board,this.active);if(!target)return;
+    const distance=target.y-this.active.y;
+    if(distance>0&&this.tryTransform(target)){
+      this.nextGravity=this.time+this.interval;this.addScore(2*distance);
+    }
+  }
   down():void {if(this.tryTransform({...this.active,y:this.active.y+1})){this.nextGravity=this.time+this.interval;this.addScore(1);}}
 }

@@ -97,7 +97,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/landing.ts; constructed-board unit fixtures.
             Depends on: T-013. Contract: G-09, S-02.
             Evidence: Floor/wall/overhang/stack targets use first obstruction and never overlap settled cells.
-        - [ ] T-015 — Implement hard drop with captured lock timing
+        - [x] T-015 — Implement hard drop with captured lock timing
+            Completion evidence: RED: all four hard-drop contract tests failed on the absent action. GREEN: 63 unit tests and TypeScript check pass. Hard drop uses the shared first-obstruction target, awards two points per traveled row with saturation, waits a full grounding interval, preserves zero-distance clocks/score, ignores no-target states and honors a due lock before a same-time subsequent drop. Browser action and ghost rendering remain T-016.
             Scope: src/game/game.ts; clock/drop tests.
             Depends on: T-014. Contract: G-05/G-09 default follow, S-01/S-02.
             Evidence: Score traveled rows, position at shared target, preserve zero-distance deadline and obey interval-policy boundary ties.
