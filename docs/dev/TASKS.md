@@ -12,51 +12,61 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 1 — Classic baseline
 
-- [ ] Phase 1 — Classic baseline
-    - [ ] Milestone 1.1 — Playable falling loop
-        - [ ] T-001 — Establish classic geometry and board rules
+- [x] Phase 1 — Classic baseline
+    - [x] Milestone 1.1 — Playable falling loop
+        - [x] T-001 — Establish classic geometry and board rules
+            Completion evidence: RED: npm test observed four intended geometry/collision failures. GREEN: npm test passed 5/5; npm run check passed. Pinned dependencies installed from registry with a lockfile; board rows, spawn cells, pivot/O behavior, hidden bounds and collisions verified. Browser/build acceptance remains T-003 work.
             Scope: package/toolchain setup; src/game/types.ts, geometry.ts, board.ts; unit fixtures.
             Depends on: none. Contract: G-01, R-01 zero-offset subset.
             Evidence: Typecheck and deterministic bounds/spawn/rotation/board fixtures; no full kicks or modern features.
-        - [ ] T-002 — Implement movement gravity and interval locking
+        - [x] T-002 — Implement movement gravity and interval locking
+            Completion evidence: RED: four intended clock/movement assertions failed against the initial Game placeholder. GREEN: npm test passed 11/11 and npm run check passed. Verified full grounding interval, grounded-move preservation, unground/reground resets, floor/wall rejection, first-obstruction landing and controlled independent source; snapshots are detached. Also verified clean npm ci from the committed lockfile before this task.
             Scope: src/game/game.ts, landing.ts, source.ts; time/command tests.
             Depends on: T-001. Contract: G-01, G-04/G-05 default interval, G-07 independent source, S-01.
             Evidence: Exact grounding deadline, failed moves, legal movement, ordinary landing and seeded source traces.
-        - [ ] T-003 — Connect the playable browser loop
+        - [x] T-003 — Connect the playable browser loop
+            Completion evidence: RED: two Controller assertions and the persisted-page lifecycle regression failed before fixes. GREEN: 17 unit tests, TypeScript/Vite build, and 10 actual app browser tests passed (5 Chromium/5 Firefox); screenshot inspected. Repeated isolated preflight passed after official download fallbacks and diagnosed Firefox process-local override. Independent milestone review rechecked the repaired lifecycle bug; report 1.1 and HANDOFF included. Native Back and modeled persisted-handler evidence are explicitly distinguished.
             Scope: src/main.ts; app/controller.ts; browser/input.ts, render.ts; isolated Playwright setup.
             Depends on: T-001, T-002. Contract: G-01/G-03 initial keys, S-01/S-05, A-01 playable subset.
             Evidence: Proactively pin/provision and repeatedly exercise isolated Chromium/Firefox before browser-dependent checks; verify falling/moving/rotating board and inspected rendering.
             Milestone exit: review the whole 1.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 1.2 — Complete classic game
-        - [ ] T-004 — Add simultaneous line clearing scoring and levels
+    - [x] Milestone 1.2 — Complete classic game
+        - [x] T-004 — Add simultaneous line clearing scoring and levels
+            Completion evidence: RED: three intended compaction/scoring assertions failed before implementation. GREEN: 25 unit tests and TypeScript/Vite build passed. Verified simultaneous immutable compaction, 1–4 line awards at pre-clear level, threshold level/speed change for the next piece, successful-only soft-drop points, zero-line lock and safe score saturation. Browser scoring presentation remains T-006 work.
             Scope: src/game/board.ts, game.ts; line/score unit fixtures.
             Depends on: T-003. Contract: G-06.
             Evidence: One-to-four-line compaction, level-before-clear scoring, speed changes and safe score saturation.
-        - [ ] T-005 — Complete game lifecycle and pause transitions
+        - [x] T-005 — Complete game lifecycle and pause transitions
+            Completion evidence: RED: three intended pause/completion assertions failed. GREEN: 29 unit tests and TypeScript/Vite build passed. Composable pause reasons freeze logical deadlines and reject commands; resume preserves remaining time. Spawn/hidden-lock game over queues one event with an instance ID; controller emits once, restart resets game/user pause and excludes abandonment. UI lifecycle controls are T-006 work.
             Scope: src/game/game.ts; app/controller.ts; lifecycle/time tests.
             Depends on: T-004. Contract: G-02, G-05, S-01, A-01/A-03.
             Evidence: Spawn/top-out, one completion event, restart preservation boundaries and frozen/restored logical deadlines.
-        - [ ] T-006 — Present classic stats and lifecycle controls
+        - [x] T-006 — Present classic stats and lifecycle controls
+            Completion evidence: RED: missing-stats UI test failed before UI implementation; Enter regression failed with live score reset before repair. GREEN: 30 unit tests, TypeScript/Vite build and 16 browser checks passed (8 each). Native controls and controlled-clock browser flows verify a scored line clear, stats, pause/resume, game over/restart and Enter/P/Escape guards. Independent milestone review rechecked fixes; report 1.2 and HANDOFF included.
             Scope: browser/panels.ts; controller/render composition; browser classic suite.
             Depends on: T-004, T-005. Contract: G-01–G-06, S-05, A-01.
             Evidence: Play a scored game, pause/resume, lose and restart through real controls in both browsers; stats match domain.
             Milestone exit: review the whole 1.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 1.3 — Browser delivery
-        - [ ] T-007 — Implement controlled key repeat and focus pause
+    - [x] Milestone 1.3 — Browser delivery
+        - [x] T-007 — Implement controlled key repeat and focus pause
+            Completion evidence: RED: native held-key test failed at the first 150 ms repeat boundary. GREEN: 30 unit tests, TypeScript/Vite build and 28 supported browser checks passed (14 each). Verified 150/50 repeat, latest-direction/fresh-delay behavior, held-state cleanup, native DOM control/key ownership and modeled blur/visibility/user-pause composition. Independent review found no Critical/Important code issue. Controlled probes disproved an extra native tab-focus test premise in headless sessions; removed that invalid assertion and documented that OS-window transitions are not established, rather than claiming models are native evidence.
             Scope: browser/input.ts; app/controller.ts; focus/repeat tests.
             Depends on: T-006. Contract: G-03, S-01/S-05.
             Evidence: 150/50 ms repeat, competing horizontal keys, one-shot repeat suppression, form focus, blur/visibility and user-pause composition.
-        - [ ] T-008 — Package and document the playable baseline
+        - [x] T-008 — Package and document the playable baseline
+            Completion evidence: RED: initial archive failed the required playable-entry/license inventory check. GREEN: npm run package built the static app and inspected a 7-member ZIP; two package builds were byte-identical with SHA-256 745258ea176b1ade79c208b2f8eb52b1bf1f47f03a55b92642b229a5cfba3b92. Verified CRC, unique safe names, relative asset references, license/version/source/dirty metadata, checksum and credential exclusions. Workflow YAML parsed and official v7 action commits pinned; hosted CI and clean tagged release packaging remain pending.
             Scope: build/CI configuration; package lock/version; README, docs/user/CONTROLS.md.
             Depends on: T-007. Contract: S-05, Phase 1 delivery/release requirements.
             Evidence: Reproducible static build and validated setup/check commands; baseline version 0.1.0 and truthful controls, assets and notices.
-        - [ ] T-009 — Verify classic browser acceptance and repair blockers
+        - [x] T-009 — Verify classic browser acceptance and repair blockers
+            Completion evidence: Thirty unit tests/check/build and 30 actual packaged-server browser checks passed (15 Chromium/15 Firefox). Verified minimum 1024x768 essential bounds and inspected Firefox screenshot; static asset responses succeeded. Independent whole-milestone/phase code review found no Critical/Important issue. CI now runs the extracted package; YAML parsed. Report 1.3 and HANDOFF retain native OS-focus, Windows and hosted-CI evidence limits.
             Scope: tests/browser/classic suites and rendering fixtures; affected baseline owners.
             Depends on: T-007, T-008. Contract: A-01/A-03/A-09 baseline, Phase 1 exits.
             Evidence: Actual packaged/server path in Chromium/Firefox, Canvas screenshot inspection, keyboard/lifecycle/time regressions and no missing essential classic action.
             Milestone exit: review the whole 1.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 1.4 — Phase review
-        - [ ] T-010 — Review test and report phase 1
+    - [x] Milestone 1.4 — Phase review
+        - [x] T-010 — Review test and report phase 1
+            Completion evidence: Independent read-only phase code review and owner cross-milestone inspection found no Critical/Important blockers. Classic exits pass: 30 unit tests/check/build and 30 packaged Chromium/Firefox checks, inspected screenshot. Actual parent-diff audit verified T001-T009 single-task result/evidence/initial checkbox commits and folded reports. Phase report/HANDOFF record source, release readiness, limits and pending integration/provider effects.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.1.0.
             Depends on: T-009; all phase 1 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/1/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.

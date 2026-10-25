@@ -1,0 +1,32 @@
+name: Verify static game
+on:
+  push:
+    branches: [main]
+    paths: ['src/**', 'tests/**', 'scripts/**', 'public/**', 'package*.json', '*.config.ts', 'tsconfig.json', 'index.html', '.github/workflows/ci.yml']
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.cache/playwright
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npm test
+      - run: node node_modules/playwright/cli.js install --with-deps --only-shell chromium firefox
+      - run: npm run package
+      - run: python -m zipfile -e .cache/releases/browser-tetris.zip .cache/package-test
+      - run: npm run test:browser
+        env:
+          TETRIS_PACKAGE_TEST: '1'

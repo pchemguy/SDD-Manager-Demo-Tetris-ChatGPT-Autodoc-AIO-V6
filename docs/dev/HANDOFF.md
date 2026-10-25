@@ -1,41 +1,11 @@
 # Project handoff
 
-Checkpoint: DOCS-009 whole-package QC passed; documentation integration pending.
-This snapshot is identified by its containing commit. Recover later effects from the owning records, Git and provider before continuing.
+Checkpoint: phase 1 integration into main; merged-state verification/publication pending.
 
-Outcome: PROJECT explicitly accepted by the user; ARCHITECTURE through TASKS authored under scoped autodoc preapproval, with per-document conformance evidence. Six bounded implementation phases define 57 executable tasks. No game implementation exists.
+## Authority and provenance
 
-## Workflow and sources
+Full T-001–T-057 and six releases are authorized. Current phase/1-classic-baseline was created from accepted main preparation b18661c3f18fec5ff19536cb60f76e09e4d9d046; main is its integration parent. T-001–T-009 are published/closed and delivery milestones 1.1–1.3 closed. T-010 assesses all classic exits and includes PHASE-REPORT. Independent phase review finds no Critical/Important blocker; owner inspected task persistence through T-009.
 
-- Main development, preparation stage. Coordinator: sdd-manage; completed task-list author/review owner: sdd-tasks.
-- [DOCS_TASKS](DOCS_TASKS.md) owns preparation checkoffs; [DOCS_PREPARATION](DOCS_PREPARATION.md) owns approval/control/source identities. [TASKS](TASKS.md) owns the unchecked implementation hierarchy.
-- Inputs: [PROJECT](PROJECT.md), [ARCHITECTURE](ARCHITECTURE.md), [DECOMPOSITION](DECOMPOSITION.md), [SPEC](SPEC.md) and children, [PLAN](PLAN.md), [layout](layout.md), and adjacent SPEC/PLAN/TASKS review reports.
-- Bundled SDD Manager 0.15.3 and repository browser/Windows policies remain applicable. No dependencies or browsers were installed; no build/test commands have been validated.
+## Evidence and next steps
 
-## Scope and human decisions
-
-- User requested the complete target in autodoc/onepass and approved PROJECT plus its presented decisions on 2026-10-25. Later document first-approval checkpoints through TASKS are covered by that mode, not individually claimed human approvals.
-- The user advanced the stop with "Do qc and full implementation": authorize package QC and full T-001–T-057 implementation through six integrated/versioned releases.
-- The complete implementation range is selected. Phase release requests remain applicable when implementation is separately reached and authorized; they do not authorize releases of documents.
-- Tracking enabled by AGENTS.md for preparation/implementation; only preparation milestone 1/issues 1–9 projected. Standard reporting.
-
-## Branches and return
-
-- Working branch: design-docs/main. Creation parent/eventual target: actual default main.
-- Branch-off commit: 90bf4aee2ed2279a328bf3d3845152c0f6ca46e2.
-- Main contains the verified preliminary provenance scaffold, not the project-document package. Retain design-docs/ai-logs for manual records.
-- Parent return: preparation has not integrated; no implementation is running or suspended.
-
-## Previous pending work at DOCS-008
-
-- This DOCS-008 completion requires push/readback and issue 8 completion-evidence/closure/readback. Earlier DOCS-001–007 publication/closures were verified. Reconcile current Git/provider state before replay.
-- Keep DOCS-009 unchecked, issue 9 open and documentation milestone 1 open. Do not run whole-package QC or merge the documents at this stop.
-- Wait for explicit advance direction. The next possible stage is DOCS-009 package QC, followed only when successful by verified/published documentation integration and milestone closure. Actual code, runtime/browsers and release acceptance remain unverified.
-
-## Current next action
-
-Publish/read back this passing DOCS-009 checkpoint; close/read back issue 9. Explicitly merge documentation into actual default main, verify/publish/read back, then close/read back milestone 1. Project only eligible phase 1 and begin T-001–T-010; continue all six authorized phases sequentially, preserving one verified task per commit and phase release gates. No product code exists at this checkpoint.
-
-## Documentation integration
-
-Prospective explicit integration of design-docs/main tip 9dc6d4cc8aec3ca244dbf53544fcb415cb3d65f5 into main parent 90bf4aee2ed2279a328bf3d3845152c0f6ca46e2. Merged package contains passing DOCS-009, all nine preparation checkoffs and current product/task sources; local links/source checks and git diff --check passed. This merge requires push/readback and documentation milestone closure before phase 1 activation. Full implementation remains authorized.
+Thirty unit tests/check/build and thirty packaged browser checks pass; screenshot inspected. Evidence limits: native OS-window transitions, Windows and hosted CI not established. T-010 is published/closed; all four phase milestones are closed. Its actual closing commit passed the single-task persistence audit. Explicit merge parents: main b18661c3f18fec5ff19536cb60f76e09e4d9d046 and phase tip 7be8ab2756f18cc6d541b3aafcf7b41ff861fb6c. No conflicts. Merged npm test (30), check, build/package and packaged browser suite (30, 15 per browser) pass. The first merged browser attempt ended without a complete result; a direct rerun completed all 30 with exit 0. Publish/read back this explicit merge and observe hosted CI. Prepare exact-body release notes/commit on main, tag and package clean source 0.1.0, publish/verify GitHub release assets/body/downloads. Only then project/branch phase 2 and continue full range; no new approval required.
