@@ -92,7 +92,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Visible next matches next spawn, classic replay remains usable, full SRS works in the actual game.
             Milestone exit: review the whole 2.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/2/2.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 2.2 — Ghost and hard drop
-        - [ ] T-014 — Unify ordinary landing projection
+        - [x] T-014 — Unify ordinary landing projection
+            Completion evidence: RED: the hidden first-obstruction fixture returned a non-visible target. GREEN: 59 unit tests and TypeScript check pass. Shared ordinary projection now rejects hidden/invalid targets, stops at overhangs rather than lower legal gaps, preserves board data and lands every kind/orientation exactly at the bottom boundary. Grounding consumes this projection; lifecycle/time/SRS/source regressions remain green.
             Scope: src/game/landing.ts; constructed-board unit fixtures.
             Depends on: T-013. Contract: G-09, S-02.
             Evidence: Floor/wall/overhang/stack targets use first obstruction and never overlap settled cells.

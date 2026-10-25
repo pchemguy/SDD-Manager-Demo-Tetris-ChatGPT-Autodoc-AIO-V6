@@ -2,6 +2,7 @@
 import { canPlace, clearLines, emptyBoard } from './board';
 import { cells,rotationCandidates } from './geometry';
 import { PieceSource } from './source';
+import { landing } from './landing';
 import type { Board, Piece } from './types';
 export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number;gameId?:string }
 export interface GameOverEvent {type:'game-over';gameId:string;score:number;lines:number;level:number}
@@ -43,7 +44,8 @@ export class Game {
   get snapshot() { return {next:this.source.peek(),board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
   private refreshGrounding():void {
     if(this.status!=='playing') {this.groundedDeadline=null;return;}
-    if(canPlace(this.board,{...this.active,y:this.active.y+1})) this.groundedDeadline=null;
+    const target=landing(this.board,this.active);
+    if(target&&target.y>this.active.y) this.groundedDeadline=null;
     else if(this.groundedDeadline===null) this.groundedDeadline=this.time+this.interval;
   }
   private lock():void {
