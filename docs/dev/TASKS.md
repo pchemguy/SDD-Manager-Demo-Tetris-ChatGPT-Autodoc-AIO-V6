@@ -36,7 +36,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/board.ts, game.ts; line/score unit fixtures.
             Depends on: T-003. Contract: G-06.
             Evidence: One-to-four-line compaction, level-before-clear scoring, speed changes and safe score saturation.
-        - [ ] T-005 — Complete game lifecycle and pause transitions
+        - [x] T-005 — Complete game lifecycle and pause transitions
+            Completion evidence: RED: three intended pause/completion assertions failed. GREEN: 29 unit tests and TypeScript/Vite build passed. Composable pause reasons freeze logical deadlines and reject commands; resume preserves remaining time. Spawn/hidden-lock game over queues one event with an instance ID; controller emits once, restart resets game/user pause and excludes abandonment. UI lifecycle controls are T-006 work.
             Scope: src/game/game.ts; app/controller.ts; lifecycle/time tests.
             Depends on: T-004. Contract: G-02, G-05, S-01, A-01/A-03.
             Evidence: Spawn/top-out, one completion event, restart preservation boundaries and frozen/restored logical deadlines.

@@ -3,8 +3,13 @@ import { canPlace, clearLines, emptyBoard } from './board';
 import { cells } from './geometry';
 import { PieceSource } from './source';
 import type { Board, Piece, Orientation } from './types';
-export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number }
+export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number;gameId?:string }
+export interface GameOverEvent {type:'game-over';gameId:string;score:number;lines:number;level:number}
 export class Game {
+  private readonly gameId:string;
+  private readonly events:GameOverEvent[]=[];
+  /** Completion is queued once and consumed independently of rendering frequency. */
+  drainEvents():GameOverEvent[] {return this.events.splice(0);}
   private board:Board;
   private active:Piece;
   private status:'playing'|'game-over'='playing';
@@ -15,12 +20,13 @@ export class Game {
   private lines=0;
   private readonly source:PieceSource;
   constructor(options:GameOptions={}) {
+    this.gameId=options.gameId??'game';
     for(const value of [options.lines??0,options.score??0]) if(!Number.isSafeInteger(value)||value<0)throw new RangeError('Counters must be safe nonnegative integers');
     this.lines=options.lines??0;this.score=options.score??0;
     this.board=(options.board??emptyBoard()).map(row=>[...row]);
     this.source=new PieceSource(options.random);
     this.active=options.piece?{...options.piece}:this.spawnPiece();
-    if(!canPlace(this.board,this.active)) this.status='game-over';
+    if(!canPlace(this.board,this.active)) this.endGame();
     this.nextGravity=this.interval;
     this.refreshGrounding();
   }
@@ -28,6 +34,11 @@ export class Game {
   private get level():number {return Math.floor(this.lines/10)+1;}
   private get interval():number {return Math.max(70,1000*Math.pow(.8,this.level-1));}
   private addScore(points:number):void {this.score=Math.min(Number.MAX_SAFE_INTEGER,this.score+points);}
+  private endGame():void {
+    if(this.status==='game-over')return;
+    this.status='game-over';this.groundedDeadline=null;
+    this.events.push({type:'game-over',gameId:this.gameId,score:this.score,lines:this.lines,level:this.level});
+  }
   /** A detached snapshot prevents renderers from mutating the domain. */
   get snapshot() { return {board:this.board.map(row=>[...row]),active:{...this.active},status:this.status,time:this.time,groundedDeadline:this.groundedDeadline,score:this.score,lines:this.lines,level:this.level}; }
   private refreshGrounding():void {
@@ -37,13 +48,13 @@ export class Game {
   }
   private lock():void {
     if(!canPlace(this.board,this.active) || cells(this.active).some(p=>p.y<0)) {
-      this.status='game-over';this.groundedDeadline=null;return;
+      this.endGame();return;
     }
     for(const {x,y} of cells(this.active)) this.board[y][x]=this.active.kind;
     const compacted=clearLines(this.board);this.addScore([0,100,300,500,800][compacted.cleared]*this.level);
     this.board=compacted.board;this.lines=Math.min(Number.MAX_SAFE_INTEGER,this.lines+compacted.cleared);
     this.active=this.spawnPiece();this.groundedDeadline=null;this.nextGravity=this.time+this.interval;
-    if(!canPlace(this.board,this.active)) this.status='game-over';
+    if(!canPlace(this.board,this.active)) this.endGame();
     this.refreshGrounding();
   }
   /** Advance absolute logical game time; deadlines take priority at exact ties. */
