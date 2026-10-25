@@ -1,6 +1,8 @@
 /** Canvas presentation consumes snapshots and never recomputes movement rules. */
 import type {View} from '../app/controller';
 import {cells,COLORS} from '../game/geometry';
+import type {Piece} from '../game/types';
+import type {Settings} from '../settings/definitions';
 const CELL=28;
 export function renderBoard(canvas:HTMLCanvasElement,view:View):void {
  const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas is unavailable');
@@ -18,7 +20,7 @@ export function renderBoard(canvas:HTMLCanvasElement,view:View):void {
    const kind=view.board[y][x];if(kind)block(x,y,COLORS[kind]);
   }
   const color=view.penetrator?'#ffffff':COLORS[view.active.kind];
-  if(view.ghost){
+  if(view.ghost&&ghostVisible(view.settings.ghost,view.ghost)){
    ctx.fillStyle=color+'22';ctx.strokeStyle=color;ctx.lineWidth=1;
    for(const {x,y} of cells(view.ghost)){
     ctx.fillRect(x*CELL+2,y*CELL+2,CELL-4,CELL-4);
@@ -33,4 +35,9 @@ export function renderBoard(canvas:HTMLCanvasElement,view:View):void {
   ctx.fillStyle='#07101dcc';ctx.fillRect(0,0,280,560);ctx.fillStyle='#dcece5';ctx.textAlign='center';ctx.font='700 22px system-ui';ctx.fillText(view.status==='paused'?'PAUSED':'GAME OVER',140,265);
   ctx.fillStyle='#91aaac';ctx.font='11px system-ui';ctx.fillText(view.status==='paused'?'P OR ESC TO RESUME':'ENTER TO RESTART',140,291);
  }
+}
+
+/** The midline applies to occupied cells, including frame offsets and straddling shapes. */
+export function ghostVisible(mode:Settings['ghost'],target:Piece|null):boolean {
+ return target!==null&&(mode==='show'||(mode==='dynamic'&&cells(target).every(p=>p.y>=10)));
 }

@@ -178,51 +178,61 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 ## Phase 4 — Persistent configuration
 
-- [ ] Phase 4 — Persistent configuration
-    - [ ] Milestone 4.1 — Runtime controls
-        - [ ] T-028 — Define runtime settings and alternate lock policies
+- [x] Phase 4 — Persistent configuration
+    - [x] Milestone 4.1 — Runtime controls
+        - [x] T-028 — Define runtime settings and alternate lock policies
+            Completion evidence: RED: nine runtime-policy assertions failed plus the absent definitions module. GREEN: 111 unit tests, TypeScript/Vite build pass. Exact tokens/defaults and strict value checks, failed Down/gravity, follow versus immediate (including zero travel), captured old deadline/policies, hold replacement capture, live availability with preserved hold/source and pre-start Controller settings are verified. Due lock precedes new-piece immediate drop. HANDOFF records verified 0.3.0 release/CI and phase4 hosted readiness.
             Scope: src/settings/definitions.ts; game/controller policy capture; unit tests.
             Depends on: T-027. Contract: C-01, G-05, S-03.
             Evidence: Exact tokens/defaults, failed-down and immediate hard-drop modes, same-time boundaries and next-spawn snapshots.
-        - [ ] T-029 — Connect six live configuration controls
+        - [x] T-029 — Connect six live configuration controls
+            Completion evidence: RED: both actual Chromium control scenarios failed on absent labeled selects. GREEN: 111 unit tests/build and six focused Chromium/Firefox checks (live controls, ready policy capture and minimum viewport) pass. All six native controls update memory, hide/disable immediately while preserving queue/hold-used state, retain current locking policy and apply selected policies at next/hold spawn. Strict tokens/native focus ownership, dynamic whole-piece condition and listener disposal included. Independent read-only core review found no Critical/Important issue; boundary visibility/complete regressions remain T-030.
             Scope: browser/panels.ts; controller/settings in-memory wiring.
             Depends on: T-028. Contract: C-01, G-07–G-09, S-03.
             Evidence: All controls work without persistence, hide/disable relevant features immediately and preserve source/hold state.
-        - [ ] T-030 — Implement dynamic ghost and verify runtime settings
+        - [x] T-030 — Implement dynamic ghost and verify runtime settings
+            Completion evidence: Extracted existing whole-piece visibility into a pure contract boundary; its three initial helper assertions failed before extraction. GREEN:114 unit tests/check/build/package and all48 packaged checks pass. Exact-midline I cells, straddling/upper/lower/null modes verified. Native browsers build a real straddling L target, hide/show and move lower to reveal it; native select keys preserve board ownership and ghost survives hardDropoff. Firefox screenshot inspected. Independent whole-milestone review/recheck found no Critical/Important issue; report4.1/HANDOFF included.
             Scope: game/landing snapshots; browser/render.ts; runtime-setting suites.
             Depends on: T-028, T-029. Contract: G-09, C-01, A-04.
             Evidence: Hide straddling/upper ghost, show all-lower ghost; test switching/disabled hold/drop/next and captured policies in playable game.
             Milestone exit: review the whole 4.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 4.2 — Settings persistence
-        - [ ] T-031 — Resolve URL cookie and default per setting
+    - [x] Milestone 4.2 — Settings persistence
+        - [x] T-031 — Resolve URL cookie and default per setting
+            Completion evidence: RED:12 source-resolution assertions failed against the initial default-only resolver. GREEN:127 unit tests and TypeScript check pass. All six keys resolve valid unique URL, then valid unique decoded complete-name cookie, then default independently. Explicit defaults enter the cookie-write plan; omissions/invalid URLs schedule no default replacement. Covered mixed sources, duplicate/case/whitespace/empty/malformed values, duplicate/invalid cookies, unknown names, exact matching and detached defaults. Pure resolver performs no browser writes.
             Scope: src/settings/service.ts; synthetic source fixtures.
             Depends on: T-030. Contract: C-02.
             Evidence: All six keys, mixed/omitted/default URL cases, duplicate/invalid tokens/cookies and independent fallback.
-        - [ ] T-032 — Implement independent cookie and URL writes
+        - [x] T-032 — Implement independent cookie and URL writes
+            Completion evidence: RED:9 persistence-effect assertions failed against read-only initialization/no writes. GREEN:138 unit tests and TypeScript check pass. Explicit URL defaults save exact per-key cookies; omissions/invalid duplicates do not overwrite cookies or synthesize defaults. Changed-key writes use Path/SameSite/MaxAge/Secure rules and replaceState with preserved state/path/foreign query/fragment and collapsed duplicates. Cookie/history errors and silent no-ops are independently detected, with the other effect still attempted; unavailable reads retain usable resolution and invalid changed tokens cause no effects.
             Scope: src/settings/browser.ts, service.ts; adapter failure tests.
             Depends on: T-031. Contract: C-03/C-04.
             Evidence: Exact cookie flags, valid explicit-default writes, no omitted/default overwrite, changed-key replaceState and unrelated URL preservation.
-        - [ ] T-033 — Integrate startup reload and persistence feedback
+        - [x] T-033 — Integrate startup reload and persistence feedback
+            Completion evidence: RED:three selected Chromium startup/persistence assertions failed before wiring. GREEN:138 unit tests, TypeScript/build/package,18 focused persistence and66 complete packaged browser checks pass. Actual cookies/query/reloads cover all six keys and explicit defaults/omissions; history state/length/foreign query/fragment preserved. Modeled cookie/history failures leave live play and independent writes usable. Independent read-only milestone review found no findings; report4.2/HANDOFF included.
             Scope: src/main.ts; controller/panels; browser configuration suite.
             Depends on: T-031, T-032. Contract: C-01–C-04, A-06.
             Evidence: Resolve before first spawn; actual reload/cookies/query, separate write failures, visible warnings and working session controls.
             Milestone exit: review the whole 4.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 4.3 — Configuration integration
-        - [ ] T-034 — Verify policies across hold penetrator and drop
+    - [x] Milestone 4.3 — Configuration integration
+        - [x] T-034 — Verify policies across hold penetrator and drop
+            Completion evidence: Added six cross-feature characterization scenarios against existing accepted implementation: all four penetrator locking combinations, mid-piece settings changes, disabled drop with visible ghost, active hold/reactivation guards, unchanged clocks/source/bonuses, legal non-overlapping lock and next capture; activation cancels an obsolete grounded deadline without resetting gravity; nonempty hold exchange captures policies without queue consumption. GREEN:144 unit tests and TypeScript check pass; no production rule change needed.
             Scope: domain/controller integration fixtures; affected rule owners.
             Depends on: T-033. Contract: G-05/G-08/G-09, P-01/P-02, S-03.
             Evidence: Mid-piece policy changes, hold-spawn capture, active-penetrator guard, ghost with hard drop off and no timer/source reset.
-        - [ ] T-035 — Explain and expose configuration state clearly
+        - [x] T-035 — Explain and expose configuration state clearly
+            Completion evidence: Added configuration guide with exact tokens/defaults, independent precedence/default writes/omissions, invalid-value fallback, midline and timing/penetrator behavior, cookie scope and failure semantics. UI explains preserved disabled state and ghost/drop independence; lock controls describe next-piece capture, readable live persistence status and desktop sticky board. TypeScript/Vite build and four focused Chromium/Firefox native-focus/minimum-viewport checks pass.
             Scope: browser/panels.ts, styles; docs/user/CONFIGURATION.md.
             Depends on: T-034. Contract: C-01/C-04, S-05.
             Evidence: Labeled/native controls, next-piece policy note, disabled-feature explanations and visible nonblocking persistence status.
-        - [ ] T-036 — Verify persistent configuration in both browsers
+        - [x] T-036 — Verify persistent configuration in both browsers
+            Completion evidence: Version0.4.0 package/lock metadata and README reflect six persistent settings. GREEN:144 unit tests, TypeScript/Vite package and66 exact-packaged Chromium/Firefox checks pass, including every setting source/write/reload, native focus, foreign query/fragment/history retention and classic/modern/natural penetrator regressions. Independent whole-milestone/phase inspection found no findings; report4.3/HANDOFF included. Required phase audit/integration/hosted CI/release effects remain pending.
             Scope: tests/browser/configuration suites; packaged app/README/version.
             Depends on: T-034, T-035. Contract: A-04/A-06/A-09, Phase 4 exits.
             Evidence: All six source/write/reload paths, focus, fragment/unrelated query retention and classic/modern/penetrator regression; version 0.4.0 metadata.
             Milestone exit: review the whole 4.3 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.3.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
-    - [ ] Milestone 4.4 — Phase review
-        - [ ] T-037 — Review test and report phase 4
+    - [x] Milestone 4.4 — Phase review
+        - [x] T-037 — Review test and report phase 4
+            Completion evidence: Independent complete-phase source/test/guide review and milestone reviews report no remaining findings;144 unit/check/package and66 packaged browser checks verify unchanged final payload. Audited actual T028–036 commits one owning result/evidence/initial checkbox each, prior closed reports unchanged, all delivery issues/milestones closed. Phase report/HANDOFF record exits, limits, no TODO and pending integration/release effects;0.4.0 candidate ready for explicit merged verification.
             Scope: complete phase code and integration boundaries, required acceptance/regressions, blocker repairs, report and release readiness for 0.4.0.
             Depends on: T-036; all phase 4 delivery milestones completed and closed, including their folded review/report obligations.
             Evidence: independently assess code and executed checks, confirm phase exits and preserved predecessor behavior, reconcile findings/TODOs and exact version/package/release-note source; include `docs/dev/reports/phases/4/PHASE-REPORT.md` and refreshed HANDOFF in this task’s completion commit.

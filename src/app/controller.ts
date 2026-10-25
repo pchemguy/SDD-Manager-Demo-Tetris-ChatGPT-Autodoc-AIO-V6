@@ -1,5 +1,6 @@
 /** Routes logical time and browser commands to a single game owner. */
 import {Game,type GameOverEvent} from '../game/game';
+import {DEFAULTS,type Settings} from '../settings/definitions';
 export type View=(Omit<Game['snapshot'],'status'>&{status:'playing'|'paused'|'game-over'})|null;
 export type Command='left'|'right'|'down'|'cw'|'ccw'|'drop'|'hold'|'penetrator';
 export class Controller {
@@ -8,8 +9,9 @@ export class Controller {
   private logical=0;
   private instance=0;
   private completed=false;
+  private settings:Settings={...DEFAULTS};
   private readonly pauses=new Set<'user'|'hidden'|'blur'>();
-  constructor(private readonly render:(view:View)=>void,private readonly create:(id:string)=>Game=(id)=>new Game({gameId:id}),private readonly onCompleted:(event:GameOverEvent)=>void=()=>{}) {render(null);}
+  constructor(private readonly render:(view:View)=>void,private readonly create:(id:string,settings:Settings)=>Game=(id,settings)=>new Game({gameId:id,settings}),private readonly onCompleted:(event:GameOverEvent)=>void=()=>{}) {render(null);}
   get view():View {
     if(!this.game)return null;
     const snapshot=this.game.snapshot;
@@ -17,8 +19,12 @@ export class Controller {
   }
   start(now:number):void {
     if(this.game)this.frame(now);
-    this.game=this.create(`game-${++this.instance}`);this.completed=false;
+    this.game=this.create(`game-${++this.instance}`,{...this.settings});this.completed=false;
     this.pauses.delete('user');this.last=now;this.logical=0;this.consumeEvents();this.render(this.view);
+  }
+  /** Retain ready/restart configuration and update live availability without clock work. */
+  configure(settings:Settings):void {
+    this.settings={...settings};this.game?.configure(this.settings);this.render(this.view);
   }
   setPaused(reason:'user'|'hidden'|'blur',paused:boolean,now:number):void {
     this.frame(now);
