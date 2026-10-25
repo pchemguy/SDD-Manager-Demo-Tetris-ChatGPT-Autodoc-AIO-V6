@@ -141,7 +141,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/landing.ts; adversarial board fixtures.
             Depends on: T-020. Contract: P-02, S-02.
             Evidence: Enumerated deepest targets below blockers, intermediate overlap, board boundaries and no-target cases.
-        - [ ] T-022 — Implement viability-checked penetrator transitions
+        - [x] T-022 — Implement viability-checked penetrator transitions
+            Completion evidence: RED: six viability/activation domain tests failed on the absent transition. GREEN: 81 unit tests and TypeScript check pass. Penetrator transforms/kicks require a deepest legal target, cross occupied cells without mutation, reject impossible lateral candidates, preserve/cancel grounding correctly and retain the gravity schedule. Activation validates before spending, repeats reject and active hold cannot transfer the ability. A bounded initial-bonus injection supports domain fixtures; normal games still start at zero and player awards/hotkey/presentation remain T024-T026. Shared projection selection keeps consumers coherent.
             Scope: src/game/game.ts; geometry/landing collaborators; domain fixtures.
             Depends on: T-021. Contract: P-01/P-02, G-05, R-01.
             Evidence: Traversal/ordered kicks retain a legal target; transient overlap never locks; activation grounding preserves or cancels deadlines correctly.
