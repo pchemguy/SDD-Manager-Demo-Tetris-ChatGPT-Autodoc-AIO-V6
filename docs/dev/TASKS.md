@@ -280,7 +280,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: leaderboard/files.ts; browser/files.ts, panels.ts; controller operation wiring.
             Depends on: T-043. Contract: L-04 JSON, S-04.
             Evidence: Actual download/upload path, immutable save snapshot, fully validated replace-not-merge and gameplay/file-action pause.
-        - [ ] T-045 — Handle file cancellation errors and resource cleanup
+        - [x] T-045 — Handle file cancellation errors and resource cleanup
+            Completion evidence: RED:pre-aborted restore still opened picker; two falsy codec rejections and a modeled empty download exception incorrectly appeared successful. Repairs guard before picker and discriminate fulfillment/rejection explicitly. GREEN:221 unit tests, TypeScript/Vite build and12 focused Chromium/Firefox file checks pass. Tests cover immutable save, size-before-read, picker cancellation/no deadline, codec deadline including initialization, abort propagation, late candidate/download rejection, timer disposal, file/read/download errors, composed user/file pause, overlap/restart guards, picker/URL cleanup and unchanged prior values/order. Native OS dialog cancellation remains modeled distinctly.
             Scope: leaderboard/files.ts; browser/files.ts; controller pause/operation tests.
             Depends on: T-044. Contract: L-04, S-04.
             Evidence: Picker cancellation, file/read/download failures, deadline/stale reply, disabled concurrency and cleanup preserve prior list and other pause reasons.

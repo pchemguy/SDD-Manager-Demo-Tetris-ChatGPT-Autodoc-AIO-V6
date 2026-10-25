@@ -17,9 +17,9 @@ export function browserFilePort():FilePort {
    checkActive(signal);const owned=new Uint8Array(bytes.byteLength);owned.set(bytes);
    const url=URL.createObjectURL(new Blob([owned.buffer],{type:mime}));let anchor:HTMLAnchorElement|undefined;
    try{const link=document.createElement('a');anchor=link;link.href=url;link.download=name;link.hidden=true;document.body.append(link);await new Promise<void>((resolve,reject)=>{
-    let settled=false;const finish=(error?:unknown)=>{if(settled)return;settled=true;clearTimeout(timer);signal.removeEventListener('abort',abort);if(error)reject(error);else resolve();};
-    const abort=()=>finish(canceled());const timer=setTimeout(()=>finish(),1000);signal.addEventListener('abort',abort,{once:true});
-    try{checkActive(signal);link.click();}catch(error){finish(error);}
+    let settled=false;const finish=(success:boolean,error?:unknown)=>{if(settled)return;settled=true;clearTimeout(timer);signal.removeEventListener('abort',abort);if(success)resolve();else reject(error);};
+    const abort=()=>finish(false,canceled());const timer=setTimeout(()=>finish(true),1000);signal.addEventListener('abort',abort,{once:true});
+    try{checkActive(signal);link.click();}catch(error){finish(false,error);}
    });}finally{anchor?.remove();URL.revokeObjectURL(url);}
   },
  };
