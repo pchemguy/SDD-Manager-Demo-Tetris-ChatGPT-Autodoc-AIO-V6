@@ -25,7 +25,9 @@ npm test
 npm run dev
 ```
 
-`npm run test:dev` checks first-use SQLite Save and Restore with a separate empty Vite dependency cache for every browser/scenario. The development configuration pre-optimizes the lazy worker's `sql.js` dependency so the first operation does not trigger a dependency-rebuild page reload. WASM still loads only when SQLite is used. After updating a running checkout, stop the old dev server, restart `npm run dev`, and reload the page.
+`npm run test:dev` checks first-use SQLite Save and Restore with a separate empty Vite dependency cache for every browser/scenario, in ordinary and linked-source layouts. The linked fixture reproduces the reported filesystem worker entry returning HTML while retaining real Vite transformation, imports, WASM and database operations. The development configuration pre-optimizes `sql.js` to avoid a first-use dependency-rebuild page reload. The dev worker uses the base-prefixed project source route rather than a canonical filesystem URL; production retains its bundled worker. WASM still loads only when SQLite is used. After updating a running checkout, stop the old dev server, restart `npm run dev`, and reload the page.
+
+Vite has limitations with Windows symlinks, junctions and cross-drive mappings. This worker-route workaround addresses the confirmed HTML-response failure; it does not provide general linked-checkout support. If other development assets fail, launch from the real physical checkout path.
 
 `npm run build` creates `dist/`; `npm run package` builds `.cache/releases/browser-tetris.zip` and its SHA-256 file. The 1.0.0 release passed 283 unit tests and 104 packaged Playwright checks across Chromium/Firefox, including actual uploads/downloads, cross-format data preservation, subdirectory local assets and two exact served-byte inventory checks. Independent milestone/phase/product reviews found no remaining code findings. The [verified release outcome](docs/dev/reports/RELEASE-1.0.0-OUTCOME.md) records completed publication and CI. Detailed evidence and limits are in [development reports](docs/dev/reports/), [TASKS](docs/dev/TASKS.md) and [HANDOFF](docs/dev/HANDOFF.md).
 
