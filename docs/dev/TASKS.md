@@ -153,7 +153,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Ghost/drop deepest equality, crossing occupied rows, ordinary-versus-penetrator distinction, no overwritten cells and legal-only final lock.
             Milestone exit: review the whole 3.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/3/3.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 3.2 — Earn and activate
-        - [ ] T-024 — Award and cap penetrator bonuses
+        - [x] T-024 — Award and cap penetrator bonuses
+            Completion evidence: RED: four award/future-activation assertions failed before four-line awards. GREEN: 94 unit tests and TypeScript check pass. Exactly four simultaneous lines add one bonus, cap at three, zero-to-three line clears add none, and an activated clear ends the old activation before awarding a future use. Fresh games reset zero; bounded fixture funding rejects invalid values. Existing legal traversal/drop/hold/timing regressions pass.
             Scope: src/game/game.ts; scoring/bonus fixtures.
             Depends on: T-023. Contract: P-03.
             Evidence: Four-line clears award exactly one, zero-to-three cap, penetrator clear awards future bonus and new game resets.

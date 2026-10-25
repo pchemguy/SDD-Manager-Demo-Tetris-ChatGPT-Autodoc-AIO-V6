@@ -69,6 +69,7 @@ export class Game {
     for(const {x,y} of cells(this.active)) this.board[y][x]=this.active.kind;
     this.penetrator=false;
     const compacted=clearLines(this.board);this.addScore([0,100,300,500,800][compacted.cleared]*this.level);
+    if(compacted.cleared===4)this.bonuses=Math.min(3,this.bonuses+1);
     this.board=compacted.board;this.lines=Math.min(Number.MAX_SAFE_INTEGER,this.lines+compacted.cleared);
     this.holdUsed=false;this.active=this.spawnPiece();this.startPieceTiming();
   }
