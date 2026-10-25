@@ -1,6 +1,6 @@
 # Project handoff
 
-Checkpoint: prospective explicit complete phase6 integration into main.
+Checkpoint: direct main release1.0.0 after published integratione0119c908caf65091124583ace4b955126f11a4e.
 
 ## Authority and source
 
@@ -13,3 +13,7 @@ Phase5 explicit main mergeccec12dd82b7ad625515bbaad1e000066dfddec6 passed hosted
 T-048–T-056 and delivery milestones6.1–6.3 are published/closed. T-057 owns final phase and IMPLEMENTATION-REPORT plus completion evidence. Complete-product/phase source reviews and final producer/documentation recheck find no remaining findings. Final unchanged1.0.0 payload passed283 unit/check/package and104 exact-packaged Chromium/Firefox checks with no skips; reproducible candidate11-member package/schema/WASM/notices/links and final screenshot verified. Actual task audit throughT-056 passes; prior closed phase reports unchanged. All historical TODO sections aggregated with provenance: no unresolved/deferred functional work; environment evidence limits explicitly retained.
 
 T-057/6.4 are published/closed; actual final task audit passes. Current default/main and full tag/closed-task inventory verified. Explicit merge parents are3d981272ce51100f6631a7b7601be6578f396043 and92403386d9ce07532d195653a86b780f22c9aeab. Merged283 unit/check/package and104 exact-packaged Chromium/Firefox checks pass with no skips. Publish/readback this explicit merge and verify hosted CI. Then exact-body direct main1.0.0 release commit/tag, clean reproducible source-bound package/assets/latest/anonymous download verification. Record actual final release outcome separately without rewriting closed phase reports. Full remaining finalization remains authorized; no current functional blocker. Linux/HTTP/native Chromium/Firefox established; native OS-window/BFCache/picker/HTTPS/Windows limits as final report.
+
+## Release 1.0.0 boundary
+
+Complete previous-tag range through e0119c908caf65091124583ace4b955126f11a4e reviewed: ten owning task results plus cumulative explicit main integration, full history/tags and exact task audits. Prior notes ownership/hash verified and atomically refreshed. The exact complete notes form this direct-main release commit body and GitHub release body. Merge publication and merged 283 unit/104 packaged checks are verified. Hosted CI, final clean reproducible package, exact tag/assets/latest/body and anonymous download verification remain publisher prerequisites. After publication record the actual final outcome separately; closed phase reports remain immutable acceptance snapshots.
