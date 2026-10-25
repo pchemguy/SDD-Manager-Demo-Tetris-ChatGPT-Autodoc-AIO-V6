@@ -219,7 +219,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: domain/controller integration fixtures; affected rule owners.
             Depends on: T-033. Contract: G-05/G-08/G-09, P-01/P-02, S-03.
             Evidence: Mid-piece policy changes, hold-spawn capture, active-penetrator guard, ghost with hard drop off and no timer/source reset.
-        - [ ] T-035 — Explain and expose configuration state clearly
+        - [x] T-035 — Explain and expose configuration state clearly
+            Completion evidence: Added configuration guide with exact tokens/defaults, independent precedence/default writes/omissions, invalid-value fallback, midline and timing/penetrator behavior, cookie scope and failure semantics. UI explains preserved disabled state and ghost/drop independence; lock controls describe next-piece capture, readable live persistence status and desktop sticky board. TypeScript/Vite build and four focused Chromium/Firefox native-focus/minimum-viewport checks pass.
             Scope: browser/panels.ts, styles; docs/user/CONFIGURATION.md.
             Depends on: T-034. Contract: C-01/C-04, S-05.
             Evidence: Labeled/native controls, next-piece policy note, disabled-feature explanations and visible nonblocking persistence status.

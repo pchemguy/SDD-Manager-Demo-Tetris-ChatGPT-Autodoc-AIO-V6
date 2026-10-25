@@ -11,3 +11,6 @@
 .bonus-card{padding:10px 18px!important;margin:12px 0}.bonus-top,.bonus-line{display:flex;align-items:center;justify-content:space-between;gap:8px}.bonus-top h2{margin:0}.bonus-top output{font-size:12px;color:#8ce4c4}.bonus-line{margin-top:5px;min-height:22px}.bonus-line #bonus-symbols{font-size:15px;letter-spacing:2px;color:#fff}.bonus-line #penetrator-state{font-size:8px;letter-spacing:1px;color:#95b6b7;margin-left:auto}.bonus-line kbd{font-size:9px}
 
 .settings-card{margin:16px 0}.settings-card label{display:block;font-size:11px;color:#b8c8d0;margin:12px 0 6px}.settings-card select{width:100%;min-height:34px;background:#142330;color:#dce7ed;border:1px solid #36515d;border-radius:5px;padding:6px;font:inherit;font-size:11px}.settings-card select:focus-visible{outline:2px solid #77e3bc;outline-offset:2px}.piece-card canvas[hidden]{display:none}
+
+@media(min-width:721px){.board-frame{position:sticky;top:16px}}
+#settings-status{color:#b8c8d0;overflow-wrap:anywhere}
