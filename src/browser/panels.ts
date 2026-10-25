@@ -5,7 +5,9 @@ import type {View} from '../app/controller';
 import type {Result} from '../leaderboard/validation';
 const resultCache=new WeakMap<HTMLElement,string>();
 import {DEFAULTS,KEYS,isSettingValue,type Settings,type SettingKey} from '../settings/definitions';
-export function renderPanels(view:View,settings:Readonly<Settings>=view?.settings??DEFAULTS,results:readonly Result[]=[]):void {
+export function renderPanels(view:View,settings:Readonly<Settings>=view?.settings??DEFAULTS,results:readonly Result[]=[],busy=false):void {
+ for(const id of ['save','restore','file-format'])(document.getElementById(id) as HTMLButtonElement|HTMLSelectElement).disabled=busy;
+ document.getElementById('file-cancel')!.hidden=!busy;
  renderResults(results);
  const set=(id:string,value:string)=>{const node=document.getElementById(id)!;if(node.textContent!==value)node.textContent=value;};
  for(const key of KEYS){const select=document.getElementById('setting-'+key) as HTMLSelectElement;if(select.value!==settings[key])select.value=settings[key];}
@@ -21,8 +23,8 @@ export function renderPanels(view:View,settings:Readonly<Settings>=view?.setting
  (document.getElementById('score') as HTMLElement).style.fontSize=score.length>10?'20px':'34px';
  set('status',view?view.status.toUpperCase().replace('-',' '):'READY');
  const start=document.querySelector<HTMLButtonElement>('#start')!;
- start.firstChild!.textContent=view?'Restart ':'Start game ';
- const pause=document.querySelector<HTMLButtonElement>('#pause')!;pause.disabled=!view||view.status==='game-over';pause.textContent=view?.status==='paused'?'Resume':'Pause';
+ start.disabled=busy;start.firstChild!.textContent=view?'Restart ':'Start game ';
+ const pause=document.querySelector<HTMLButtonElement>('#pause')!;pause.disabled=busy||!view||view.status==='game-over';pause.textContent=view?.status==='paused'?'Resume':'Pause';
 }
 
 /** Small fixed-frame previews are pure presentations of domain-selected kinds. */

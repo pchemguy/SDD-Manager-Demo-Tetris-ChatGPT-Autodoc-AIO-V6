@@ -275,7 +275,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Malformed UTF-8/JSON, unknown fields/version, wrong types, dates, duplicate IDs, excess count and byte limits reject as a whole.
             Milestone exit: review the whole 5.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 5.3 — Manual JSON files
-        - [ ] T-044 — Add JSON Save and atomic Restore below results
+        - [x] T-044 — Add JSON Save and atomic Restore below results
+            Completion evidence: RED:native JSON path failed on missing Save; modeled DOM append failure then exposed one unreleased download URL. GREEN:209 unit tests, TypeScript/Vite build and6 focused Chromium/Firefox file checks pass after wrapping all download setup in URL cleanup. Real empty and restored ranked downloads preserve records; actual picker restore replaces only after full validation and invalid restore preserves prior rows. File pause composes with user pause, disables overlapping actions/restart and leaves results unchanged on Save. Added bounded codec/abort service and owned picker/FileReader/download lifetimes; further failure/race matrix is T045.
             Scope: leaderboard/files.ts; browser/files.ts, panels.ts; controller operation wiring.
             Depends on: T-043. Contract: L-04 JSON, S-04.
             Evidence: Actual download/upload path, immutable save snapshot, fully validated replace-not-merge and gameplay/file-action pause.

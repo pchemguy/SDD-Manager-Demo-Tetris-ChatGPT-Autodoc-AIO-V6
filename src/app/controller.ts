@@ -13,21 +13,26 @@ export class Controller {
   get results():Result[]{return this.leaderboard.results;}
   replaceResults(value:unknown):void {this.leaderboard.replace(value);this.publish();}
   clearResults():void {this.leaderboard.clear();this.publish();}
-  private publish():void {this.render(this.view,this.results);}
+  private publish():void {this.render(this.view,this.results,this.fileBusy);}
+  private fileBusy=false;
+  get busy():boolean{return this.fileBusy;}
+  beginFile(now:number):boolean {if(this.fileBusy)return false;this.fileBusy=true;this.setPaused('file',true,now);return true;}
+  endFile(now:number):void {if(!this.fileBusy)return;this.fileBusy=false;this.setPaused('file',false,now);}
   private game:Game|null=null;
   private last=0;
   private logical=0;
   private instance=0;
   private completed=false;
   private settings:Settings={...DEFAULTS};
-  private readonly pauses=new Set<'user'|'hidden'|'blur'>();
-  constructor(private readonly render:(view:View,results:Result[])=>void,private readonly create:(id:string,settings:Settings)=>Game=(id,settings)=>new Game({gameId:id,settings}),private readonly onCompleted:(event:GameOverEvent)=>void=()=>{},private readonly resultPorts:ResultPorts={id:uuid,timestamp:()=>new Date().toISOString()}) {render(null,this.results);}
+  private readonly pauses=new Set<'user'|'hidden'|'blur'|'file'>();
+  constructor(private readonly render:(view:View,results:Result[],busy:boolean)=>void,private readonly create:(id:string,settings:Settings)=>Game=(id,settings)=>new Game({gameId:id,settings}),private readonly onCompleted:(event:GameOverEvent)=>void=()=>{},private readonly resultPorts:ResultPorts={id:uuid,timestamp:()=>new Date().toISOString()}) {render(null,this.results,false);}
   get view():View {
     if(!this.game)return null;
     const snapshot=this.game.snapshot;
     return {...snapshot,status:snapshot.status==='playing'&&this.pauses.size?'paused':snapshot.status};
   }
   start(now:number):void {
+    if(this.fileBusy)return;
     if(this.game)this.frame(now);
     this.game=this.create(`game-${++this.instance}`,{...this.settings});this.completed=false;
     this.pauses.delete('user');this.last=now;this.logical=0;this.consumeEvents();this.publish();
@@ -36,7 +41,7 @@ export class Controller {
   configure(settings:Settings):void {
     this.settings={...settings};this.game?.configure(this.settings);this.publish();
   }
-  setPaused(reason:'user'|'hidden'|'blur',paused:boolean,now:number):void {
+  setPaused(reason:'user'|'hidden'|'blur'|'file',paused:boolean,now:number):void {
     this.frame(now);
     if(paused)this.pauses.add(reason);else this.pauses.delete(reason);
     this.rebaseClock(now);this.publish();
