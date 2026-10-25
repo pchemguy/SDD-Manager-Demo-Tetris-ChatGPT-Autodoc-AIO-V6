@@ -48,7 +48,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Play a scored game, pause/resume, lose and restart through real controls in both browsers; stats match domain.
             Milestone exit: review the whole 1.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/1/1.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 1.3 — Browser delivery
-        - [ ] T-007 — Implement controlled key repeat and focus pause
+        - [x] T-007 — Implement controlled key repeat and focus pause
+            Completion evidence: RED: native held-key test failed at the first 150 ms repeat boundary. GREEN: 30 unit tests, TypeScript/Vite build and 28 supported browser checks passed (14 each). Verified 150/50 repeat, latest-direction/fresh-delay behavior, held-state cleanup, native DOM control/key ownership and modeled blur/visibility/user-pause composition. Independent review found no Critical/Important code issue. Controlled probes disproved an extra native tab-focus test premise in headless sessions; removed that invalid assertion and documented that OS-window transitions are not established, rather than claiming models are native evidence.
             Scope: browser/input.ts; app/controller.ts; focus/repeat tests.
             Depends on: T-006. Contract: G-03, S-01/S-05.
             Evidence: 150/50 ms repeat, competing horizontal keys, one-shot repeat suppression, form focus, blur/visibility and user-pause composition.
