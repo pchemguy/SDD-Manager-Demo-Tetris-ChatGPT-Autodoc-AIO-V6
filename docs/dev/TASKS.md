@@ -19,7 +19,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: package/toolchain setup; src/game/types.ts, geometry.ts, board.ts; unit fixtures.
             Depends on: none. Contract: G-01, R-01 zero-offset subset.
             Evidence: Typecheck and deterministic bounds/spawn/rotation/board fixtures; no full kicks or modern features.
-        - [ ] T-002 — Implement movement gravity and interval locking
+        - [x] T-002 — Implement movement gravity and interval locking
+            Completion evidence: RED: four intended clock/movement assertions failed against the initial Game placeholder. GREEN: npm test passed 11/11 and npm run check passed. Verified full grounding interval, grounded-move preservation, unground/reground resets, floor/wall rejection, first-obstruction landing and controlled independent source; snapshots are detached. Also verified clean npm ci from the committed lockfile before this task.
             Scope: src/game/game.ts, landing.ts, source.ts; time/command tests.
             Depends on: T-001. Contract: G-01, G-04/G-05 default interval, G-07 independent source, S-01.
             Evidence: Exact grounding deadline, failed moves, legal movement, ordinary landing and seeded source traces.
