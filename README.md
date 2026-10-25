@@ -25,7 +25,7 @@ npm test
 npm run dev
 ```
 
-`npm run build` creates `dist/`; `npm run package` builds `.cache/releases/browser-tetris.zip` and its SHA-256 file. The versioned candidate passes 283 unit tests and 104 packaged Playwright checks across Chromium/Firefox, including actual uploads/downloads, cross-format data preservation, subdirectory local assets and two exact served-byte inventory checks. Independent milestone/phase/product reviews found no remaining code findings. Detailed evidence and limits are in [development reports](docs/dev/reports/), [TASKS](docs/dev/TASKS.md) and [HANDOFF](docs/dev/HANDOFF.md).
+`npm run build` creates `dist/`; `npm run package` builds `.cache/releases/browser-tetris.zip` and its SHA-256 file. The 1.0.0 release passed 283 unit tests and 104 packaged Playwright checks across Chromium/Firefox, including actual uploads/downloads, cross-format data preservation, subdirectory local assets and two exact served-byte inventory checks. Independent milestone/phase/product reviews found no remaining code findings. The [verified release outcome](docs/dev/reports/RELEASE-1.0.0-OUTCOME.md) records completed publication and CI. Detailed evidence and limits are in [development reports](docs/dev/reports/), [TASKS](docs/dev/TASKS.md) and [HANDOFF](docs/dev/HANDOFF.md).
 
 ## Browser checks
 
