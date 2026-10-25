@@ -258,7 +258,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Rank/score/time labels, top ten after games, restart retention and reload clearing with unchanged persistent settings.
             Milestone exit: review the whole 5.1 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/5/5.1.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 5.2 — JSON contract
-        - [ ] T-041 — Compile and publish the canonical JSON Schema
+        - [x] T-041 — Compile and publish the canonical JSON Schema
+            Completion evidence: RED:schema suite failed on absent codec module before implementation. GREEN:183 unit tests and TypeScript/Vite build pass. Actual canonical draft2020-12 schema compiles once with pinned Ajv8.20.0, strict custom real-calendar utc-timestamp and mutation/coercion/default/removal disabled. Structural/wrong-type/calendar fixtures reject without input mutation. Public/dist schema bytes equal canonical source; exact full MIT/BSD production license texts verified in notices (initial header-wording check corrected). Official Ajv docs and registry version/integrity inspected.
             Scope: src/leaderboard/json.ts; canonical schema import; scripts/copy-schema.mjs; generated public schema.
             Depends on: T-040. Contract: L-02 and LEADERBOARD-SCHEMA.json.
             Evidence: Pinned schema validator without coercion/default/removal, registered strict UTC format, downloadable schema byte equality and invalid-calendar corpus.
