@@ -246,7 +246,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/leaderboard/validation.ts, store.ts; result fixtures.
             Depends on: T-037. Contract: L-01.
             Evidence: Safe integers, stable IDs, strict calendar UTC, duplicate rejection, deterministic ties and truncation.
-        - [ ] T-039 — Record each game-over result exactly once
+        - [x] T-039 — Record each game-over result exactly once
+            Completion evidence: RED:four completion lifecycle tests failed against missing results integration. GREEN:177 unit tests and TypeScript check pass. Controller records first game-over exactly once including zero, preserves history across restart without abandoned results, injects completion IDs/UTC time, retries restored-ID collisions, and provides detached validated replacement/clear ports. Default UUIDv4 uses browser crypto getRandomValues for HTTP compatibility; domain completion/input/pause regressions remain green.
             Scope: app/controller.ts; injected ID/time provider; lifecycle fixtures.
             Depends on: T-038. Contract: L-01, G-02, S-01.
             Evidence: Unique ID/time on first completion, exclude abandoned games, retain restored-ID uniqueness and no duplicate events.
