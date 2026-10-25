@@ -214,7 +214,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Evidence: Resolve before first spawn; actual reload/cookies/query, separate write failures, visible warnings and working session controls.
             Milestone exit: review the whole 4.2 capability and dependencies; run focused/browser/regression checks as applicable; fix blockers; include `docs/dev/reports/phases/4/4.2.md` and refreshed HANDOFF with this task’s result and initial completion. TODO section: None or evidence-backed eligible deferrals.
     - [ ] Milestone 4.3 — Configuration integration
-        - [ ] T-034 — Verify policies across hold penetrator and drop
+        - [x] T-034 — Verify policies across hold penetrator and drop
+            Completion evidence: Added six cross-feature characterization scenarios against existing accepted implementation: all four penetrator locking combinations, mid-piece settings changes, disabled drop with visible ghost, active hold/reactivation guards, unchanged clocks/source/bonuses, legal non-overlapping lock and next capture; activation cancels an obsolete grounded deadline without resetting gravity; nonempty hold exchange captures policies without queue consumption. GREEN:144 unit tests and TypeScript check pass; no production rule change needed.
             Scope: domain/controller integration fixtures; affected rule owners.
             Depends on: T-033. Contract: G-05/G-08/G-09, P-01/P-02, S-03.
             Evidence: Mid-piece policy changes, hold-spawn capture, active-penetrator guard, ghost with hard drop off and no timer/source reset.
