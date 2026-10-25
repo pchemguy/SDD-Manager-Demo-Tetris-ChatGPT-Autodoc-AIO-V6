@@ -80,7 +80,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: src/game/source.ts; bag/queue fixtures.
             Depends on: T-010. Contract: G-07.
             Evidence: Every seeded bag contains seven kinds once, boundary draws and preview do not corrupt consumption.
-        - [ ] T-012 — Implement full SRS transformations and kicks
+        - [x] T-012 — Implement full SRS transformations and kicks
+            Completion evidence: RED: all 16 transition cases plus the floor-kick fixture failed before SRS. GREEN: 52 unit tests/check and production build pass. Ordered candidates match the normative tables, actual Game rotation selects the first legal wall/floor/hidden/stack target, and all-kicks rejection preserves board/piece/deadline. Corrected an overstrong empty-board fixture premise by adding real blocking-cell variants for transitions that need a stack to exercise kicks. O/pivot geometry regressions remain green.
             Scope: src/game/geometry.ts, game.ts; rotation fixtures.
             Depends on: T-011. Contract: R-01, G-05.
             Evidence: All eight transitions in each ordered table, wall/floor/stack rejection, O invariance, hidden bounds and unchanged timer on rejected rotation.

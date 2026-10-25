@@ -20,9 +20,10 @@ it('cancels on ungrounding and starts a fresh deadline on regrounding',()=>{
  expect(g.snapshot.groundedDeadline).toBeNull();g.advance(500);g.move(-1);
  expect(g.snapshot.groundedDeadline).toBe(1500);
 });
-it('rejects floor rotation and illegal wall movement without changing cells',()=>{
- const g=new Game({piece:{kind:'T',orientation:0,x:0,y:18}});g.move(-1);g.rotate(1);
- expect(g.snapshot.active).toEqual({kind:'T',orientation:0,x:0,y:18});
+it('rejects illegal wall movement and applies a legal floor kick',()=>{
+ const g=new Game({piece:{kind:'T',orientation:0,x:0,y:18}});g.move(-1);expect(g.snapshot.active.x).toBe(0);g.rotate(1);
+ expect(g.snapshot.active).toEqual({kind:'T',orientation:1,x:-1,y:17});
+ expect(g.snapshot.groundedDeadline).toBe(1000);
 });
 it('uses first obstruction rather than passing through it',()=>{
  const board=emptyBoard();board[10][4]='Z';

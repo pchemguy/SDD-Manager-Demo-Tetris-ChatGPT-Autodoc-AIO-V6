@@ -1,8 +1,8 @@
 /** Serial browser-independent classic movement and logical-time state. */
 import { canPlace, clearLines, emptyBoard } from './board';
-import { cells } from './geometry';
+import { cells,rotationCandidates } from './geometry';
 import { PieceSource } from './source';
-import type { Board, Piece, Orientation } from './types';
+import type { Board, Piece } from './types';
 export interface GameOptions { random?: () => number; board?: Board; piece?: Piece; lines?:number; score?:number;gameId?:string }
 export interface GameOverEvent {type:'game-over';gameId:string;score:number;lines:number;level:number}
 export class Game {
@@ -76,7 +76,7 @@ export class Game {
   }
   move(dx:-1|1):void {this.tryTransform({...this.active,x:this.active.x+dx});}
   rotate(direction:-1|1):void {
-    this.tryTransform({...this.active,orientation:((this.active.orientation+direction+4)%4) as Orientation});
+    for(const candidate of rotationCandidates(this.active,direction))if(this.tryTransform(candidate))break;
   }
   down():void {if(this.tryTransform({...this.active,y:this.active.y+1})){this.nextGravity=this.time+this.interval;this.addScore(1);}}
 }
