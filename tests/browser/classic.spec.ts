@@ -48,7 +48,7 @@ test('shows stats and pauses resumes loses and restarts through real controls',a
  await page.getByRole('button',{name:/Restart/}).click();await expect(page.locator('#score')).toHaveText('0');await expect(page.locator('#level')).toHaveText('1');await expect(page.locator('#lines')).toHaveText('0');
 });
 test('clears and scores a line with deterministic pieces and native keys',async({page})=>{
- await page.clock.install();await page.addInitScript(()=>{const draws=[0,0,3/7];Math.random=()=>draws.shift()??0;});await page.goto('/');await page.getByRole('button',{name:/Start game/}).click();
+ await page.clock.install();await page.addInitScript(()=>{const draws=[0,1/6,2/5,0,0,0];Math.random=()=>draws.shift()??0;});await page.goto('/');await page.getByRole('button',{name:/Start game/}).click();
  const descend=async()=>{for(let i=0;i<20;i++)await page.keyboard.press('ArrowDown');await page.clock.fastForward(1000);};
  for(let i=0;i<3;i++)await page.keyboard.press('ArrowLeft');await descend();
  await page.keyboard.press('ArrowRight');await descend();

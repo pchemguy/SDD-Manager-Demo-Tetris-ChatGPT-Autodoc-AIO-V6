@@ -75,7 +75,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 
 - [ ] Phase 2 — Modern play
     - [ ] Milestone 2.1 — Bag and rotation
-        - [ ] T-011 — Implement seven-bag generation and queue semantics
+        - [x] T-011 — Implement seven-bag generation and queue semantics
+            Completion evidence: RED: two new queue/permutation tests failed with missing peek. GREEN: 35 unit tests/check and 30 actual Chromium/Firefox regressions passed. Twenty deterministic bags contain every kind once, preview does not consume, exact boundary refill uses six draws, invalid entropy rejects. Updated the classic line-clear replay from impossible repeated I pieces to legal I/J/L; source switch is intentional. HANDOFF records verified predecessor release/CI and phase projection.
             Scope: src/game/source.ts; bag/queue fixtures.
             Depends on: T-010. Contract: G-07.
             Evidence: Every seeded bag contains seven kinds once, boundary draws and preview do not corrupt consumption.

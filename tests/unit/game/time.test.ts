@@ -3,7 +3,6 @@ import {expect,it} from 'vitest';
 import {Game} from '../../../src/game/game';
 import {emptyBoard} from '../../../src/game/board';
 import {landing} from '../../../src/game/landing';
-import {PieceSource} from '../../../src/game/source';
 const square={kind:'O',orientation:0,x:3,y:17} as const;
 it('grounds after descent and waits one whole gravity interval',()=>{
  const g=new Game({piece:square,random:()=>0});g.advance(1000);
@@ -28,10 +27,6 @@ it('rejects floor rotation and illegal wall movement without changing cells',()=
 it('uses first obstruction rather than passing through it',()=>{
  const board=emptyBoard();board[10][4]='Z';
  expect(landing(board,{...square,y:0})?.y).toBe(8);
-});
-it('uses controlled uniform source draws and rejects invalid entropy',()=>{
- const values=[0,.999];const s=new PieceSource(()=>values.shift()!);expect(s.next()).toBe('I');expect(s.next()).toBe('Z');
- expect(()=>new PieceSource(()=>1).next()).toThrow(RangeError);
 });
 it('resets gravity after successful Down and preserves a rejected Down deadline',()=>{
  const g=new Game({piece:{...square,y:0}});g.advance(400);g.down();expect(g.snapshot.active.y).toBe(1);
