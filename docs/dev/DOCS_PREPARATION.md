@@ -7,7 +7,7 @@
 - Approval basis: The user explicitly approved PROJECT and its presented decisions on 2026-10-25 ("Approve"). Autodoc preapproves ARCHITECTURE through TASKS; technical QC remains required.
 - Tracking: enabled for documentation preparation and implementation by root AGENTS.md. Before repository writes, native milestone 1 (`sdd-docs-main`) and issues 1–9 were created and all standard bodies/associations read back against bundled 0.15.3 definitions.
 - Publication: every owned commit must be pushed/read back before progression. Reporting: Standard after Explicit bootstrap; Minimal and Explicit remain available.
-- Next boundary: publish the PROJECT acceptance and close/read back issue 2, then prepare ARCHITECTURE through TASKS. After later accepted TASKS, stop at DOCS-008 before package QC, integration or implementation activation.
+- Next boundary: publish/read back DOCS-003 and close/read back issue 3; continue to DOCS-004 within autodoc preapproval.
 
 ## Scope source
 
@@ -19,7 +19,12 @@ The user's 2026-10-25 project request is the complete target. Preserve its playa
 | --- | --- |
 | DOCS-001 | All four root destinations retained unchanged from initial commit `c7b7376ccaf7348fdb4fb369d28c2ce96b716a20`. Both provenance scaffold assets verified byte for byte. Root initialization, checked task and this record/HANDOFF form this completion checkpoint. |
 | DOCS-002 | PROJECT proposal SHA-256 `356830face7845b524b9d21011ad899d0ca4491bc70baca9ddf59712021fccc1`; explicitly accepted by the user on 2026-10-25, unchanged from proposal commit `8cd49d31acfad303aed88e2ecde14841c6b5ad56`. Scope/decision coverage, document boundaries and local links checked. Completion publication and issue 2 closure/readback follow this checkpoint. |
-| DOCS-003–008 | Not authored; later first-approval checkpoints preapproved only by autodoc selection. Required per-document QC remains. |
+| DOCS-003 | Accepted under user-selected autodoc preapproval after explicit PROJECT approval. Scoped owner QC passed: `docs/dev/ARCHITECTURE.md` SHA-256 `afd0c9d33a017ab2456061098763febb6700afc222f168bb4e55209179b29488`. Initial checklist completion and evidence are in this checkpoint; publication/closure must follow. |
+| DOCS-004 | Pending; scoped autodoc preapproval applies. |
+| DOCS-005 | Pending; scoped autodoc preapproval applies. |
+| DOCS-006 | Pending; scoped autodoc preapproval applies. |
+| DOCS-007 | Pending; scoped autodoc preapproval applies. |
+| DOCS-008 | Pending; scoped autodoc preapproval applies. |
 | DOCS-009 | Not selected: autodoc stops before whole-package QC. |
 
 The user accepted all presented gameplay, session-lifetime, technology and versioning decisions with PROJECT approval. The [PROJECT proposal](PROJECT.md#proposed-gameplay-decisions) surfaces midline straddling, lock resets/pause, penetrator/hold and legal landing, setting changes/fallback and leaderboard session/tie/import choices. TypeScript/Canvas, page-lifetime score history and version milestones were included in that approval. Exact downstream contracts remain with SPEC.
@@ -35,4 +40,4 @@ The user accepted all presented gameplay, session-lifetime, technology and versi
 
 ## Pending transitions
 
-Initialization commit `12792bc7ae0be703aa2155b52d82c0ef1948314e` was pushed with exact remote readback and confirmed cleanup; issue 1 evidence comment and completed closure were read back. Proposal commit `8cd49d31acfad303aed88e2ecde14841c6b5ad56` was published with exact remote readback. PROJECT acceptance now requires push/readback and issue 2 closure. PROJECT is now accepted; finish its acceptance publication/issue closure before ARCHITECTURE. Documentation milestone 1 and issues 2–9 remain open. No implementation phase objects or product releases exist.
+Preceding preparation completions through DOCS-002 were published with exact Git readback and their evidence comments/closed-completed issue states verified. This DOCS-003 completion requires push/readback and issue 3 closure/readback. Reconcile actual effects before retry. DOCS-009 and documentation milestone 1 remain open; no package-QC run, documentation integration, implementation projection or product release is authorized by this checkpoint.
