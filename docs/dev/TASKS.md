@@ -301,7 +301,7 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
 ## Phase 6 — SQLite portability
 
 - [ ] Phase 6 — SQLite portability
-    - [ ] Milestone 6.1 — SQLite encoding
+    - [x] Milestone 6.1 — SQLite encoding
         - [x] T-048 — Bundle a lazy bounded SQLite worker
             Completion evidence: RED:worker suite failed importing absent SQLite runtime while221 predecessors passed. GREEN:229 unit tests, TypeScript/Vite build and4 native Chromium/Firefox component probes pass. Pinned sql.js1.15.1/types1.4.11; real local WASM initialization/database close, operation IDs/stale replies, error/post/construction/malformed-reply paths, abort/deadline cleanup and termination verified. Native probes confirm local WASM200/error reply/zero remaining workers and working JSON download/gameplay after forced load failure. Worker/WASM/notices bundle locally; actual file encoder/import remain assigned next tasks and unadvertised. Fixture ArrayBuffer typing corrected; HANDOFF records verified0.5.0/CI/assets and phase6 readiness.
             Scope: leaderboard/sqlite.worker.ts, sqlite.ts; local WASM/build wiring.
@@ -312,7 +312,8 @@ Phase entry requires the predecessor review, hosted milestone closures and verif
             Scope: leaderboard/sqlite.ts; real SQLite byte fixtures.
             Depends on: T-048. Contract: L-03.
             Evidence: Genuine database header, user_version=1, exact ordinary table, bound inserts, integer score storage and empty/ten preserved records.
-        - [ ] T-050 — Integrate and verify SQLite downloads
+        - [x] T-050 — Integrate and verify SQLite downloads
+            Completion evidence: RED:native format-selection assertion failed before UI integration. GREEN:234 unit/check/package and90 complete exact-packaged Chromium/Firefox checks pass. Four focused native SQLite cases download genuine empty/ten files; independent Python SQLite verifies header/version/exact columns/PK/index/integrity/storage classes and stable safe fields. Local WASM loads lazily only for SQLite; workers terminate, Save retains results and JSON/gameplay survive forced initialization failure. Filename/MIME dispatch and all predecessor gameplay/settings/session/JSON regressions pass. Independent whole6.1 review found no findings; report6.1/HANDOFF included; restore remains assigned6.2.
             Scope: browser/files.ts; leaderboard/files.ts; browser export checks.
             Depends on: T-048, T-049. Contract: L-03 export, L-04 Save.
             Evidence: SQLite export through real UI, actual downloaded database inspection and cleanup in both browsers; preserve JSON export.

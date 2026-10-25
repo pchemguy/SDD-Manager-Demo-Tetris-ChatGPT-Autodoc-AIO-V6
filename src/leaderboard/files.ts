@@ -22,7 +22,7 @@ export function bounded<T>(work:(signal:AbortSignal)=>Promise<T>,parent:AbortSig
 }
 export async function saveFile(format:Format,results:readonly Result[],port:FilePort,signal:AbortSignal,codec:Codecs=codecs):Promise<void> {
  const snapshot=validateResults(results);
- await bounded(async child=>{const bytes=await codec.encode(format,snapshot,child);checkActive(child);await port.download(bytes,'tetris-scores.json','application/json',child);checkActive(child);},signal);
+ await bounded(async child=>{const bytes=await codec.encode(format,snapshot,child);checkActive(child);await port.download(bytes,format==='sqlite'?'tetris-scores.sqlite':'tetris-scores.json',format==='sqlite'?'application/vnd.sqlite3':'application/json',child);checkActive(child);},signal);
 }
 export async function restoreFile(port:FilePort,signal:AbortSignal,codec:Codecs=codecs):Promise<Result[]|null> {
  checkActive(signal);const file=await port.pick(signal);checkActive(signal);if(!file)return null;
