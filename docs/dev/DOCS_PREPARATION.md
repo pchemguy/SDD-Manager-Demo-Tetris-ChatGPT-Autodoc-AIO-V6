@@ -7,7 +7,7 @@
 - Approval basis: The user explicitly approved PROJECT and its presented decisions on 2026-10-25 ("Approve"). Autodoc preapproves ARCHITECTURE through TASKS; technical QC remains required.
 - Tracking: enabled for documentation preparation and implementation by root AGENTS.md. Before repository writes, native milestone 1 (`sdd-docs-main`) and issues 1–9 were created and all standard bodies/associations read back against bundled 0.15.3 definitions.
 - Publication: every owned commit must be pushed/read back before progression. Reporting: Standard after Explicit bootstrap; Minimal and Explicit remain available.
-- Next boundary: publish/read back DOCS-003 and close/read back issue 3; continue to DOCS-004 within autodoc preapproval.
+- Next boundary: publish/read back DOCS-004 and close/read back issue 4; continue to DOCS-005 within autodoc preapproval.
 
 ## Scope source
 
@@ -20,7 +20,7 @@ The user's 2026-10-25 project request is the complete target. Preserve its playa
 | DOCS-001 | All four root destinations retained unchanged from initial commit `c7b7376ccaf7348fdb4fb369d28c2ce96b716a20`. Both provenance scaffold assets verified byte for byte. Root initialization, checked task and this record/HANDOFF form this completion checkpoint. |
 | DOCS-002 | PROJECT proposal SHA-256 `356830face7845b524b9d21011ad899d0ca4491bc70baca9ddf59712021fccc1`; explicitly accepted by the user on 2026-10-25, unchanged from proposal commit `8cd49d31acfad303aed88e2ecde14841c6b5ad56`. Scope/decision coverage, document boundaries and local links checked. Completion publication and issue 2 closure/readback follow this checkpoint. |
 | DOCS-003 | Accepted under user-selected autodoc preapproval after explicit PROJECT approval. Scoped owner QC passed: `docs/dev/ARCHITECTURE.md` SHA-256 `afd0c9d33a017ab2456061098763febb6700afc222f168bb4e55209179b29488`. Initial checklist completion and evidence are in this checkpoint; publication/closure must follow. |
-| DOCS-004 | Pending; scoped autodoc preapproval applies. |
+| DOCS-004 | Accepted under user-selected autodoc preapproval after explicit PROJECT approval. Scoped owner QC passed: `docs/dev/DECOMPOSITION.md` SHA-256 `a10c96c6d030e25bedfb4c08c56b2b509ea09ef86ccd960fbc713f2edcb91107`. Initial checklist completion and evidence are in this checkpoint; publication/closure must follow. |
 | DOCS-005 | Pending; scoped autodoc preapproval applies. |
 | DOCS-006 | Pending; scoped autodoc preapproval applies. |
 | DOCS-007 | Pending; scoped autodoc preapproval applies. |
@@ -40,4 +40,4 @@ The user accepted all presented gameplay, session-lifetime, technology and versi
 
 ## Pending transitions
 
-Preceding preparation completions through DOCS-002 were published with exact Git readback and their evidence comments/closed-completed issue states verified. This DOCS-003 completion requires push/readback and issue 3 closure/readback. Reconcile actual effects before retry. DOCS-009 and documentation milestone 1 remain open; no package-QC run, documentation integration, implementation projection or product release is authorized by this checkpoint.
+Preceding preparation completions through DOCS-003 were published with exact Git readback and their evidence comments/closed-completed issue states verified. This DOCS-004 completion requires push/readback and issue 4 closure/readback. Reconcile actual effects before retry. DOCS-009 and documentation milestone 1 remain open; no package-QC run, documentation integration, implementation projection or product release is authorized by this checkpoint.
